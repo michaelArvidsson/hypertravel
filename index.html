@@ -51,6 +51,7 @@
     background:#fed;
     margin-top:15px;
     margin-bottom:15px;
+    height:100%;
     background-color: rgb(222, 226, 17);
 }
 
@@ -59,6 +60,7 @@
     background:#fed;
     margin-top:15px;
     margin-bottom:15px;
+    height:100%;
     background-color: rgb(17, 202, 226);
 }
 
@@ -67,6 +69,7 @@
     background:#def;
     margin-top:15px;
     margin-bottom:15px;
+    height:100%;
     background-color: darkviolet;
 }
 
@@ -75,7 +78,16 @@
     background:#fde;
     margin-top:15px;
     margin-bottom:15px;
+    height:100%;
     background-color: rgb(17, 226, 104);
+}
+
+#errorMessage{
+    display:none;
+    width: 200px;
+    color: firebrick;
+    border: 1px solid grey;
+    background-color: white;
 }
     </style>
 </head>
@@ -95,13 +107,18 @@
 </script>
 
 <script>
-    function validateForm() {
-        var x = document.forms["myForm"]["fname"].value;
-        if (x == "") {
-            alert("Name must be filled out");
-            return false;
-        }
-}
+ function validate()
+    {
+      var textinput = document.getElementById("input1");
+      var errorMessage = document.getElementById("errorMessage");
+      if(textinput.value.indexOf("@")!=-1){
+        textinput.style.backgroundColor = "#cfa";
+        errorMessage.style.display ="none";
+      }else{
+        textinput.style.backgroundColor = " #f57";
+        errorMessage.style.display ="block";
+      }
+    }
 </script>
 
 <body>
@@ -113,7 +130,7 @@
         <div onclick="showpage()">Search</div>
     </nav>
 <!--Welcome-->
-    <section id="page1" class="page">
+    <section id="page1" class="page" onload="validate()">
         <div class="welcomeHead">
             <h1>Welcome to Hypertravel inc</h1>
             <div class="loginForm">
@@ -123,9 +140,11 @@
                 <label for="lname">Last name:</label><br>
                 <input type="text" id="lname" name="lname" value=""><br>
                 <label for="email">email:</label><br>
-                <input type="text" id="email" name="email" value=""><br><br>
+                <input type="text" id="input1" name="email" value="" placeholder="email" onchange="validate()" onkeyup="validate()"><br><br>
+                <div id="errorMessage" class="errorMessage">Field must contain emailadress</div><br><br>
                 <input type="submit" value="Sign in">
                 <input type="submit" onclick="showpage('page2')" value="Register new account">
+                
             </div>
         </div>
     </section>
@@ -141,6 +160,7 @@
             <label for="email">email:</label><br>
             <input type="text" id="email" name="email" value=""><br><br>
             <input type="submit" value="register">
+            
         </div>
     </section>
 
