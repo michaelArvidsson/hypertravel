@@ -274,13 +274,12 @@
 <script>
     function validateTravel() {
         var city = document.getElementById('city').value;
-        var type = document.getElementById('type').value;
+        var type = document.getElementsByClassName('type').value;
         var tDate = document.getElementById('tDate').value;
         var tTime = document.getElementById('tTime').value;
 
         if (city == "") {
             alert("Please select city!");
-            return false;
         } else if (type == "") {
             alert("Please select type!");
         } else if (tDate == "") {
@@ -354,13 +353,14 @@
                 <option value="Barcelona" name="Barcelona">Barcelona</option>
                 <option value="Rome" name="dest">Rome</option>
             </select><br>
-            <label for="class">class:</label><br>
-            <select name="type" id="type">
-                <option value="" name="">Select</option>
-                <option value="First" name="First">First</option>
-                <option value="Second" name="Second">Second</option>
-                <option value="Third" name="Third">Third</option>
-            </select><br>
+            <p>Please select your prefered class:</p>
+            <input type="radio" id="class1" name="class" value="class1">
+            <label for="age1">class1</label><br>
+            <input type="radio" id="class2" name="class" value="class2">
+            <label for="age2">class2</label><br>  
+            <input type="radio" id="class3" name="class" value="class3">
+            <label for="age3">class3</label><br><br>
+            
             <label for="date">Pick available date:</label><br>
             <input type="date" id="tDate" name="tDate" value=""><br>
             <label for="time">Pick available time:</label><br>
