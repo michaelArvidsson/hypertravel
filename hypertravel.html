@@ -1,5 +1,14 @@
 <html lang="en">
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+
+
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,12 +21,12 @@
             overflow: hidden;
             padding: 8px;
         }
-        
+
         .topnav a {
             text-decoration: none;
             color: whitesmoke;
         }
-        
+
         .topNav div {
             font-family: Arial, Helvetica, sans-serif;
             float: left;
@@ -30,23 +39,23 @@
             margin-right: 10px;
             border: 1px solid white;
         }
-        
+
         .topNav div:hover {
             background-color: #ddd;
             color: black;
         }
-        
+
         .topNav div.active {
             background-color: #04AA6D;
             color: white;
         }
-        
+
         .welcomeHead {
             width: 200px;
             text-align: center;
             margin: auto;
         }
-        
+
         .divForm {
             margin: 0 auto;
             width: 400px;
@@ -55,7 +64,7 @@
             padding: 10px;
             box-shadow: 1px 1px 6px 2px lightslategray;
         }
-        
+
         input[type=text],
         [type=date],
         [type=time],
@@ -69,18 +78,18 @@
             border-radius: 5px;
             outline: none;
         }
-        
-         ::placeholder {
+
+        ::placeholder {
             color: red;
         }
-        
+
         #selectButton {
             width: 100px;
             margin: 0 auto;
             margin-top: 15px;
             display: block;
         }
-        
+
         .pageHeader {
             width: 600px;
             margin: auto;
@@ -88,7 +97,7 @@
             padding: 20px;
             text-align: center;
         }
-        
+
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
@@ -99,14 +108,14 @@
             padding: 10px;
             box-shadow: 1px 1px 6px 2px lightslategray;
         }
-        
+
         td,
         th {
             border: 1px solid rgb(0, 0, 0);
             text-align: left;
             padding: 8px;
         }
-        
+
         #page1 {
             display: block;
             margin-top: 15px;
@@ -114,7 +123,7 @@
             height: 100%;
             background-color: rgb(222, 226, 17);
         }
-        
+
         #page2 {
             display: none;
             margin-top: 15px;
@@ -122,7 +131,7 @@
             height: 100%;
             background-color: rgb(17, 202, 226);
         }
-        
+
         #page3 {
             display: none;
             margin-top: 15px;
@@ -130,7 +139,15 @@
             height: 100%;
             background-color: darkviolet;
         }
-        
+
+        #page4 {
+            display: none;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            height: 100%;
+            background-color: rgb(255, 255, 255);
+        }
+
         #page5 {
             display: none;
             margin-top: 15px;
@@ -146,7 +163,15 @@
             height: 100%;
             background-color: rgb(255, 152, 246);
         }
-        
+
+        #page7 {
+            display: none;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            height: 100%;
+            background-color: rgb(152, 248, 255);
+        }
+
         #errorMessage {
             display: none;
             width: 200px;
@@ -158,15 +183,12 @@
 
 <script>
     function historyChange(event) {
-        //alert('hash changed!');
-        //document.getElementById("outputValue").value += JSON.stringify(event.state);
+      
         console.log(event.state);
 
-        if (event.state != null){
+        if (event.state != null) {
             showpage(event.state);
         }
-        
-        
     }
 
     function updateHistory(token) {
@@ -174,46 +196,27 @@
     }
 
     function setupHistory() {
-        //document.getElementById("outputValue").value = history.state;
-        window.onpopstate = function(event) {
+        
+        window.onpopstate = function (event) {
             historyChange(event);
         };
     }
-</script>
 
-<script>
     function showpage(pageid) {
-        console.log('SHOW:'+pageid);
+        console.log('SHOW:' + pageid);
         var pages = document.getElementsByClassName("page");
         for (var i = 0; i < pages.length; i++) {
             pages[i].style.display = "none";
         }
         document.getElementById(pageid).style.display = "block";
-        
+
     }
 
-    function show(pageid){
+    function show(pageid) {
         showpage(pageid);
         updateHistory(pageid);
     }
-</script>
 
-<!-- <script>
-    function validate() {
-        var textinput = document.getElementById("input1");
-        var errorMessage = document.getElementById("errorMessage");
-        if (textinput.value.indexOf("@") != -1) {
-            textinput.style.backgroundColor = "#cfa";
-            errorMessage.style.display = "none";
-        } else {
-            textinput.style.backgroundColor = " #f57";
-            errorMessage.innerHTML = "ERROR";
-            errorMessage.style.display = "block";
-        }
-    }
-</script> -->
-
-<script>
     function validatelogForm() {
         event.preventDefault();
 
@@ -232,13 +235,10 @@
             document.getElementById('logPassword').style.border = "2px solid red";
             document.getElementsByName('logPassword')[0].value = '';
             document.getElementsByName('logPassword')[0].placeholder = 'password incorrect';
-
         }
 
     }
-</script>
 
-<script>
     function validateForm() {
         event.preventDefault();
         var fname = document.getElementById('fname').value;
@@ -267,30 +267,48 @@
         } else {
             return true;
         }
-
     }
-</script>
 
-<script>
+    function IsEmail(email) {
+        var email = document.getElementById('email').value; 
+             var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+             if(!regex.test(email)) {
+                return false;
+             }else{
+                return true;
+             }
+    }
+
     function validateTravel() {
         var city = document.getElementById('city').value;
         var type = document.getElementsByClassName('type').value;
-        var tDate = document.getElementById('tDate').value;
+
         var tTime = document.getElementById('tTime').value;
 
         if (city == "") {
             alert("Please select city!");
         } else if (type == "") {
             alert("Please select type!");
-        } else if (tDate == "") {
-            alert("Please select date!");
         } else if (tTime == "") {
             alert("Please select time!");
         } else {
             showpage('page4');
         }
-
     }
+ 
+
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+
+    function confirmAgree() {
+        if ($('input[name="checkB"]').is(':checked')) {
+            alert('Success');
+        } else {
+            alert('No checkbox');
+        }
+    }
+    
 </script>
 
 <body onload="setupHistory();updateHistory('page1');">
@@ -313,7 +331,8 @@
             <div class="divForm">
 
                 <label for="">email:</label> <input type="text" id="logEmail" name="logEmail" placeholder=""><br>
-                <label for="">password:</label> <input type="text" id="logPassword" name="logPassword" placeholder=""><br>
+                <label for="">password:</label> <input type="text" id="logPassword" name="logPassword"
+                    placeholder=""><br>
 
                 <input type="submit" onclick="return validatelogForm()" value="Submit">
                 <button onclick="showpage('page2')">Register</button>
@@ -339,6 +358,7 @@
         </div>
     </section>
     <!--Register end-->
+
     <section id="page3" class="page">
         <div class="pageHeader">
             <h1>Where do you want to travel</h1>
@@ -357,15 +377,15 @@
             <input type="radio" id="class1" name="class" value="class1">
             <label for="age1">class1</label><br>
             <input type="radio" id="class2" name="class" value="class2">
-            <label for="age2">class2</label><br>  
+            <label for="age2">class2</label><br>
             <input type="radio" id="class3" name="class" value="class3">
             <label for="age3">class3</label><br><br>
-            
-            <label for="date">Pick available date:</label><br>
-            <input type="date" id="tDate" name="tDate" value=""><br>
-            <label for="time">Pick available time:</label><br>
+
+            <label for="datepcker">Pick available date:</label><br>
+            <p>Date: <input type="text" autocomplete="off" name="tDate" id="datepicker"></p><br>
+            <label for="time" autocomplete="off">Pick available time:</label><br>
             <input type="time" id="tTime" name="tTime" value=""><br><br>
-            <input type="submit" onclick="validateTravel()" value="continue">
+            <input type="submit" onclick="validateTravel();" value="continue">
         </div>
     </section>
 
@@ -376,10 +396,10 @@
                 <h3>Select your seat</h3>
             </div>
             <div class="divForm">
-
-
-                <div style="width:200px; height:400px;margin:auto; margin-top:20px; border-radius:30px 30px 5px 5px; background-color: dimgray;"></div>
-                <input id="selectButton" type="submit" onclick="showpage()" value="confirm seat">
+                <div
+                    style="width:200px; height:400px;margin:auto; margin-top:20px; border-radius:30px 30px 5px 5px; background-color: dimgray;">
+                </div>
+                <input id="selectButton" type="submit" onclick="showpage('page7')" value="confirm seat">
             </div>
 
         </div>
@@ -447,28 +467,51 @@
                 </tr>
             </table>
         </div>
-        </section>
+    </section>
 
-        <section id="page6" class="page">
-            <div class="pageHeader">
-                <h3>Search available resources</h3>
-            </div>
-            <div class="divForm">
-                <input type="text" value="SEARCH">
-            </div>
-        </section>
+    <section id="page6" class="page">
+        <div class="pageHeader">
+            <h3>Search available resources</h3>
+        </div>
+        <div class="divForm">
+            <input type="text" value="SEARCH">
+        </div>
+    </section>
 
-        <section id="page7" class="page">
-            <div>
+    <section id="page7" class="page">
+        <div class="pageHeader">
+            <h3>Confirm the agreements below</h3>
+        </div>
+        <div style="height:380px; " class="divForm">
 
-            </div>
-        </section>
+            <p>
+                These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds,
+                to seek out new life and new civilizations, to boldly go where no one has gone before. We need to
+                neutralize the homing signal. Each unit has total environmental control, gravity, temperature,
+                atmosphere, light, in a protective field. Sensors show energy readings in your area. We had a forced
+                chamber explosion in the resonator coil. Field strength has increased by 3,000 percent.
+            </p>
 
-        <section id="page8" class="page">
-            <div>
+            <p>
+                Exceeding reaction chamber thermal limit. We have begun power-supply calibration. Force fields have been
+                established on all turbo lifts and crawlways. Computer, run a level-two diagnostic on warp-drive
+                systems. Antimatter containment positive. Warp drive within normal parameters. I read an ion trail
+                characteristic of a freighter escape pod. The bomb had a molecular-decay detonator. Detecting some
+                unusual fluctuations in subspace frequencies.
+            </p>
 
-            </div>
-        </section>
+            <label for="checkB">I agree to the terms</label><input type="checkbox" id="checkB" name="checkB">
+            <button onclick="confirmAgree();">GO!</button>
+
+
+        </div>
+    </section>
+
+    <section id="page8" class="page">
+        <div>
+
+        </div>
+    </section>
 
 </body>
 
