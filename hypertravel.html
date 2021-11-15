@@ -3,8 +3,10 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 <head>
     <meta charset="UTF-8">
@@ -18,12 +20,12 @@
             overflow: hidden;
             padding: 8px;
         }
-        
+
         .topnav a {
             text-decoration: none;
             color: whitesmoke;
         }
-        
+
         .topNav div {
             font-family: Arial, Helvetica, sans-serif;
             float: left;
@@ -36,23 +38,23 @@
             margin-right: 10px;
             border: 1px solid white;
         }
-        
+
         .topNav div:hover {
             background-color: #ddd;
             color: black;
         }
-        
+
         .topNav div.active {
             background-color: #04AA6D;
             color: white;
         }
-        
+
         .welcomeHead {
             width: 200px;
             text-align: center;
             margin: auto;
         }
-        
+
         .divForm {
             margin: 0 auto;
             width: 400px;
@@ -61,7 +63,7 @@
             padding: 10px;
             box-shadow: 1px 1px 6px 2px lightslategray;
         }
-        
+
         input[type=text],
         [type=date],
         [type=time],
@@ -75,18 +77,18 @@
             border-radius: 5px;
             outline: none;
         }
-        
-         ::placeholder {
+
+        ::placeholder {
             color: red;
         }
-        
+
         #selectButton {
             width: 100px;
             margin: 0 auto;
             margin-top: 15px;
             display: block;
         }
-        
+
         .pageHeader {
             width: 600px;
             margin: auto;
@@ -94,7 +96,7 @@
             padding: 20px;
             text-align: center;
         }
-        
+
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
@@ -105,14 +107,14 @@
             padding: 10px;
             box-shadow: 1px 1px 6px 2px lightslategray;
         }
-        
+
         td,
         th {
             border: 1px solid rgb(0, 0, 0);
             text-align: left;
             padding: 8px;
         }
-        
+
         #page1 {
             display: block;
             margin-top: 15px;
@@ -120,7 +122,7 @@
             height: 100%;
             background-color: rgb(222, 226, 17);
         }
-        
+
         #page2 {
             display: none;
             margin-top: 15px;
@@ -128,7 +130,7 @@
             height: 100%;
             background-color: rgb(17, 202, 226);
         }
-        
+
         #page3 {
             display: none;
             margin-top: 15px;
@@ -136,7 +138,7 @@
             height: 100%;
             background-color: darkviolet;
         }
-        
+
         #page4 {
             display: none;
             margin-top: 15px;
@@ -144,7 +146,7 @@
             height: 100%;
             background-color: rgb(255, 255, 255);
         }
-        
+
         #page5 {
             display: none;
             margin-top: 15px;
@@ -152,7 +154,7 @@
             height: 100%;
             background-color: rgb(17, 226, 104);
         }
-        
+
         #page6 {
             display: none;
             margin-top: 15px;
@@ -160,7 +162,7 @@
             height: 100%;
             background-color: rgb(255, 152, 246);
         }
-        
+
         #page7 {
             display: none;
             margin-top: 15px;
@@ -168,15 +170,26 @@
             height: 100%;
             background-color: rgb(152, 248, 255);
         }
-        
+
         #errorMessage {
             display: none;
             width: 200px;
             color: firebrick;
             padding: 3px;
         }
-        
-        #modal {}
+
+        .hidden{
+            display: none;
+        }
+
+        .visible{
+            display: block;
+        }
+
+        #confirmPop{
+            width: 200px;
+            background-color: yellowgreen;
+        }
     </style>
 </head>
 
@@ -196,7 +209,7 @@
 
     function setupHistory() {
 
-        window.onpopstate = function(event) {
+        window.onpopstate = function (event) {
             historyChange(event);
         };
     }
@@ -219,15 +232,12 @@
     function validatelogForm() {
         event.preventDefault();
 
-        var logEmail = document.getElementById('logEmail').value;
+        
         var logPassword = document.getElementById('logPassword').value;
         var pw = 'password';
 
-        if (logEmail == "") {
-            document.getElementById('logEmail').style.border = "2px solid red";
-            document.getElementsByName('logEmail')[0].placeholder = 'email must be filled out';
-            return false;
-        } else if (logPassword.match(pw)) {
+     
+        if (logPassword.match(pw)) {
             document.getElementById('logPassword').style.border = "2px solid green";
             return true;
         } else {
@@ -252,7 +262,7 @@
             document.getElementById('lname').style.border = "2px solid red";
             document.getElementsByName('lname')[0].placeholder = 'Last Name must be filled out';
             return false;
-            validateMail(email);
+            validateMail();
         } else if (phone == "") {
             document.getElementById('lname').style.border = "2px solid rgb(17, 226, 104)";
             document.getElementById('phone').style.border = "2px solid red";
@@ -266,10 +276,13 @@
     function validateMail(email) {
         var email = document.getElementById('email').value;
         var regex = /^[a-zA-Z0-9_\.\-\+]+\@([a-zA-Z0-9\-])/;
-        if (!regex.test(email)) {
+        if (email == ""){
+            document.getElementsByName('email')[0].placeholder = 'email must be filled out';
+            document.getElementById('email').style.border = "2px solid red";
+         }else if(!regex.test(email)) {
             document.getElementById('email').style.border = "2px solid red";
             return false;
-        } else {
+        }else {
             document.getElementById('email').style.border = "2px solid rgb(17, 226, 104)";
             return true;
         }
@@ -308,7 +321,7 @@
         }
     }
 
-    $(function() {
+    $(function () {
         $("#datepicker").datepicker({
             minDate: -0,
             maxDate: "+6M +1D"
@@ -322,26 +335,16 @@
         } else {
             $(":checked").wrap("<span style='background-color:red'>");
             console.log('No checkbox');
+            $('#messagePop').toggleClass('visible');
         }
     }
 
-    $(function() {
-        $("#opener").on("click", function() {
-            $("#dialog").dialog("open");
-        });
-
-        $("#dialog").dialog({
-            autoOpen: false,
-            show: {
-                effect: "blind",
-                duration: 1000
-            },
-            hide: {
-                effect: "explode",
-                duration: 1000
-            }
-        });
+    $(function () {
+        $("#tooltip-1").tooltip();
+        $("#tooltip-2").tooltip();
+        $("#tooltip-3").tooltip();
     });
+
 </script>
 
 <body onload="setupHistory();updateHistory('page1');">
@@ -363,8 +366,9 @@
 
             <div class="divForm">
 
-                <label for="">email:</label> <input type="text" id="logEmail" name="logEmail" placeholder=""><br>
-                <label for="">password:</label> <input type="text" id="logPassword" name="logPassword" placeholder=""><br>
+                <label for="">email: <i id="tooltip-3" title="email address example john.doe@hypertravel.com" class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label> <input type="text" onkeyup="validateMail()" id="email" name="email" placeholder=""><br>
+                <label for="">password:</label> <input type="text" id="logPassword" name="logPassword"
+                    placeholder=""><br>
 
                 <input type="submit" onclick="return validatelogForm()" value="Submit">
                 <button onclick="showpage('page2')">Register</button>
@@ -381,10 +385,14 @@
             <h3>Fill in the form to begin your journey</h3>
         </div>
         <div class="divForm">
-            <label for="">First Name: </label> <input type="text" id="fname" name="fname" placeholder=""><br>
-            <label for="">Last Name:</label> <input type="text" id="lname" name="lname" placeholder=""><br>
-            <label for="">email:</label> <input type="text" onkeyup="validateMail() " id="email" name="email" placeholder=""><br>
-            <label for="">Phone:</label> <input type="text" id="phone" name="phone" placeholder=""><br>
+            <label for="">First Name: <i id="tooltip-1" title="Firstname"class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
+            <input type="text" id="fname" name="fname" placeholder=""><br>
+            <label for="">Last Name: <i id="tooltip-2" title="Lastname" class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
+            <input type="text" id="lname" name="lname" placeholder=""><br>
+            <label for="">email:<i id="tooltip-3" title="email address example john.doe@hypertravel.com" class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
+            <input type="text" onkeyup="validateMail()" id="email" name="email" placeholder=""><br>
+            <label for="">Phone: <i class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
+            <input type="text" id="phone" name="phone" placeholder=""><br>
             <input type="submit" onclick="return validateForm()" value="Submit">
 
         </div>
@@ -396,7 +404,8 @@
             <h1>Where do you want to travel</h1>
         </div>
         <div class="divForm">
-            <label for="destination">Destination:</label><br>
+            <label for="destination">Destination: <i class="fa fa-question-circle"
+                    style="color: rgb(14, 92, 238); font-size:16px"></i></label><br>
             <select name="city " id="city">
                 <option value="" name="">Select</option>
                 <option value="Berlin" name="Berlin">Berlin</option>
@@ -405,7 +414,8 @@
                 <option value="Barcelona" name="Barcelona">Barcelona</option>
                 <option value="Rome" name="dest">Rome</option>
             </select><br>
-            <p id="classSelect">Please select your prefered class:</p>
+            <p id="classSelect">Please select your prefered class: <i class="fa fa-question-circle"
+                    style="color: rgb(14, 92, 238); font-size:16px"></i></p>
             <input type="radio" id="class1radio" name="class" value="class1">
             <label for="class1">class1</label><br>
             <input type="radio" id="class2radio" name="class" value="class2">
@@ -413,9 +423,11 @@
             <input type="radio" id="class3radio" name="class" value="class3">
             <label for="class3">class3</label><br><br>
 
-            <label id="dateLabel" for="datepicker">Pick available date:</label><br>
+            <label id="dateLabel" for="datepicker">Pick available date: <i class="fa fa-question-circle"
+                    style="color: rgb(14, 92, 238); font-size:16px"></i></label><br>
             <p>Date: <input type="text" autocomplete="off" name="tDate" id="datepicker"></p><br>
-            <label id="timeLabel" for="time" autocomplete="off">Pick available time:</label><br>
+            <label id="timeLabel" for="time" autocomplete="off">Pick available time: <i class="fa fa-question-circle"
+                    style="color: rgb(14, 92, 238); font-size:16px"></i></label><br>
             <input type="time" id="tTime" name="tTime" value=""><br><br>
             <input type="submit" onclick="validateTravel();" value="continue">
         </div>
@@ -428,7 +440,8 @@
                 <h3>Select your seat</h3>
             </div>
             <div class="divForm">
-                <div style="width:200px; height:400px;margin:auto; margin-top:20px; border-radius:30px 30px 5px 5px; background-color: dimgray;">
+                <div
+                    style="width:200px; height:400px;margin:auto; margin-top:20px; border-radius:30px 30px 5px 5px; background-color: dimgray;">
                 </div>
                 <input id="selectButton" type="submit" onclick="showpage('page7')" value="confirm seat">
             </div>
@@ -516,22 +529,33 @@
         <div style="height:380px; " class="divForm">
 
             <p>
-                These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no one has gone before. We need to neutralize the homing signal. Each unit has total
-                environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength has increased by 3,000 percent.
+                These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds,
+                to seek out new life and new civilizations, to boldly go where no one has gone before. We need to
+                neutralize the homing signal. Each unit has total
+                environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show
+                energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength
+                has increased by 3,000 percent.
             </p>
 
             <p>
-                Exceeding reaction chamber thermal limit. We have begun power-supply calibration. Force fields have been established on all turbo lifts and crawlways. Computer, run a level-two diagnostic on warp-drive systems. Antimatter containment positive. Warp drive
-                within normal parameters. I read an ion trail characteristic of a freighter escape pod. The bomb had a molecular-decay detonator. Detecting some unusual fluctuations in subspace frequencies.
+                Exceeding reaction chamber thermal limit. We have begun power-supply calibration. Force fields have been
+                established on all turbo lifts and crawlways. Computer, run a level-two diagnostic on warp-drive
+                systems. Antimatter containment positive. Warp drive
+                within normal parameters. I read an ion trail characteristic of a freighter escape pod. The bomb had a
+                molecular-decay detonator. Detecting some unusual fluctuations in subspace frequencies.
             </p>
 
             <label for="checkB">I agree to the terms</label><input type="checkbox" id="checkB" name="checkB">
-            <button id="opener" onclick="confirmAgree();">GO!</button>
+            <button onclick="confirmAgree();">GO!</button>
+
+            <div id="confirmPop" class="hidden">
+                <div id="confirmPopMessage">
+                    You have to accept the agreement
+                </div>
+            </div>
         </div>
 
-        <div id="dialog" title="Attention!">
-            <p>Please agree to the terms before you proceed</p>
-        </div>
+
     </section>
 
     <section id="page8" class="page">
