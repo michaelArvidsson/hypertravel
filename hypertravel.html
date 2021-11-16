@@ -178,17 +178,36 @@
             padding: 3px;
         }
 
-        .hidden{
+        .hidden {
             display: none;
         }
 
-        .visible{
+        .visible {
             display: block;
         }
 
-        #confirmPop{
-            width: 200px;
-            background-color: yellowgreen;
+        #confirmPop {
+            width: 250px;
+            height: 100px;
+            background-color: rgb(193, 194, 197);
+            padding:20px;
+            padding: 20px;
+            position: absolute;
+            bottom: 10;
+            left: 340;
+            animation-name: popup;
+            animation-duration: 3s;
+        }
+        #output{
+            display:none;
+        }
+        @keyframes popup{
+            from{
+                opacity: 0;
+            }
+            to{
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -232,11 +251,11 @@
     function validatelogForm() {
         event.preventDefault();
 
-        
+
         var logPassword = document.getElementById('logPassword').value;
         var pw = 'password';
 
-     
+
         if (logPassword.match(pw)) {
             document.getElementById('logPassword').style.border = "2px solid green";
             return true;
@@ -262,7 +281,6 @@
             document.getElementById('lname').style.border = "2px solid red";
             document.getElementsByName('lname')[0].placeholder = 'Last Name must be filled out';
             return false;
-            validateMail();
         } else if (phone == "") {
             document.getElementById('lname').style.border = "2px solid rgb(17, 226, 104)";
             document.getElementById('phone').style.border = "2px solid red";
@@ -276,13 +294,13 @@
     function validateMail(email) {
         var email = document.getElementById('email').value;
         var regex = /^[a-zA-Z0-9_\.\-\+]+\@([a-zA-Z0-9\-])/;
-        if (email == ""){
+        if (email == "") {
             document.getElementsByName('email')[0].placeholder = 'email must be filled out';
             document.getElementById('email').style.border = "2px solid red";
-         }else if(!regex.test(email)) {
+        } else if (!regex.test(email)) {
             document.getElementById('email').style.border = "2px solid red";
             return false;
-        }else {
+        } else {
             document.getElementById('email').style.border = "2px solid rgb(17, 226, 104)";
             return true;
         }
@@ -324,7 +342,7 @@
     $(function () {
         $("#datepicker").datepicker({
             minDate: -0,
-            maxDate: "+6M +1D"
+            maxDate: "+6M"
         });
     });
 
@@ -333,10 +351,13 @@
         if ($('input[name="checkB"]').is(':checked')) {
             console.log('Success');
         } else {
-            $(":checked").wrap("<span style='background-color:red'>");
-            console.log('No checkbox');
-            $('#messagePop').toggleClass('visible');
+            console.log('No checkbox');  
+            document.getElementById("confirmPop").className = "visible";   
         }
+    }
+
+    function closePop() {
+        document.getElementById("confirmPop").className = "hidden"; 
     }
 
     $(function () {
@@ -344,6 +365,73 @@
         $("#tooltip-2").tooltip();
         $("#tooltip-3").tooltip();
     });
+
+      // For students, User name of student to differentiate between different applications on the server
+     /*  var apptype="Hotel_Demo"; */
+ 
+ //------------------------------------------------------------------------
+ // make customer
+ //------------------------------------------------------------------------
+ // Creates a new customer with a given id, name, address etc
+ // Customers are general for ALL booking systems, so no need to add type attribute
+ //------------------------------------------------------------------------
+
+ function storeCustomer()
+ {
+     document.getElementById("output").innerHTML+="<br>AJAX CALL Started.";
+     
+     var firstname=document.getElementById("customerfnameC").value;
+     var lastname=document.getElementById("customerlnameC").value;
+     var email=document.getElementById("customeremailC").value;
+     var address=document.getElementById("customeraddressC").value;
+     
+
+     document.getElementById("output").innerHTML+="<br>Creating a new customer...";
+     var jqxhr = $.ajax( "../WebbProgrammering/booking/makecustomer_XML.php", {
+         type: 'POST',
+         data: { 
+             ID: encodeURIComponent(email),
+             firstname: encodeURIComponent(firstname),
+             lastname: encodeURIComponent(lastname),
+             email: encodeURIComponent(email),
+             address: encodeURIComponent(address),
+             
+         }
+     })
+     .done(ResultCustomern)
+     .fail(errormsg)
+     .always(function() {
+         console.log( "Request for storing customer "+firstname+" "+lastname+" has completed." );
+         document.getElementById("output").innerHTML+="<br> AJAX CALL Finished."
+     });
+ }
+
+ function ResultCustomern(returnedData)
+ {
+     // Iterate over all nodes in root node (i.e. the 'created' element in root which has an attribute called status)
+     for (i = 0; i < returnedData.childNodes.length; i++) {
+         if(returnedData.childNodes.item(i).nodeName=="created"){
+           document.getElementById("output").innerHTML+="SUCCESSFUL!";
+           alert(returnedData.childNodes.item(i).attributes['status'].value);
+         }
+     }
+ }        
+
+ //------------------------------------------------------------------------
+ // error message callback
+ //------------------------------------------------------------------------
+ // The errror message callback displays the error message and error code
+ //------------------------------------------------------------------------
+
+ function errormsg(jqXHR,textStatus,errorThrown)
+ {
+     console.log(jqXHR);
+     document.getElementById("output").innerHTML+="FAILED!";
+     alert("AJAX Error:"+errorThrown);
+ }
+
+
+ //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
 
 </script>
 
@@ -366,11 +454,11 @@
 
             <div class="divForm">
 
-                <label for="">email: <i id="tooltip-3" title="email address example john.doe@hypertravel.com" class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label> <input type="text" onkeyup="validateMail()" id="email" name="email" placeholder=""><br>
-                <label for="">password:</label> <input type="text" id="logPassword" name="logPassword"
-                    placeholder=""><br>
+                <label for="">email: <i id="tooltip-3" title="email address example john.doe@hypertravel.com"
+                        class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
+                <input type="text" onkeyup="validateMail()" id="email" name="email" placeholder=""><br>
 
-                <input type="submit" onclick="return validatelogForm()" value="Submit">
+                <input type="Submit" onclick="return validatelogForm()" value="Sign in">
                 <button onclick="showpage('page2')">Register</button>
 
             </div>
@@ -385,17 +473,22 @@
             <h3>Fill in the form to begin your journey</h3>
         </div>
         <div class="divForm">
-            <label for="">First Name: <i id="tooltip-1" title="Firstname"class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
-            <input type="text" id="fname" name="fname" placeholder=""><br>
-            <label for="">Last Name: <i id="tooltip-2" title="Lastname" class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
-            <input type="text" id="lname" name="lname" placeholder=""><br>
-            <label for="">email:<i id="tooltip-3" title="email address example john.doe@hypertravel.com" class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
-            <input type="text" onkeyup="validateMail()" id="email" name="email" placeholder=""><br>
-            <label for="">Phone: <i class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
-            <input type="text" id="phone" name="phone" placeholder=""><br>
-            <input type="submit" onclick="return validateForm()" value="Submit">
-
+            <label for="">First Name: <i id="tooltip-1" title="Firstname" class="fa fa-question-circle"
+                    style="color: rgb(14, 92, 238); font-size:16px"></i></label>
+            <input type="text" id="customerfnameC" name="customerfnameC" placeholder=""><br>
+            <label for="">Last Name: <i id="tooltip-2" title="Lastname" class="fa fa-question-circle"
+                    style="color: rgb(14, 92, 238); font-size:16px"></i></label>
+            <input type="text" id="customerlnameC" name="customerlnameC" placeholder=""><br>
+            <label for="">email:<i id="tooltip-3" title="email address example john.doe@hypertravel.com"
+                    class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
+            <input type="text" onkeyup="validateMail()" id="customeremailC" name="customeremailC" placeholder=""><br>
+            <label for="">Adress: <i class="fa fa-question-circle"
+                    style="color: rgb(14, 92, 238); font-size:16px"></i></label>
+            <input type="text" id="customeraddressC" name="customeraddressC" placeholder=""><br>
+            <!-- <input type="submit" onclick="return validateForm()" value="Submit"> -->
+            <input type="button" onclick="storeCustomer();" value="Register">           
         </div>
+        <div id="output"></div>
     </section>
     <!--Register end-->
 
@@ -550,7 +643,8 @@
 
             <div id="confirmPop" class="hidden">
                 <div id="confirmPopMessage">
-                    You have to accept the agreement
+                    <p>You have to accept the agreement</p> <br>
+                    <button onclick="closePop();">OK</button>
                 </div>
             </div>
         </div>
