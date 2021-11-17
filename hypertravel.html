@@ -190,7 +190,7 @@
             width: 250px;
             height: 100px;
             background-color: rgb(193, 194, 197);
-            padding:20px;
+            padding: 20px;
             padding: 20px;
             position: absolute;
             bottom: 10;
@@ -198,14 +198,17 @@
             animation-name: popup;
             animation-duration: 3s;
         }
-        #output{
-            display:none;
+
+        #output {
+            display: none;
         }
-        @keyframes popup{
-            from{
+
+        @keyframes popup {
+            from {
                 opacity: 0;
             }
-            to{
+
+            to {
                 opacity: 1;
             }
         }
@@ -339,6 +342,83 @@
         }
     }
 
+    function fixChars(returnedData) {
+        var resultset = returnedData.childNodes[0];
+
+        // Iterate over all nodes in root node recursively and replace the strings inside attributes
+        x = returnedData.getElementsByTagName('*');
+        for (i = 0; i < x.length; i++) {
+            for (j = 0; j < x[i].attributes.length; j++) {
+                x[i].attributes[j].nodeValue = x[i].attributes[j].nodeValue.replace(/%/g, "&");
+            }
+        }
+    }
+
+    //------------------------------------------------------------------------
+    // get customer bookings
+    //------------------------------------------------------------------------
+    // Returns the set of bookings made by a given customer
+    // This function thus implements a traditional shopping cart
+    //------------------------------------------------------------------------
+
+    function processinputbox() {
+        customer = document.getElementById("customerID").value;
+        var jqxhr = $.ajax("../WebbProgrammering/booking/getcustomerbookings_XML.php", {
+            method: "POST",
+            data: {
+                customerID: encodeURIComponent(customer),
+                type: apptype    // Only show bookings for your webbapplication using the apptype
+            }
+        })
+            .done(ResultBookingCustomer)
+            .fail(errormsg)
+            .always(function () {
+                console.log("Request bookings for customer " + customer + " has completed.");
+            });
+    }
+
+    function ResultBookingCustomer(returnedData) {
+        // Fix characters in XML notation to HTML notation
+        fixChars(returnedData);
+
+        // An XML DOM document is returned from AJAX
+        var resultset = returnedData.childNodes[0];
+
+        var output = "<table>";
+
+        // Iterate over all nodes in root node (i.e. bookings)
+        for (i = 0; i < resultset.childNodes.length; i++) {
+            // Iterate over all child nodes of that node that are booking nodes
+            if (resultset.childNodes.item(i).nodeName == "booking") {
+                // Retrieve first name and last name for node
+                var booking = resultset.childNodes.item(i);
+
+                output += "<tr class='actiontablerow'>";
+                output += "<td>" + booking.attributes['company'].value + "</td>";
+                output += "<td>" + booking.attributes['name'].value + "</td>";
+                output += "<td>" + booking.attributes['location'].value + "</td>";
+                output += "<td>" + booking.attributes['date'].value + "</td>";
+                output += "</tr>";
+
+            }
+        }
+
+        output += "</table>"
+        var div = document.getElementById('OutputDiv');
+        div.innerHTML = output;
+    }
+
+    //------------------------------------------------------------------------
+    // error message callback
+    //------------------------------------------------------------------------
+    // The errror message callback displays the error message and error code
+    //------------------------------------------------------------------------
+
+    function errormsg(jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR);
+        alert("AJAX Error:" + errorThrown);
+    }
+
     $(function () {
         $("#datepicker").datepicker({
             minDate: -0,
@@ -351,13 +431,13 @@
         if ($('input[name="checkB"]').is(':checked')) {
             console.log('Success');
         } else {
-            console.log('No checkbox');  
-            document.getElementById("confirmPop").className = "visible";   
+            console.log('No checkbox');
+            document.getElementById("confirmPop").className = "visible";
         }
     }
 
     function closePop() {
-        document.getElementById("confirmPop").className = "hidden"; 
+        document.getElementById("confirmPop").className = "hidden";
     }
 
     $(function () {
@@ -366,72 +446,122 @@
         $("#tooltip-3").tooltip();
     });
 
-      // For students, User name of student to differentiate between different applications on the server
-     /*  var apptype="Hotel_Demo"; */
- 
- //------------------------------------------------------------------------
- // make customer
- //------------------------------------------------------------------------
- // Creates a new customer with a given id, name, address etc
- // Customers are general for ALL booking systems, so no need to add type attribute
- //------------------------------------------------------------------------
 
- function storeCustomer()
- {
-     document.getElementById("output").innerHTML+="<br>AJAX CALL Started.";
-     
-     var firstname=document.getElementById("customerfnameC").value;
-     var lastname=document.getElementById("customerlnameC").value;
-     var email=document.getElementById("customeremailC").value;
-     var address=document.getElementById("customeraddressC").value;
-     
+    //------------------------------------------------------------------------
+    // make customer
+    //------------------------------------------------------------------------
+    // Creates a new customer with a given id, name, address etc
+    // Customers are general for ALL booking systems, so no need to add type attribute
+    //------------------------------------------------------------------------
 
-     document.getElementById("output").innerHTML+="<br>Creating a new customer...";
-     var jqxhr = $.ajax( "../WebbProgrammering/booking/makecustomer_XML.php", {
-         type: 'POST',
-         data: { 
-             ID: encodeURIComponent(email),
-             firstname: encodeURIComponent(firstname),
-             lastname: encodeURIComponent(lastname),
-             email: encodeURIComponent(email),
-             address: encodeURIComponent(address),
-             
-         }
-     })
-     .done(ResultCustomern)
-     .fail(errormsg)
-     .always(function() {
-         console.log( "Request for storing customer "+firstname+" "+lastname+" has completed." );
-         document.getElementById("output").innerHTML+="<br> AJAX CALL Finished."
-     });
- }
+    function storeCustomer() {
+        document.getElementById("output").innerHTML += "<br>AJAX CALL Started.";
 
- function ResultCustomern(returnedData)
- {
-     // Iterate over all nodes in root node (i.e. the 'created' element in root which has an attribute called status)
-     for (i = 0; i < returnedData.childNodes.length; i++) {
-         if(returnedData.childNodes.item(i).nodeName=="created"){
-           document.getElementById("output").innerHTML+="SUCCESSFUL!";
-           alert(returnedData.childNodes.item(i).attributes['status'].value);
-         }
-     }
- }        
+        var firstname = document.getElementById("customerfnameC").value;
+        var lastname = document.getElementById("customerlnameC").value;
+        var email = document.getElementById("customeremailC").value;
+        var address = document.getElementById("customeraddressC").value;
 
- //------------------------------------------------------------------------
- // error message callback
- //------------------------------------------------------------------------
- // The errror message callback displays the error message and error code
- //------------------------------------------------------------------------
 
- function errormsg(jqXHR,textStatus,errorThrown)
- {
-     console.log(jqXHR);
-     document.getElementById("output").innerHTML+="FAILED!";
-     alert("AJAX Error:"+errorThrown);
- }
+        document.getElementById("output").innerHTML += "<br>Creating a new customer...";
+        var jqxhr = $.ajax("../WebbProgrammering/booking/makecustomer_XML.php", {
+            type: 'POST',
+            data: {
+                ID: encodeURIComponent(email),
+                firstname: encodeURIComponent(firstname),
+                lastname: encodeURIComponent(lastname),
+                email: encodeURIComponent(email),
+                address: encodeURIComponent(address),
+
+            }
+        })
+            .done(ResultCustomern)
+            .fail(errormsg)
+            .always(function () {
+                console.log("Request for storing customer " + firstname + " " + lastname + " has completed.");
+                document.getElementById("output").innerHTML += "<br> AJAX CALL Finished."
+            });
+    }
+
+    function ResultCustomern(returnedData) {
+        // Iterate over all nodes in root node (i.e. the 'created' element in root which has an attribute called status)
+        for (i = 0; i < returnedData.childNodes.length; i++) {
+            if (returnedData.childNodes.item(i).nodeName == "created") {
+                document.getElementById("output").innerHTML += "SUCCESSFUL!";
+                alert(returnedData.childNodes.item(i).attributes['status'].value);
+            }
+        }
+    }
+
+    //------------------------------------------------------------------------
+    // error message callback
+    //------------------------------------------------------------------------
+    // The errror message callback displays the error message and error code
+    //------------------------------------------------------------------------
+
+    function errormsg(jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR);
+        document.getElementById("output").innerHTML += "FAILED!";
+        alert("AJAX Error:" + errorThrown);
+    }
 
 
  //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
+
+ //------------------------------------------------------------------------
+		// get customer
+		//------------------------------------------------------------------------
+		// Reads the customer information for the given customerID
+		// This can be used for creating a login function, since no information is returned if customer does not exist
+		//------------------------------------------------------------------------
+
+		function showCustomer()
+		{
+				var customerID=document.getElementById("customerIDG").value;
+		
+				var jqxhr = $.ajax( "../WebbProgrammering/booking/getcustomer_XML.php", {
+						type: 'POST',
+						data: { 
+								customerID: encodeURIComponent(customerID)
+						}
+				})
+				.done(ResultCustomers)
+				.fail(errormsg)
+				.always(function() {
+						console.log( "Request for showing customers complete." );
+				});
+		}
+	
+		function ResultCustomers(returnedData)
+		{
+				// Fix characters in XML notation to HTML notation
+				fixChars(returnedData);
+
+				var resultset=returnedData.childNodes[0];
+		
+				// Iterate over all nodes in root node (i.e. customers)
+				for (i = 0; i < resultset.childNodes.length; i++) {
+						// Iterate over all child nodes of that node that are customer nodes
+						if(resultset.childNodes.item(i).nodeName=="customer"){
+								// Retrieve first name and last name for node
+								var customer=resultset.childNodes.item(i);
+								var div=document.getElementById('CustomerOutputDiv');
+								output=customer.attributes['id'].value;
+								output+=' '+customer.attributes['firstname'].value;
+								/* output+=' '+customer.attributes['lastname'].value;
+								output+=' '+customer.attributes['address'].value;
+								output+=' '+customer.attributes['email'].value;
+								output+=' '+customer.attributes['lastvisit'].value;
+								output+=' '+customer.attributes['auxdata'].value; */
+								div.innerHTML=output;
+						}
+				}
+		}				
+
+		// get customer END
+		//--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
+
+
 
 </script>
 
@@ -462,6 +592,14 @@
                 <button onclick="showpage('page2')">Register</button>
 
             </div>
+            <div class="actionbox">
+                <span class="actionheading">Get Customer Data (used for faux log-in)</span>
+                CustID:<input type='text' name='customerIDG' id='customerIDG' onchange="showCustomer()"
+                    onkeyup="showCustomer()">
+                <span class="actionheading">Result</span>
+                <div id="CustomerOutputDiv" />Customer Information
+            </div>
+        </div>
         </div>
     </section>
     <!--Welcome end-->
@@ -485,8 +623,7 @@
             <label for="">Adress: <i class="fa fa-question-circle"
                     style="color: rgb(14, 92, 238); font-size:16px"></i></label>
             <input type="text" id="customeraddressC" name="customeraddressC" placeholder=""><br>
-            <!-- <input type="submit" onclick="return validateForm()" value="Submit"> -->
-            <input type="button" onclick="storeCustomer();" value="Register">           
+            <input type="button" onclick="storeCustomer();" value="Register">
         </div>
         <div id="output"></div>
     </section>
@@ -496,6 +633,24 @@
         <div class="pageHeader">
             <h1>Where do you want to travel</h1>
         </div>
+
+        <div class="divForm">
+            <label for="">First Name: <i id="tooltip-1" title="Firstname" class="fa fa-question-circle"
+                    style="color: rgb(14, 92, 238); font-size:16px"></i></label>
+            <input type="text" id="customerfnameC" name="customerfnameC" placeholder=""><br>
+            <label for="">Last Name: <i id="tooltip-2" title="Lastname" class="fa fa-question-circle"
+                    style="color: rgb(14, 92, 238); font-size:16px"></i></label>
+            <input type="text" id="customerlnameC" name="customerlnameC" placeholder=""><br>
+            <label for="">email:<i id="tooltip-3" title="email address example john.doe@hypertravel.com"
+                    class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
+            <input type="text" onkeyup="validateMail()" id="customeremailC" name="customeremailC" placeholder=""><br>
+            <label for="">Adress: <i class="fa fa-question-circle"
+                    style="color: rgb(14, 92, 238); font-size:16px"></i></label>
+            <input type="text" id="customeraddressC" name="customeraddressC" placeholder=""><br>
+            <input type="button" onclick="storeBooking();" value="Register">
+        </div>
+        <div id="outputB"></div>
+
         <div class="divForm">
             <label for="destination">Destination: <i class="fa fa-question-circle"
                     style="color: rgb(14, 92, 238); font-size:16px"></i></label><br>
@@ -547,62 +702,71 @@
 
             <h1 class="pageHeader">Future travels</h1>
 
-            <table>
-                <tr>
-                    <th>Date</th>
-                    <th>Destination</th>
-                    <th>Seat</th>
-                    <th>Details</th>
-                </tr>
-                <tr>
-                    <td>2022-02-15</td>
-                    <td>Berlin</td>
-                    <td>22 D</td>
-                    <td>Window</td>
-                </tr>
-                <tr>
-                    <td>2022-07-05</td>
-                    <td>Barcelona</td>
-                    <td>15A</td>
-                    <td>Pet</td>
-                </tr>
+            <div class="actionbox">
+                <span class="actionheading">Bookings Shopping Cart (show bookings for a customer ID)</span>
+                CustID:<input type='text' style='width:300px' name='customerID' id='customerID'
+                    onchange="processinputbox()" onkeyup="processinputbox()">
+                <span class="actionheading">Result</span>
+                <div id="OutputDiv" />
+            </div>
+        </div>
 
-            </table>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Destination</th>
+                <th>Seat</th>
+                <th>Details</th>
+            </tr>
+            <tr>
+                <td>2022-02-15</td>
+                <td>Berlin</td>
+                <td>22 D</td>
+                <td>Window</td>
+            </tr>
+            <tr>
+                <td>2022-07-05</td>
+                <td>Barcelona</td>
+                <td>15A</td>
+                <td>Pet</td>
+            </tr>
 
-            <h1 class="pageHeader">Travelhistory</h1>
+        </table>
 
-            <table>
-                <tr>
-                    <th>Date</th>
-                    <th>Destination</th>
-                    <th>Seat</th>
-                    <th>Details</th>
-                </tr>
-                <tr>
-                    <td>2021-10-15</td>
-                    <td>Berlin</td>
-                    <td>22 D</td>
-                    <td>Window</td>
-                </tr>
-                <tr>
-                    <td>2021-07-05</td>
-                    <td>Barcelona</td>
-                    <td>15A</td>
-                    <td>Pet</td>
-                </tr>
-                <tr>
-                    <td>2021-10-15</td>
-                    <td>Berlin</td>
-                    <td>22 D</td>
-                    <td>Window</td>
-                </tr>
-                <tr>
-                    <td>2021-07-05</td>
-                    <td>Barcelona</td>
-                    <td>15 A</td>
-                    <td>Pet</td>
-                </tr>
-            </table>
+        <h1 class="pageHeader">Travelhistory</h1>
+
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Destination</th>
+                <th>Seat</th>
+                <th>Details</th>
+            </tr>
+            <tr>
+                <td>2021-10-15</td>
+                <td>Berlin</td>
+                <td>22 D</td>
+                <td>Window</td>
+            </tr>
+            <tr>
+                <td>2021-07-05</td>
+                <td>Barcelona</td>
+                <td>15A</td>
+                <td>Pet</td>
+            </tr>
+            <tr>
+                <td>2021-10-15</td>
+                <td>Berlin</td>
+                <td>22 D</td>
+                <td>Window</td>
+            </tr>
+            <tr>
+                <td>2021-07-05</td>
+                <td>Barcelona</td>
+                <td>15 A</td>
+                <td>Pet</td>
+            </tr>
+        </table>
         </div>
     </section>
 
