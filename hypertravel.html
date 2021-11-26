@@ -382,7 +382,7 @@
     //------------------------------------------------------------------------
 
     function makeBooking() {
-        var customerID = document.getElementById("customerIDB").value;
+        var customerID = localStorage.getItem("username");
         var resourceID = document.getElementById("resourceIDB").value;
         var date = document.getElementById("dateB").value;
         var dateto = document.getElementById("dateToB").value;
@@ -430,20 +430,13 @@
     //------------------------------------------------------------------------
 
     function searchAvailability() {
-        var resID = document.getElementById("resIDA").value;
-        var resname = document.getElementById("resNameA").value;
-        var reslocation = document.getElementById("resLocationA").value;
-        var rescompany = document.getElementById("resCompanyA").value;
-        var resfulltext = document.getElementById("resFulltextA").value;
 
+        console.log(apptype)
         var jqxhr = $.ajax("../WebbProgrammering/booking/getavailability_search_XML.php", {
+            
             type: 'POST',
             data: {
-                resID: encodeURIComponent(resID),
-                name: encodeURIComponent(resname),
-                location: encodeURIComponent(reslocation),
-                company: encodeURIComponent(rescompany),
-                fulltext: encodeURIComponent(resfulltext),
+            
                 type: apptype		// Only show bookings for your webbapplication using the apptype
             }
         })
@@ -455,39 +448,27 @@
     }
 
     function showAvailability(returnedData) {
+       
         // Fix characters in XML notation to HTML notation
         fixChars(returnedData);
-
+        console.log(returnedData);
+      
         // An XML DOM document is returned from AJAX
         var resultset = returnedData.childNodes[0];
-        var output = "<table>";
+        var output = "";
         // Iterate over all nodes in root node (i.e. resources)
         for (i = 0; i < resultset.childNodes.length; i++) {
             // Iterate over all child nodes of that node that are resource nodes
             if (resultset.childNodes.item(i).nodeName == "availability") {
                 // Retrieve data from resource nodes
                 var avail = resultset.childNodes.item(i);
-                output += "<tr class='actiontablerow' onclick='alert(\"" + avail.attributes['resourceID'].value + "\")'>";
-                output += "<td>" + avail.attributes['resourceID'].value + "</td>";
-                output += "<td>" + avail.attributes['company'].value + "</td>";
-                output += "<td>" + avail.attributes['name'].value + "</td>";
-                output += "<td>" + avail.attributes['location'].value + "</td>";
-                output += "<td>" + avail.attributes['size'].value + "</td>";
-                output += "<td>" + avail.attributes['cost'].value + "</td>";
-                output += "<td>" + avail.attributes['category'].value + "</td>";
-                output += "<td>" + avail.attributes['date'].value + "</td>";
-                output += "<td>" + avail.attributes['dateto'].value + "</td>";
-                output += "<td>" + avail.attributes['bookingcount'].value + "</td>";
-                output += "<td>" + avail.attributes['remaining'].value + "</td>";
-                output += "</tr>";
-            } else {
-                output += "<td>''</td>";
-            }
+                output += "<option value='"+avail.attributes['date'].value+"'>"+avail.attributes['date'].value+"</option>";
+            
+            } 
         }
 
-        output += "</table>"
-        var div = document.getElementById("OutputDivSearchA");
-        div.innerHTML = output;
+        var dropdownDate = document.getElementById("Select_dateDrop");
+        dropdownDate.innerHTML = output;
     }
 
     // search availability END
@@ -512,8 +493,6 @@
             }
         })
         
-            
-        
             .done(showResources1)
             .fail(errormsg)
             .always(function () {
@@ -527,9 +506,7 @@
                 type: apptype		// Only show bookings for your webbapplication using the apptype
             }
         })
-        
-            
-        
+          
             .done(showResources2)
             .fail(errormsg)
             .always(function () {
@@ -555,12 +532,9 @@
                 // Retrieve data from resource nodes
                 var resource = resultset.childNodes.item(i);
                 output += "<option value='"+ resource.attributes['id'].value +"'>" + resource.attributes['location'].value + "</option>";
-        
-
             }
         }
-
-        
+       
         var dropdown = document.getElementById("Select_drop");
         dropdown.innerHTML = output;
     }
@@ -824,7 +798,7 @@
     //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
 </script>
 
-<body onload="setupHistory();updateHistory('page1');searchResources('1');">
+<body onload="setupHistory();updateHistory('page1');searchResources('1');searchAvailability();">
     <!--Navbar-->
     <nav class="topNav">
         <div onclick="show('page1')"> Home</div>
@@ -893,10 +867,8 @@
 
             <div class="actionbox">
                 <span class="actionheading">Make Booking</span>
-                CustID:<input type='text' name='customerIDB' id='customerIDB'>
-                ResourceID:<select id='Select_drop'></select>
-                Date:<input type='text' name='dateB' id='dateB'>
-                Date To:<input type='text' name='dateToB' id='dateToB'><br />
+                Location:<select id='Select_drop'></select>
+                Date:<select id='Select_dateDrop'></select>
                 Rebate:<input type='text' name='rebateB' id='rebateB'>
                 Status:<input type='text' name='statusB' id='statusB'>
                 Position:<input type='text' name='positionB' id='positionB'><br />
