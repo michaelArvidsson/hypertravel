@@ -16,16 +16,17 @@
     <style>
         .topNav {
             margin: auto;
-            background-color: darkslategray;
+            background: rgb(255,255,255);
+background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(120,120,120,1) 35%, rgba(0,0,0,1) 100%);
             overflow: hidden;
             padding: 8px;
         }
-        
+
         .topnav a {
             text-decoration: none;
             color: whitesmoke;
         }
-        
+
         .topNav div {
             font-family: Arial, Helvetica, sans-serif;
             float: left;
@@ -38,23 +39,23 @@
             margin-right: 10px;
             border: 1px solid white;
         }
-        
+
         .topNav div:hover {
             background-color: #ddd;
             color: black;
         }
-        
+
         .topNav div.active {
             background-color: #04AA6D;
             color: white;
         }
-        
+
         .welcomeHead {
             width: 200px;
             text-align: center;
             margin: auto;
         }
-        
+
         .divForm {
             margin: 0 auto;
             width: 400px;
@@ -63,7 +64,18 @@
             padding: 10px;
             box-shadow: 1px 1px 6px 2px lightslategray;
         }
-        
+
+        .RegForm {
+            position: fixed;
+            left: -2000;
+            margin: 0 auto;
+            width: 400px;
+            background-color: white;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 1px 1px 6px 2px lightslategray;
+        }
+
         input[type=text],
         [type=date],
         [type=time],
@@ -77,18 +89,18 @@
             border-radius: 5px;
             outline: none;
         }
-        
-         ::placeholder {
+
+        ::placeholder {
             color: red;
         }
-        
+
         #selectButton {
             width: 100px;
             margin: 0 auto;
             margin-top: 15px;
             display: block;
         }
-        
+
         .pageHeader {
             width: 600px;
             margin: auto;
@@ -96,7 +108,7 @@
             padding: 20px;
             text-align: center;
         }
-        
+
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
@@ -105,16 +117,15 @@
             background-color: white;
             border-radius: 5px;
             padding: 10px;
-            box-shadow: 1px 1px 6px 2px lightslategray;
         }
-        
+
         td,
         th {
             border: 1px solid rgb(0, 0, 0);
             text-align: left;
             padding: 8px;
         }
-        
+
         #page1 {
             display: block;
             margin-top: 15px;
@@ -122,7 +133,7 @@
             height: 100%;
             background-color: rgb(222, 226, 17);
         }
-        
+
         #page2 {
             display: none;
             margin-top: 15px;
@@ -130,7 +141,7 @@
             height: 100%;
             background-color: rgb(17, 202, 226);
         }
-        
+
         #page3 {
             display: none;
             margin-top: 15px;
@@ -138,7 +149,7 @@
             height: 100%;
             background-color: darkviolet;
         }
-        
+
         #page4 {
             display: none;
             margin-top: 15px;
@@ -146,7 +157,7 @@
             height: 100%;
             background-color: rgb(255, 255, 255);
         }
-        
+
         #page5 {
             display: none;
             margin-top: 15px;
@@ -154,7 +165,7 @@
             height: 100%;
             background-color: rgb(17, 226, 104);
         }
-        
+
         #page6 {
             display: none;
             margin-top: 15px;
@@ -162,7 +173,7 @@
             height: 100%;
             background-color: rgb(255, 152, 246);
         }
-        
+
         #page7 {
             display: none;
             margin-top: 15px;
@@ -170,7 +181,7 @@
             height: 100%;
             background-color: rgb(152, 248, 255);
         }
-        
+
         #page8 {
             display: none;
             margin-top: 15px;
@@ -178,22 +189,22 @@
             height: 100%;
             background-color: rgb(180, 255, 118);
         }
-        
+
         #errorMessage {
             display: none;
             width: 200px;
             color: firebrick;
             padding: 3px;
         }
-        
+
         .hidden {
             display: none;
         }
-        
+
         .visible {
             display: block;
         }
-        
+
         #confirmPop {
             width: 250px;
             height: 100px;
@@ -207,15 +218,16 @@
             animation-name: popup;
             animation-duration: 3s;
         }
-        
+
         #output {
             display: none;
         }
-        
+
         @keyframes popup {
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
@@ -239,7 +251,7 @@
 
     function setupHistory() {
 
-        window.onpopstate = function(event) {
+        window.onpopstate = function (event) {
             historyChange(event);
         };
     }
@@ -300,6 +312,7 @@
         } else {
             return true;
         }
+
     }
 
     function validateMail(email) {
@@ -349,6 +362,20 @@
         }
     }
 
+    function goShow() {
+        $("#RegForm").animate({
+            opacity: 1,
+            left: 350
+        }, 1500, "easeOutBounce");
+    }
+
+    function goHide() {
+        $("#RegForm").animate({
+            opacity: 0,
+            left: -2000
+        }, 1500, "easeInBack");
+    }
+
     var apptype = "a18micar";
 
     //------------------------------------------------------------------------
@@ -380,34 +407,34 @@
     //   Auxdata can be used to store additional information about the booking (any relevant information)
     //------------------------------------------------------------------------
 
-    function makeBooking() {
+    function makeBooking(resourceID, date) {
         var customerID = localStorage.getItem("username");
-        var resourceID = document.getElementById("resourceIDB").value;
-        var date = document.getElementById("dateB").value;
-        var dateto = document.getElementById("dateToB").value;
+        var resourceID = document.getElementById("Select_drop").value;
+        var date = document.getElementById("datepicker").value;
+        /* var dateto = document.getElementById("datepicker").value;
         var rebate = document.getElementById("rebateB").value;
         var statusb = document.getElementById("statusB").value;
         var position = document.getElementById("positionB").value;
-        var auxdata = document.getElementById("auxDataB").value;
+        var auxdata = document.getElementById("auxDataB").value; */
 
         alert(customerID + " " + resourceID + " " + date + " " + rebate + " " + statusb + " " + position + " " + auxdata);
 
         var jqxhr = $.ajax("../WebbProgrammering/booking/makebooking_XML.php", {
-                type: 'POST',
-                data: {
-                    resourceID: resourceID,
-                    date: date,
-                    dateto: dateto,
-                    customerID: customerID,
-                    rebate: rebate,
-                    status: statusb, // 2 = "Real" booking.
-                    position: position,
-                    type: apptype // Only show bookings for your webbapplication using the apptype
-                }
-            })
+            type: 'POST',
+            data: {
+                resourceID: resourceID,
+                date: date,
+                dateto: date,
+                customerID: customerID,
+                /* rebate: rebate,
+                status: statusb, // 2 = "Real" booking.
+                position: position,
+                type: apptype // Only show bookings for your webbapplication using the apptype */
+            }
+        })
             .done(ResultBooking)
             .fail(errormsg)
-            .always(function() {
+            .always(function () {
                 console.log("Request bookings for resource " + resource + " for webbapplication " + apptype + " complete.");
             });
     }
@@ -430,44 +457,65 @@
 
     function searchAvailability() {
 
-        console.log(apptype)
+        var resID = document.getElementById("Select_drop").value;
+
         var jqxhr = $.ajax("../WebbProgrammering/booking/getavailability_search_XML.php", {
+            type: 'POST',
+            data: {
+                resid: encodeURIComponent(resID),
 
-                type: 'POST',
-                data: {
-
-                    type: apptype // Only show bookings for your webbapplication using the apptype
-                }
-            })
+                type: apptype // Only show bookings for your webbapplication using the apptype
+            }
+        })
             .done(showAvailability)
             .fail(errormsg)
-            .always(function() {
+            .always(function () {
                 console.log("Request for resource availability for webbapplication " + apptype + " complete.");
             });
     }
 
     function showAvailability(returnedData) {
-
         // Fix characters in XML notation to HTML notation
         fixChars(returnedData);
-        console.log(returnedData);
 
         // An XML DOM document is returned from AJAX
         var resultset = returnedData.childNodes[0];
-        var output = "";
+        var output = "<table>";
         // Iterate over all nodes in root node (i.e. resources)
         for (i = 0; i < resultset.childNodes.length; i++) {
             // Iterate over all child nodes of that node that are resource nodes
             if (resultset.childNodes.item(i).nodeName == "availability") {
                 // Retrieve data from resource nodes
                 var avail = resultset.childNodes.item(i);
-                output += "<option value='" + avail.attributes['date'].value + "'>" + avail.attributes['date'].value + "</option>";
+                var searchDate = new Date(document.getElementById("datepicker").value);
+                var availableDate = new Date(avail.attributes['date'].value);
+                if (searchDate.getDate() === availableDate.getDate()) {
 
+                    output += "<tr class='actiontablerow' onclick='alert(\"" + avail.attributes['resourceID'].value + "\")'>";
+                    /*   output += "<td>" + avail.attributes['resourceID'].value + "</td>"; */
+                    /* output += "<td>" + avail.attributes['company'].value + "</td>"; */
+                    output += "<td>" + avail.attributes['name'].value + "</td>";
+                    output += "<td>" + avail.attributes['location'].value + "</td>";
+                    /*  output += "<td>" + avail.attributes['size'].value + "</td>"; */
+                    output += "<td>" + avail.attributes['cost'].value + "</td>";
+                    /*  output += "<td>" + avail.attributes['category'].value + "</td>"; */
+                    output += "<td>" + avail.attributes['date'].value + "</td>";
+                    /* output += "<td>" + avail.attributes['dateto'].value + "</td>"; */
+                    /*  output += "<td>" + avail.attributes['bookingcount'].value + "</td>"; */
+                    output += "<td>" + avail.attributes['remaining'].value + "</td>";
+                    output += `<td> <input type='button' onclick='makeBooking(
+                    "` + avail.attributes['resourceID'].value + `","`
+                        + avail.attributes['date'].value + `","`
+                        + avail.attributes['dateto'].value + `");' value='Make Booking'> </td>`;
+                    output += "</tr>";
+                }
             }
         }
 
-        var dropdownDate = document.getElementById("Select_dateDrop");
-        dropdownDate.innerHTML = output;
+        output += "</table>"
+        var div = document.getElementById("OutputDivSearchA");
+        div.innerHTML = output;
+
     }
 
     // search availability END
@@ -482,19 +530,19 @@
     //------------------------------------------------------------------------
 
     function searchResources(number) {
-
-        if (number == '1') {
+           if (number == '1') {
             var jqxhr = $.ajax("../WebbProgrammering/booking/getresources_XML.php", {
                 type: 'POST',
                 data: {
-
+                    name:document.querySelector('input[name="class"]:checked').value,
+                    // document.querySelector('input[name="gender"]:checked').value
                     type: apptype // Only show bookings for your webbapplication using the apptype
                 }
             })
 
-            .done(showResources1)
+                .done(showResources1)
                 .fail(errormsg)
-                .always(function() {
+                .always(function () {
                     console.log("Request all resources for webbapplication " + apptype + " complete.");
                 });
         } else {
@@ -506,9 +554,9 @@
                 }
             })
 
-            .done(showResources2)
+                .done(showResources2)
                 .fail(errormsg)
-                .always(function() {
+                .always(function () {
                     console.log("Request all resources for webbapplication " + apptype + " complete.");
                 });
 
@@ -582,15 +630,15 @@
     function processinputbox() {
         customer = document.getElementById("customerID").value;
         var jqxhr = $.ajax("../WebbProgrammering/booking/getcustomerbookings_XML.php", {
-                method: "POST",
-                data: {
-                    customerID: encodeURIComponent(customer),
-                    type: apptype // Only show bookings for your webbapplication using the apptype
-                }
-            })
+            method: "POST",
+            data: {
+                customerID: encodeURIComponent(customer),
+                type: apptype // Only show bookings for your webbapplication using the apptype
+            }
+        })
             .done(ResultBookingCustomer)
             .fail(errormsg)
-            .always(function() {
+            .always(function () {
                 console.log("Request bookings for customer " + customer + " has completed.");
             });
     }
@@ -637,7 +685,7 @@
         alert("AJAX Error:" + errorThrown);
     }
 
-    $(function() {
+    $(function () {
         $("#datepicker").datepicker({
             minDate: -0,
             maxDate: "+6M"
@@ -658,7 +706,7 @@
         document.getElementById("confirmPop").className = "hidden";
     }
 
-    $(function() {
+    $(function () {
         $("#tooltip-1").tooltip();
         $("#tooltip-2").tooltip();
         $("#tooltip-3").tooltip();
@@ -683,22 +731,23 @@
 
         document.getElementById("output").innerHTML += "<br>Creating a new customer...";
         var jqxhr = $.ajax("../WebbProgrammering/booking/makecustomer_XML.php", {
-                type: 'POST',
-                data: {
-                    ID: encodeURIComponent(email),
-                    firstname: encodeURIComponent(firstname),
-                    lastname: encodeURIComponent(lastname),
-                    email: encodeURIComponent(email),
-                    address: encodeURIComponent(address),
+            type: 'POST',
+            data: {
+                ID: encodeURIComponent(email),
+                firstname: encodeURIComponent(firstname),
+                lastname: encodeURIComponent(lastname),
+                email: encodeURIComponent(email),
+                address: encodeURIComponent(address),
 
-                }
-            })
+            }
+        })
             .done(ResultCustomern)
             .fail(errormsg)
-            .always(function() {
+            .always(function () {
                 console.log("Request for storing customer " + firstname + " " + lastname + " has completed.");
                 document.getElementById("output").innerHTML += "<br> AJAX CALL Finished."
             });
+
     }
 
     function ResultCustomern(returnedData) {
@@ -737,14 +786,14 @@
         var customerID = document.getElementById("customerIDG").value;
 
         var jqxhr = $.ajax("../WebbProgrammering/booking/getcustomer_XML.php", {
-                type: 'POST',
-                data: {
-                    customerID: encodeURIComponent(customerID)
-                }
-            })
+            type: 'POST',
+            data: {
+                customerID: encodeURIComponent(customerID)
+            }
+        })
             .done(ResultCustomers)
             .fail(errormsg)
-            .always(function() {
+            .always(function () {
                 console.log("Request for showing customers complete.");
             });
     }
@@ -797,7 +846,7 @@
     //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
 </script>
 
-<body onload="setupHistory();updateHistory('page1');searchResources('1');searchAvailability();">
+<body onload="setupHistory();updateHistory('page1');searchAvailability();">
     <!--Navbar-->
     <nav class="topNav">
         <div onclick="show('page1')"> Home</div>
@@ -821,7 +870,7 @@
                 <!-- <input type="text" onkeyup="validateMail()" id="email" name="email" placeholder=""><br> -->
                 <input type='text' onkeyup="validateMail()" name='customerIDG' id='customerIDG'><br>
                 <input type="Submit" onclick="showCustomer()" value="Sign in">
-                <button onclick="showpage('page2')">Register</button>
+                <button onclick="showpage('page2');goShow();">Register</button>
 
                 <div id="CustomerOutputDiv">
 
@@ -834,11 +883,12 @@
 
     <!--Register-->
     <section id="page2" class="page">
-        <div class="pageHeader">
+
+        <div class="RegForm" id="RegForm">
+
             <h1>New registration</h1>
             <h3>Fill in the form to begin your journey</h3>
-        </div>
-        <div class="divForm">
+
             <label for="">First Name: <i id="tooltip-1" title="Firstname" class="fa fa-question-circle"
                     style="color: rgb(14, 92, 238); font-size:16px"></i></label>
             <input type="text" id="customerfnameC" name="customerfnameC" placeholder=""><br>
@@ -851,7 +901,7 @@
             <label for="">Adress: <i class="fa fa-question-circle"
                     style="color: rgb(14, 92, 238); font-size:16px"></i></label>
             <input type="text" id="customeraddressC" name="customeraddressC" placeholder=""><br>
-            <input type="button" onclick="storeCustomer();" value="Register">
+            <input type="button" onclick="storeCustomer();goHide();" value="Register">
         </div>
         <div id="output"></div>
     </section>
@@ -863,45 +913,26 @@
         </div>
 
         <div class="divForm">
-
             <div class="actionbox">
-                <span class="actionheading">Make Booking</span> Location:
-                <select id='Select_drop'></select> Date:
-                <select id='Select_dateDrop'></select> Rebate:
-                <input type='text' name='rebateB' id='rebateB'> Status:
-                <input type='text' name='statusB' id='statusB'> Position:
-                <input type='text' name='positionB' id='positionB'><br /> Aux Data:<input type='text' name='auxDataB' id='auxDataB'><br />
+                <span class="actionheading"></span>
+                <label id="dateLabel" for="datepicker">Pick available date: <i class="fa fa-question-circle"
+                        style="color: rgb(14, 92, 238); font-size:16px"></i></label>
+                <p>Date: <input type="text" autocomplete="off" name="tDate" id="datepicker"></p><br>
+                <p id="classSelect">Please select your prefered class: <i class="fa fa-question-circle"
+                        style="color: rgb(14, 92, 238); font-size:16px"></i></p>
+                <input type="radio" id="class1radio" name="class" onchange="searchResources('1');" value="Class_1">
+                <label for="class1">class1</label><br>
+                <input type="radio" id="class2radio" name="class" onchange="searchResources('1');" value="Class_2">
+                <label for="class2">class2</label><br>
+                <input type="radio" id="class3radio" name="class" onchange="searchResources('1');" value="Class_3">
+                <label for="class3">class3</label><br><br>
+                <select id='Select_drop' onchange="searchResources"></select>
 
-                <input type="button" onclick="makeBooking();" value="Make Booking">
+                <input type="button" onclick="searchAvailability();" value="Search availabilable departures">
+
             </div>
         </div>
-        <div class="divForm">
-            <label for="destination">Destination: <i class="fa fa-question-circle"
-                    style="color: rgb(14, 92, 238); font-size:16px"></i></label><br>
-            <select name="city " id="city">
-                <option value="" name="">Select</option>
-                <option value="Berlin" name="Berlin">Berlin</option>
-                <option value="Paris" name="Paris">Paris</option>
-                <option value="Brussels" name="Brussels">Brussels</option>
-                <option value="Barcelona" name="Barcelona">Barcelona</option>
-                <option value="Rome" name="dest">Rome</option>
-            </select><br>
-            <p id="classSelect">Please select your prefered class: <i class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></p>
-            <input type="radio" id="class1radio" name="class" value="class1">
-            <label for="class1">class1</label><br>
-            <input type="radio" id="class2radio" name="class" value="class2">
-            <label for="class2">class2</label><br>
-            <input type="radio" id="class3radio" name="class" value="class3">
-            <label for="class3">class3</label><br><br>
-
-            <label id="dateLabel" for="datepicker">Pick available date: <i class="fa fa-question-circle"
-                    style="color: rgb(14, 92, 238); font-size:16px"></i></label><br>
-            <p>Date: <input type="text" autocomplete="off" name="tDate" id="datepicker"></p><br>
-            <label id="timeLabel" for="time" autocomplete="off">Pick available time: <i class="fa fa-question-circle"
-                    style="color: rgb(14, 92, 238); font-size:16px"></i></label><br>
-            <input type="time" id="tTime" name="tTime" value=""><br><br>
-            <input type="submit" onclick="validateTravel();" value="continue">
-        </div>
+        <div id="OutputDivSearchA" />
     </section>
 
 
@@ -911,7 +942,8 @@
                 <h3>Select your seat</h3>
             </div>
             <div class="divForm">
-                <div style="width:200px; height:400px;margin:auto; margin-top:20px; border-radius:30px 30px 5px 5px; background-color: dimgray;">
+                <div
+                    style="width:200px; height:400px;margin:auto; margin-top:20px; border-radius:30px 30px 5px 5px; background-color: dimgray;">
                 </div>
                 <input id="selectButton" type="submit" onclick="showpage('page7')" value="confirm seat">
             </div>
@@ -920,75 +952,19 @@
     </section>
 
     <section id="page5" class="page">
-        <div>
+        <div class="divForm">
 
-            <h1 class="pageHeader">Future travels</h1>
+            <h1 class="pageHeader">My travels</h1>
 
             <div class="actionbox">
-                <span class="actionheading">Bookings Shopping Cart (show bookings for a customer ID)</span> CustID:
-                <input type='text' style='width:300px' name='customerID' id='customerID' onchange="processinputbox()" onkeyup="processinputbox()">
+                <span class="actionheading"></span>
+                <input type='text' style='width:300px' name='customerID' id='customerID' onchange="processinputbox()"
+                    onkeyup="processinputbox()">
                 <span class="actionheading">Result</span>
                 <div id="OutputDiv" />
             </div>
         </div>
 
-        <table>
-            <tr>
-                <th>Date</th>
-                <th>Destination</th>
-                <th>Seat</th>
-                <th>Details</th>
-            </tr>
-            <tr>
-                <td>2022-02-15</td>
-                <td>Berlin</td>
-                <td>22 D</td>
-                <td>Window</td>
-            </tr>
-            <tr>
-                <td>2022-07-05</td>
-                <td>Barcelona</td>
-                <td>15A</td>
-                <td>Pet</td>
-            </tr>
-
-        </table>
-
-        <h1 class="pageHeader">Travelhistory</h1>
-
-        <table>
-            <tr>
-                <th>Date</th>
-                <th>Destination</th>
-                <th>Seat</th>
-                <th>Details</th>
-            </tr>
-            <tr>
-                <td>2021-10-15</td>
-                <td>Berlin</td>
-                <td>22 D</td>
-                <td>Window</td>
-            </tr>
-            <tr>
-                <td>2021-07-05</td>
-                <td>Barcelona</td>
-                <td>15A</td>
-                <td>Pet</td>
-            </tr>
-            <tr>
-                <td>2021-10-15</td>
-                <td>Berlin</td>
-                <td>22 D</td>
-                <td>Window</td>
-            </tr>
-            <tr>
-                <td>2021-07-05</td>
-                <td>Barcelona</td>
-                <td>15 A</td>
-                <td>Pet</td>
-            </tr>
-        </table>
-        </div>
     </section>
 
     <section id="page6" class="page">
@@ -1002,7 +978,8 @@
                 <input type='text' name='resIDS' id='resIDS'> Name:
                 <input type='text' name='resNameS' id='resNameS'><br /> Location:
                 <input type='text' name='resLocationS' id='resLocationS'> Company:
-                <input type='text' name='resCompanyS' id='resCompanyS'><br /> Full Text:<input type='text' name='resFulltextS' id='resFulltextS'><br />
+                <input type='text' name='resCompanyS' id='resCompanyS'><br /> Full Text:<input type='text'
+                    name='resFulltextS' id='resFulltextS'><br />
                 <input type="button" onclick="searchResources();" value="Search Resource">
                 <span class="actionheading">Result</span>
                 <div id="OutputDivSearchR" />
@@ -1010,12 +987,17 @@
         </div>
 
         <div class="actionbox">
-            <span class="actionheading">Search Availability (show the availability for a given Resource ID)</span> ResourceID:
-            <input type='text' name='resIDA' id='resIDA' onchange="searchAvailability()" onkeyup="searchAvailability()"> Name:
-            <input type='text' name='resNameA' id='resNameA' onchange="searchAvailability()" onkeyup="searchAvailability()"> Location:
-            <input type='text' name='resLocationA' id='resLocationA' onchange="searchAvailability()" onkeyup="searchAvailability()"> Company:
-            <input type='text' name='resCompanyA' id='resCompanyA' onchange="searchAvailability()" onkeyup="searchAvailability()"><br /> Full Text:<input type='text' name='resFulltextA' id='resFulltextA' onchange="searchAvailability()" onkeyup="searchAvailability()"><br
-            />
+            <span class="actionheading">Search Availability (show the availability for a given Resource ID)</span>
+            ResourceID:
+            <input type='text' name='resIDA' id='resIDA' onchange="searchAvailability()" onkeyup="searchAvailability()">
+            Name:
+            <input type='text' name='resNameA' id='resNameA' onchange="searchAvailability()"
+                onkeyup="searchAvailability()"> Location:
+            <input type='text' name='resLocationA' id='resLocationA' onchange="searchAvailability()"
+                onkeyup="searchAvailability()"> Company:
+            <input type='text' name='resCompanyA' id='resCompanyA' onchange="searchAvailability()"
+                onkeyup="searchAvailability()"><br /> Full Text:<input type='text' name='resFulltextA' id='resFulltextA'
+                onchange="searchAvailability()" onkeyup="searchAvailability()"><br />
             <input type="button" onclick="searchAvailability();" value="Search Availability">
             <span class="actionheading">Result</span>
             <div id="OutputDivSearchA" />
@@ -1032,13 +1014,20 @@
         <div style="height:380px; " class="divForm">
 
             <p>
-                These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no one has gone before. We need to neutralize the homing signal. Each unit has total
-                environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength has increased by 3,000 percent.
+                These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds,
+                to seek out new life and new civilizations, to boldly go where no one has gone before. We need to
+                neutralize the homing signal. Each unit has total
+                environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show
+                energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength
+                has increased by 3,000 percent.
             </p>
 
             <p>
-                Exceeding reaction chamber thermal limit. We have begun power-supply calibration. Force fields have been established on all turbo lifts and crawlways. Computer, run a level-two diagnostic on warp-drive systems. Antimatter containment positive. Warp drive
-                within normal parameters. I read an ion trail characteristic of a freighter escape pod. The bomb had a molecular-decay detonator. Detecting some unusual fluctuations in subspace frequencies.
+                Exceeding reaction chamber thermal limit. We have begun power-supply calibration. Force fields have been
+                established on all turbo lifts and crawlways. Computer, run a level-two diagnostic on warp-drive
+                systems. Antimatter containment positive. Warp drive
+                within normal parameters. I read an ion trail characteristic of a freighter escape pod. The bomb had a
+                molecular-decay detonator. Detecting some unusual fluctuations in subspace frequencies.
             </p>
 
             <label for="checkB">I agree to the terms</label><input type="checkbox" id="checkB" name="checkB">
