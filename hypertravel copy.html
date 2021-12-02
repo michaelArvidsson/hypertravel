@@ -21,12 +21,12 @@
             overflow: hidden;
             padding: 8px;
         }
-        
+
         .topnav a {
             text-decoration: none;
             color: whitesmoke;
         }
-        
+
         .topNav div {
             font-family: Arial, Helvetica, sans-serif;
             float: left;
@@ -39,23 +39,23 @@
             margin-right: 10px;
             border: 1px solid white;
         }
-        
+
         .topNav div:hover {
             background-color: #ddd;
             color: black;
         }
-        
+
         .topNav div.active {
             background-color: #04AA6D;
             color: white;
         }
-        
+
         .welcomeHead {
             width: 200px;
             text-align: center;
             margin: auto;
         }
-        
+
         .divForm {
             margin: 0 auto;
             width: 400px;
@@ -64,7 +64,7 @@
             padding: 10px;
             box-shadow: 1px 1px 6px 2px lightslategray;
         }
-        
+
         .RegForm {
             position: fixed;
             top: 200;
@@ -76,7 +76,7 @@
             padding: 10px;
             box-shadow: 1px 1px 6px 2px lightslategray;
         }
-        
+
         input[type=text],
         [type=date],
         [type=time],
@@ -90,18 +90,18 @@
             border-radius: 5px;
             outline: none;
         }
-        
-         ::placeholder {
+
+        ::placeholder {
             color: red;
         }
-        
+
         #selectButton {
             width: 100px;
             margin: 0 auto;
             margin-top: 15px;
             display: block;
         }
-        
+
         .pageHeader {
             width: 600px;
             margin: auto;
@@ -109,7 +109,7 @@
             padding: 20px;
             text-align: center;
         }
-        
+
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
@@ -119,14 +119,14 @@
             border-radius: 5px;
             padding: 10px;
         }
-        
+
         td,
         th {
             border: 1px solid rgb(0, 0, 0);
             text-align: left;
             padding: 8px;
         }
-        
+
         #page1 {
             display: block;
             margin-top: 15px;
@@ -134,14 +134,14 @@
             height: 100%;
             background-color: rgb(222, 226, 17);
         }
-        
+
         #page2 {
             display: none;
             margin-top: 15px;
             margin-bottom: 15px;
             height: 100%;
         }
-        
+
         #page3 {
             display: none;
             margin-top: 15px;
@@ -149,7 +149,7 @@
             height: 100%;
             background-color: darkviolet;
         }
-        
+
         #page4 {
             display: none;
             margin-top: 15px;
@@ -157,7 +157,7 @@
             height: 100%;
             background-color: rgb(255, 255, 255);
         }
-        
+
         #page5 {
             display: none;
             margin-top: 15px;
@@ -165,7 +165,7 @@
             height: 100%;
             background-color: rgb(17, 226, 104);
         }
-        
+
         #page6 {
             display: none;
             margin-top: 15px;
@@ -173,7 +173,7 @@
             height: 100%;
             background-color: rgb(255, 152, 246);
         }
-        
+
         #page7 {
             display: none;
             margin-top: 15px;
@@ -181,7 +181,7 @@
             height: 100%;
             background-color: rgb(152, 248, 255);
         }
-        
+
         #page8 {
             display: none;
             margin-top: 15px;
@@ -189,22 +189,22 @@
             height: 100%;
             background-color: rgb(180, 255, 118);
         }
-        
+
         #errorMessage {
             display: none;
             width: 200px;
             color: firebrick;
             padding: 3px;
         }
-        
+
         .hidden {
             display: none;
         }
-        
+
         .visible {
             display: block;
         }
-        
+
         #confirmPop {
             width: 250px;
             height: 100px;
@@ -218,15 +218,16 @@
             animation-name: popup;
             animation-duration: 3s;
         }
-        
+
         #output {
             display: none;
         }
-        
+
         @keyframes popup {
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
@@ -250,7 +251,7 @@
 
     function setupHistory() {
 
-        window.onpopstate = function(event) {
+        window.onpopstate = function (event) {
             historyChange(event);
         };
     }
@@ -407,7 +408,7 @@
     //------------------------------------------------------------------------
 
     function makeBooking(resourceID, date) {
-        var customerID = localStorage.getItem("username");
+        var customerID = localStorage.getItem("userId");
         //var resourceID = document.getElementById("Select_drop").value;
         //var date = document.getElementById("datepicker").value;
         /* var dateto = document.getElementById("datepicker").value;
@@ -419,21 +420,21 @@
         alert(customerID + " " + resourceID + " " + date);
 
         var jqxhr = $.ajax("../WebbProgrammering/booking/makebooking_XML.php", {
-                type: 'POST',
-                data: {
-                    resourceID: resourceID,
-                    date: date,
-                    dateto: date,
-                    customerID: customerID,
-                    //rebate: rebate,
-                    //status: statusb, // 2 = "Real" booking.
-                    //position: position,
-                    type: apptype // Only show bookings for your webbapplication using the apptype
-                }
-            })
+            type: 'POST',
+            data: {
+                resourceID: resourceID,
+                date: date,
+                dateto: date,
+                customerID: customerID,
+                //rebate: rebate,
+                //status: statusb, // 2 = "Real" booking.
+                //position: position,
+                type: apptype // Only show bookings for your webbapplication using the apptype
+            }
+        })
             .done(ResultBooking)
             .fail(errormsg)
-            .always(function() {
+            .always(function () {
                 console.log("Request bookings for resource " + resource + " for webbapplication " + apptype + " complete.");
             });
     }
@@ -455,16 +456,16 @@
         bookingdate = document.getElementById("dateGB").value;
 
         var jqxhr = $.ajax("../booking/getbookings_XML.php", {
-                type: 'POST',
-                data: {
-                    resourceID: resource,
-                    date: bookingdate,
-                    type: apptype // Only show bookings for your webbapplication using the apptype
-                }
-            })
+            type: 'POST',
+            data: {
+                resourceID: resource,
+                date: bookingdate,
+                type: apptype // Only show bookings for your webbapplication using the apptype
+            }
+        })
             .done(ResultBooking)
             .fail(errormsg)
-            .always(function() {
+            .always(function () {
                 console.log("Request bookings for resource " + resource + " for webbapplication " + apptype + " complete.");
             });
     }
@@ -511,16 +512,16 @@
         var resID = document.getElementById("Select_drop").value;
 
         var jqxhr = $.ajax("../WebbProgrammering/booking/getavailability_search_XML.php", {
-                type: 'POST',
-                data: {
-                    resid: encodeURIComponent(resID),
+            type: 'POST',
+            data: {
+                resid: encodeURIComponent(resID),
 
-                    type: apptype // Only show bookings for your webbapplication using the apptype
-                }
-            })
+                type: apptype // Only show bookings for your webbapplication using the apptype
+            }
+        })
             .done(showAvailability)
             .fail(errormsg)
-            .always(function() {
+            .always(function () {
                 console.log("Request for resource availability for webbapplication " + apptype + " complete.");
             });
     }
@@ -598,9 +599,9 @@
                 }
             })
 
-            .done(showResources1)
+                .done(showResources1)
                 .fail(errormsg)
-                .always(function() {
+                .always(function () {
                     console.log("Request all resources for webbapplication " + apptype + " complete.");
                 });
         } else {
@@ -612,9 +613,9 @@
                 }
             })
 
-            .done(showResources2)
+                .done(showResources2)
                 .fail(errormsg)
-                .always(function() {
+                .always(function () {
                     console.log("Request all resources for webbapplication " + apptype + " complete.");
                 });
 
@@ -688,15 +689,15 @@
     function processinputbox() {
         customer = document.getElementById("customerID").value;
         var jqxhr = $.ajax("../WebbProgrammering/booking/getcustomerbookings_XML.php", {
-                method: "POST",
-                data: {
-                    customerID: encodeURIComponent(customer),
-                    type: apptype // Only show bookings for your webbapplication using the apptype
-                }
-            })
+            method: "POST",
+            data: {
+                customerID: encodeURIComponent(customer),
+                type: apptype // Only show bookings for your webbapplication using the apptype
+            }
+        })
             .done(ResultBookingCustomer)
             .fail(errormsg)
-            .always(function() {
+            .always(function () {
                 console.log("Request bookings for customer " + customer + " has completed.");
             });
     }
@@ -743,7 +744,7 @@
         alert("AJAX Error:" + errorThrown);
     }
 
-    $(function() {
+    $(function () {
         $("#datepicker").datepicker({
             minDate: -0,
             maxDate: "+6M"
@@ -764,7 +765,7 @@
         document.getElementById("confirmPop").className = "hidden";
     }
 
-    $(function() {
+    $(function () {
         $("#tooltip-1").tooltip();
         $("#tooltip-2").tooltip();
         $("#tooltip-3").tooltip();
@@ -789,19 +790,19 @@
 
         document.getElementById("output").innerHTML += "<br>Creating a new customer...";
         var jqxhr = $.ajax("../WebbProgrammering/booking/makecustomer_XML.php", {
-                type: 'POST',
-                data: {
-                    ID: encodeURIComponent(email),
-                    firstname: encodeURIComponent(firstname),
-                    lastname: encodeURIComponent(lastname),
-                    email: encodeURIComponent(email),
-                    address: encodeURIComponent(address),
+            type: 'POST',
+            data: {
+                ID: encodeURIComponent(email),
+                firstname: encodeURIComponent(firstname),
+                lastname: encodeURIComponent(lastname),
+                email: encodeURIComponent(email),
+                address: encodeURIComponent(address),
 
-                }
-            })
+            }
+        })
             .done(ResultCustomern)
             .fail(errormsg)
-            .always(function() {
+            .always(function () {
                 console.log("Request for storing customer " + firstname + " " + lastname + " has completed.");
                 document.getElementById("output").innerHTML += "<br> AJAX CALL Finished."
             });
@@ -844,14 +845,14 @@
         var customerID = document.getElementById("customerIDG").value;
 
         var jqxhr = $.ajax("../WebbProgrammering/booking/getcustomer_XML.php", {
-                type: 'POST',
-                data: {
-                    customerID: encodeURIComponent(customerID)
-                }
-            })
+            type: 'POST',
+            data: {
+                customerID: encodeURIComponent(customerID)
+            }
+        })
             .done(ResultCustomers)
             .fail(errormsg)
-            .always(function() {
+            .always(function () {
                 console.log("Request for showing customers complete.");
             });
     }
@@ -886,6 +887,8 @@
             }
         }
     }
+    // get customer END
+    //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
 
     function checkLocalStorage() {
         var username = localStorage.getItem("username");
@@ -900,17 +903,106 @@
         }
     }
 
-    // get customer END
-    //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
+    function SignOut() {
+        localStorage.clear();
+        show('page1');
+    }
+
+    //Canvas start
+
+    var ctx;
+
+    function startupCanvas() {
+        var elem = document.getElementById('myCanvas');
+        if (elem && elem.getContext) {
+            ctx = elem.getContext('2d');
+            drawgraphics();
+        }
+    }
+
+    function drawgraphics() {
+        //--==## defs1769 defs ##==--
+        ctx.globalAlpha = 1.0;
+        //defs
+        //defsend
+        function layer1() {
+            //--==## path1811 path ##==--
+            ctx.strokeStyle = '#000000';
+            ctx.globalAlpha = 1;
+            ctx.lineWidth = '1';
+            ctx.beginPath();
+            ctx.moveTo(37, 75);
+            ctx.lineTo(37, 204);
+            ctx.bezierCurveTo(36, 228, 35, 241, 45, 214);
+            ctx.bezierCurveTo(71, 235, 107, 233, 122, 215);
+            ctx.bezierCurveTo(126, 217, 134, 253, 133, 204);
+            ctx.lineTo(133, 74);
+            ctx.bezierCurveTo(132, 67, 134, 57, 124, 62);
+            ctx.bezierCurveTo(103, 52, 83, 38, 45, 62);
+            ctx.bezierCurveTo(35, 57, 37, 67, 37, 75);
+            ctx.lineTo(37, 75);
+            ctx.stroke();
+        }
+
+        ctx.globalAlpha = 1.0;
+
+        // Function calls
+        layer1();
+        ctx.translate(40,0);
+        for (var i=0; i<4; i++){
+            console.log('poddipod');
+            drawgraphics2();
+            ctx.translate(0,30);
+        }
+    }
+
+    function drawgraphics2() {
+       //--==## defs3454 defs ##==--
+ctx.globalAlpha=1.0;
+//defs
+//defsend
+      //--==## path3496 path ##==--
+   ctx.strokeStyle='#000000';
+   ctx.globalAlpha=1;
+   ctx.lineWidth='0';
+   ctx.beginPath();
+   ctx.moveTo(27,85);
+   ctx.bezierCurveTo(25,76,26,89,27,99);
+   ctx.bezierCurveTo(33,104,38,103,43,99);
+   ctx.bezierCurveTo(45,72,43,85,43,85);
+   ctx.lineTo(27,85);
+   ctx.stroke();
+      //--==## path4728 path ##==--
+   ctx.strokeStyle='#000000';
+   ctx.globalAlpha=1;
+   ctx.lineWidth='0';
+   ctx.beginPath();
+   ctx.moveTo(27,85);
+   ctx.lineTo(28,98);
+   ctx.lineTo(28,98);
+   ctx.bezierCurveTo(33,101,38,100,42,98);
+   ctx.lineTo(43,85);
+   ctx.lineTo(27,85);
+   ctx.stroke();
+}
+
+ctx.globalAlpha=1.0;
+
+// Function calls
+drawgraphics2();
+
+    
+
 </script>
 
-<body onload="setupHistory();updateHistory('page1');searchAvailability();">
+<body onload="setupHistory();updateHistory('page1');searchAvailability();startupCanvas();">
     <!--Navbar-->
     <nav class="topNav">
         <div onclick="show('page1')"> Home</div>
         <div onclick="show('page3')"> Book</div>
         <div onclick="show('page5')"> My page</div>
         <div onclick="show('page6')"> Search</div>
+        <button id="SignOutButton" class="SignOutButton" onclick="SignOut()">Sign out</button>
     </nav>
 
     <!--Welcome-->
@@ -976,7 +1068,8 @@
                 <label id="dateLabel" for="datepicker">Pick available date: <i class="fa fa-question-circle"
                         style="color: rgb(14, 92, 238); font-size:16px"></i></label>
                 <p>Date: <input type="text" autocomplete="off" name="tDate" id="datepicker"></p><br>
-                <p id="classSelect">Please select your prefered class: <i class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></p>
+                <p id="classSelect">Please select your prefered class: <i class="fa fa-question-circle"
+                        style="color: rgb(14, 92, 238); font-size:16px"></i></p>
                 <input type="radio" id="class1radio" name="class" onchange="searchResources('1');" value="Class_1">
                 <label for="class1">class1</label><br>
                 <input type="radio" id="class2radio" name="class" onchange="searchResources('1');" value="Class_2">
@@ -999,8 +1092,9 @@
                 <h3>Select your seat</h3>
             </div>
             <div class="divForm">
-                <div style="width:200px; height:400px;margin:auto; margin-top:20px; border-radius:30px 30px 5px 5px; background-color: dimgray;">
-                </div>
+
+                <canvas id="myCanvas" width="400" height="400" style="border: 2px solid black;"></canvas>
+
                 <input id="selectButton" type="submit" onclick="showpage('page7')" value="confirm seat">
             </div>
 
@@ -1014,7 +1108,8 @@
 
             <div class="actionbox">
                 <span class="actionheading"></span>
-                <input type='text' style='width:300px' name='customerID' id='customerID' onchange="processinputbox()" onkeyup="processinputbox()">
+                <input type='text' style='width:300px' name='customerID' id='customerID' onchange="processinputbox()"
+                    onkeyup="processinputbox()">
                 <span class="actionheading">Result</span>
                 <div id="OutputDiv" />
             </div>
@@ -1033,7 +1128,8 @@
                 <input type='text' name='resIDS' id='resIDS'> Name:
                 <input type='text' name='resNameS' id='resNameS'><br /> Location:
                 <input type='text' name='resLocationS' id='resLocationS'> Company:
-                <input type='text' name='resCompanyS' id='resCompanyS'><br /> Full Text:<input type='text' name='resFulltextS' id='resFulltextS'><br />
+                <input type='text' name='resCompanyS' id='resCompanyS'><br /> Full Text:<input type='text'
+                    name='resFulltextS' id='resFulltextS'><br />
                 <input type="button" onclick="searchResources();" value="Search Resource">
                 <span class="actionheading">Result</span>
                 <div id="OutputDivSearchR" />
@@ -1041,12 +1137,17 @@
         </div>
 
         <div class="actionbox">
-            <span class="actionheading">Search Availability (show the availability for a given Resource ID)</span> ResourceID:
-            <input type='text' name='resIDA' id='resIDA' onchange="searchAvailability()" onkeyup="searchAvailability()"> Name:
-            <input type='text' name='resNameA' id='resNameA' onchange="searchAvailability()" onkeyup="searchAvailability()"> Location:
-            <input type='text' name='resLocationA' id='resLocationA' onchange="searchAvailability()" onkeyup="searchAvailability()"> Company:
-            <input type='text' name='resCompanyA' id='resCompanyA' onchange="searchAvailability()" onkeyup="searchAvailability()"><br /> Full Text:<input type='text' name='resFulltextA' id='resFulltextA' onchange="searchAvailability()" onkeyup="searchAvailability()"><br
-            />
+            <span class="actionheading">Search Availability (show the availability for a given Resource ID)</span>
+            ResourceID:
+            <input type='text' name='resIDA' id='resIDA' onchange="searchAvailability()" onkeyup="searchAvailability()">
+            Name:
+            <input type='text' name='resNameA' id='resNameA' onchange="searchAvailability()"
+                onkeyup="searchAvailability()"> Location:
+            <input type='text' name='resLocationA' id='resLocationA' onchange="searchAvailability()"
+                onkeyup="searchAvailability()"> Company:
+            <input type='text' name='resCompanyA' id='resCompanyA' onchange="searchAvailability()"
+                onkeyup="searchAvailability()"><br /> Full Text:<input type='text' name='resFulltextA' id='resFulltextA'
+                onchange="searchAvailability()" onkeyup="searchAvailability()"><br />
             <input type="button" onclick="searchAvailability();" value="Search Availability">
             <span class="actionheading">Result</span>
             <div id="OutputDivSearchA" />
@@ -1063,13 +1164,20 @@
         <div style="height:380px; " class="divForm">
 
             <p>
-                These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no one has gone before. We need to neutralize the homing signal. Each unit has total
-                environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength has increased by 3,000 percent.
+                These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds,
+                to seek out new life and new civilizations, to boldly go where no one has gone before. We need to
+                neutralize the homing signal. Each unit has total
+                environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show
+                energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength
+                has increased by 3,000 percent.
             </p>
 
             <p>
-                Exceeding reaction chamber thermal limit. We have begun power-supply calibration. Force fields have been established on all turbo lifts and crawlways. Computer, run a level-two diagnostic on warp-drive systems. Antimatter containment positive. Warp drive
-                within normal parameters. I read an ion trail characteristic of a freighter escape pod. The bomb had a molecular-decay detonator. Detecting some unusual fluctuations in subspace frequencies.
+                Exceeding reaction chamber thermal limit. We have begun power-supply calibration. Force fields have been
+                established on all turbo lifts and crawlways. Computer, run a level-two diagnostic on warp-drive
+                systems. Antimatter containment positive. Warp drive
+                within normal parameters. I read an ion trail characteristic of a freighter escape pod. The bomb had a
+                molecular-decay detonator. Detecting some unusual fluctuations in subspace frequencies.
             </p>
 
             <label for="checkB">I agree to the terms</label><input type="checkbox" id="checkB" name="checkB">
