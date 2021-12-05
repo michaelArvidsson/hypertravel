@@ -20,13 +20,14 @@
             background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(120, 120, 120, 1) 35%, rgba(0, 0, 0, 1) 100%);
             overflow: hidden;
             padding: 8px;
+            height: 40px;
         }
-
+        
         .topnav a {
             text-decoration: none;
             color: whitesmoke;
         }
-
+        
         .topNav div {
             font-family: Arial, Helvetica, sans-serif;
             float: left;
@@ -34,28 +35,29 @@
             text-align: center;
             padding: 12px 16px;
             text-decoration: none;
-            font-size: 17px;
+            font-size: 15px;
             margin-left: 10px;
             margin-right: 10px;
             border: 1px solid white;
+            border-radius: 8px;
         }
-
+        
         .topNav div:hover {
             background-color: #ddd;
             color: black;
         }
-
+        
         .topNav div.active {
             background-color: #04AA6D;
             color: white;
         }
-
+        
         .welcomeHead {
             width: 200px;
             text-align: center;
             margin: auto;
         }
-
+        
         .divForm {
             margin: 0 auto;
             width: 400px;
@@ -64,7 +66,17 @@
             padding: 10px;
             box-shadow: 1px 1px 6px 2px lightslategray;
         }
-
+        
+        .resultForm {
+            margin: 0 auto;
+            margin-top: 20px;
+            width: 700px;
+            background-color: white;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 1px 1px 6px 2px lightslategray;
+        }
+        
         .RegForm {
             position: fixed;
             top: 200;
@@ -76,7 +88,7 @@
             padding: 10px;
             box-shadow: 1px 1px 6px 2px lightslategray;
         }
-
+        
         input[type=text],
         [type=date],
         [type=time],
@@ -90,18 +102,18 @@
             border-radius: 5px;
             outline: none;
         }
-
-        ::placeholder {
+        
+         ::placeholder {
             color: red;
         }
-
+        
         #selectButton {
             width: 100px;
             margin: 0 auto;
             margin-top: 15px;
             display: block;
         }
-
+        
         .pageHeader {
             width: 600px;
             margin: auto;
@@ -109,7 +121,7 @@
             padding: 20px;
             text-align: center;
         }
-
+        
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
@@ -119,92 +131,105 @@
             border-radius: 5px;
             padding: 10px;
         }
-
+        
         td,
         th {
             border: 1px solid rgb(0, 0, 0);
             text-align: left;
             padding: 8px;
         }
-
+        
+        #SiginDiv {
+            margin-top: 10px;
+            font-weight: bold;
+            color: red;
+        }
+        
         #page1 {
             display: block;
             margin-top: 15px;
             margin-bottom: 15px;
             height: 100%;
-            background-color: rgb(222, 226, 17);
+            background: rgb(255, 255, 255);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(120, 120, 120, 1) 35%, rgba(0, 0, 0, 1) 100%);
         }
-
+        
         #page2 {
             display: none;
             margin-top: 15px;
             margin-bottom: 15px;
             height: 100%;
         }
-
+        
         #page3 {
             display: none;
             margin-top: 15px;
             margin-bottom: 15px;
             height: 100%;
-            background-color: darkviolet;
+            background: rgb(255, 255, 255);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(120, 120, 120, 1) 35%, rgba(0, 0, 0, 1) 100%);
         }
-
+        
         #page4 {
             display: none;
             margin-top: 15px;
             margin-bottom: 15px;
             height: 100%;
-            background-color: rgb(255, 255, 255);
+            background: rgb(255, 255, 255);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(120, 120, 120, 1) 35%, rgba(0, 0, 0, 1) 100%);
         }
-
+        
         #page5 {
             display: none;
             margin-top: 15px;
             margin-bottom: 15px;
             height: 100%;
-            background-color: rgb(17, 226, 104);
+            background: rgb(255, 255, 255);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(120, 120, 120, 1) 35%, rgba(0, 0, 0, 1) 100%);
         }
-
+        
         #page6 {
             display: none;
             margin-top: 15px;
             margin-bottom: 15px;
             height: 100%;
-            background-color: rgb(255, 152, 246);
+            background: rgb(255, 255, 255);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(120, 120, 120, 1) 35%, rgba(0, 0, 0, 1) 100%);
         }
-
+        
         #page7 {
             display: none;
             margin-top: 15px;
             margin-bottom: 15px;
             height: 100%;
-            background-color: rgb(152, 248, 255);
+            background: rgb(255, 255, 255);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(120, 120, 120, 1) 35%, rgba(0, 0, 0, 1) 100%);
         }
-
+        
         #page8 {
             display: none;
             margin-top: 15px;
             margin-bottom: 15px;
             height: 100%;
-            background-color: rgb(180, 255, 118);
+            background: rgb(255, 255, 255);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(120, 120, 120, 1) 35%, rgba(0, 0, 0, 1) 100%);
         }
-
+        
         #errorMessage {
             display: none;
             width: 200px;
             color: firebrick;
             padding: 3px;
         }
-
+        
         .hidden {
             display: none;
         }
-
+        
         .visible {
             display: block;
         }
-
+        
         #confirmPop {
             width: 250px;
             height: 100px;
@@ -218,16 +243,15 @@
             animation-name: popup;
             animation-duration: 3s;
         }
-
+        
         #output {
             display: none;
         }
-
+        
         @keyframes popup {
             from {
                 opacity: 0;
             }
-
             to {
                 opacity: 1;
             }
@@ -236,144 +260,12 @@
 </head>
 
 <script>
-    function historyChange(event) {
-
-        console.log(event.state);
-
-        if (event.state != null) {
-            showpage(event.state);
-        }
-    }
-
-    function updateHistory(token) {
-        history.pushState(token, "Titel: " + token, "");
-    }
-
-    function setupHistory() {
-
-        window.onpopstate = function (event) {
-            historyChange(event);
-        };
-    }
-
-    function showpage(pageid) {
-        console.log('SHOW:' + pageid);
-        var pages = document.getElementsByClassName("page");
-        for (var i = 0; i < pages.length; i++) {
-            pages[i].style.display = "none";
-        }
-        document.getElementById(pageid).style.display = "block";
-
-    }
-
-    function show(pageid) {
-        showpage(pageid);
-        updateHistory(pageid);
-    }
-
-    function validatelogForm() {
-        event.preventDefault();
-
-
-        var logPassword = document.getElementById('logPassword').value;
-        var pw = 'password';
-
-
-        if (logPassword.match(pw)) {
-            document.getElementById('logPassword').style.border = "2px solid green";
-            return true;
-        } else {
-            document.getElementById('logPassword').style.border = "2px solid red";
-            document.getElementsByName('logPassword')[0].value = '';
-            document.getElementsByName('logPassword')[0].placeholder = 'password incorrect';
-        }
-
-    }
-
-    function validateForm() {
-        event.preventDefault();
-        var fname = document.getElementById('fname').value;
-        var lname = document.getElementById('lname').value;
-        var phone = document.getElementById('phone').value;
-        if (fname == "") {
-            document.getElementById('fname').style.border = "2px solid red";
-            document.getElementsByName('fname')[0].placeholder = 'First Name must be filled out';
-            return false;
-        } else if (lname == "") {
-            document.getElementById('fname').style.border = "2px solid rgb(17, 226, 104)";
-            document.getElementById('lname').style.border = "2px solid red";
-            document.getElementsByName('lname')[0].placeholder = 'Last Name must be filled out';
-            return false;
-        } else if (phone == "") {
-            document.getElementById('lname').style.border = "2px solid rgb(17, 226, 104)";
-            document.getElementById('phone').style.border = "2px solid red";
-            document.getElementsByName('phone')[0].placeholder = 'Phone must be filled out';
-            return false;
-        } else {
-            return true;
-        }
-
-    }
-
-    function validateMail(email) {
-        var email = document.getElementById('customerIDG').value;
-        var regex = /^([a-zA-Z0-9_\.])+\@([a-zA-Z0-9_\.])/;
-        if (email == "") {
-            document.getElementsByName('customerIDG')[0].placeholder = 'email must be filled out';
-            document.getElementById('customerIDG').style.border = "2px solid red";
-        } else if (!regex.test(email)) {
-            document.getElementById('customerIDG').style.border = "2px solid red";
-            return false;
-        } else {
-            document.getElementById('customerIDG').style.border = "2px solid rgb(17, 226, 104)";
-            return true;
-        }
-    }
-
-    function validateTravel() {
-        var city = document.getElementById('city').value;
-        var type = document.getElementsByClassName('class').value;
-        var tDate = document.getElementById('datepicker').value;
-        var tTime = document.getElementById('tTime').value;
-
-        if (city == "") {
-            document.getElementById('city').style.border = "2px solid red";
-        } else {
-            document.getElementById('city').style.border = "2px solid rgb(17, 226, 104)";
-        }
-
-        if ((!($('#class1radio').prop('checked'))) && (!($('#class2radio').prop('checked'))) && (!($('#class3radio').prop('checked')))) {
-            document.getElementById('classSelect').style.color = "red";
-        } else {
-            document.getElementById('classSelect').style.color = "black";
-        }
-
-        if (tDate == "") {
-            document.getElementById('dateLabel').style.color = "red";
-        } else {
-            document.getElementById('dateLabel').style.color = "black";
-        }
-
-        if (tTime == "") {
-            document.getElementById('timeLabel').style.color = "red";
-        } else {
-            document.getElementById('timeLabel').style.color = "black";
-            showpage('page4');
-        }
-    }
-
-    function goShow() {
-        $("#RegForm").animate({
-            opacity: 1,
-            left: 350
-        }, 1500, "easeOutBounce");
-    }
-
-    function goHide() {
-        $("#RegForm").animate({
-            opacity: 0,
-            left: -2000
-        }, 1500, "easeInBack");
+    function initiateSap() {
+        setupHistory();
+        updateHistory('page1');
+        searchAvailability();
+        getCusomerBookings();
+        startupCanvas();
     }
 
     var apptype = "a18micar";
@@ -397,108 +289,6 @@
         }
     }
 
-    // make booking
-    //------------------------------------------------------------------------
-    // Creates a new booking for a certain application
-    //   If status contains an other value than 1 it is a temporary booking
-    //   All temporary bookings are removed when a real booking is made
-    //   Not all booking systems have positions e.g. seats on aeroplane or in movie theater in that case use 0
-    //   Rebate is optional
-    //   Auxdata can be used to store additional information about the booking (any relevant information)
-    //------------------------------------------------------------------------
-
-    function makeBooking(resourceID, date) {
-        var customerID = localStorage.getItem("userId");
-        //var resourceID = document.getElementById("Select_drop").value;
-        //var date = document.getElementById("datepicker").value;
-        /* var dateto = document.getElementById("datepicker").value;
-        var rebate = document.getElementById("rebateB").value;
-        var statusb = document.getElementById("statusB").value;
-        var position = document.getElementById("positionB").value;
-        var auxdata = document.getElementById("auxDataB").value; */
-
-        alert(customerID + " " + resourceID + " " + date);
-
-        var jqxhr = $.ajax("../WebbProgrammering/booking/makebooking_XML.php", {
-            type: 'POST',
-            data: {
-                resourceID: resourceID,
-                date: date,
-                dateto: date,
-                customerID: customerID,
-                //rebate: rebate,
-                //status: statusb, // 2 = "Real" booking.
-                //position: position,
-                type: apptype // Only show bookings for your webbapplication using the apptype
-            }
-        })
-            .done(ResultBooking)
-            .fail(errormsg)
-            .always(function () {
-                console.log("Request bookings for resource " + resource + " for webbapplication " + apptype + " complete.");
-            });
-    }
-
-    function bookingmade(returnedData) {
-        alert('booked!');
-        console.log(returnedData);
-    }
-
-    // make booking END
-    //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
-
-    //------------------------------------------------------------------------
-    // Get Bookings
-    //------------------------------------------------------------------------
-
-    function getBookings() {
-        resource = document.getElementById("resNameGB").value;
-        bookingdate = document.getElementById("dateGB").value;
-
-        var jqxhr = $.ajax("../booking/getbookings_XML.php", {
-            type: 'POST',
-            data: {
-                resourceID: resource,
-                date: bookingdate,
-                type: apptype // Only show bookings for your webbapplication using the apptype
-            }
-        })
-            .done(ResultBooking)
-            .fail(errormsg)
-            .always(function () {
-                console.log("Request bookings for resource " + resource + " for webbapplication " + apptype + " complete.");
-            });
-    }
-
-    function ResultBooking(returnedData) {
-        // Fix characters in XML notation to HTML notation
-        fixChars(returnedData);
-
-        // An XML DOM document is returned from AJAX
-        var resultset = returnedData.childNodes[0];
-
-        var output = "<table>";
-
-        // Iterate over all nodes in root node (i.e. customers)
-        for (i = 0; i < resultset.childNodes.length; i++) {
-            if (resultset.childNodes.item(i).nodeName == "booking") {
-                // Retrieve position from the returned booking
-                var booking = resultset.childNodes.item(i);
-                output += "<tr>";
-                output += "<td>" + booking.attributes['position'].value + "</td>";
-                output += "<td>" + booking.attributes['date'].value + "</td>";
-                output += "<td>" + booking.attributes['dateto'].value + "</td>";
-                output += "</tr>";
-            }
-        }
-        output += "</table>"
-        var div = document.getElementById('OutputDivBooked');
-        div.innerHTML = output;
-    }
-
-    // get Bookings END
-    //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
-
     // search availability
     //------------------------------------------------------------------------
     // Get the availability for a certain resource by searching name, location and company in addition to the type
@@ -512,21 +302,96 @@
         var resID = document.getElementById("Select_drop").value;
 
         var jqxhr = $.ajax("../WebbProgrammering/booking/getavailability_search_XML.php", {
-            type: 'POST',
-            data: {
-                resid: encodeURIComponent(resID),
+                type: 'POST',
+                data: {
+                    resid: encodeURIComponent(resID),
 
-                type: apptype // Only show bookings for your webbapplication using the apptype
-            }
-        })
+                    type: apptype // Only show bookings for your webbapplication using the apptype
+                }
+            })
             .done(showAvailability)
             .fail(errormsg)
-            .always(function () {
+            .always(function() {
                 console.log("Request for resource availability for webbapplication " + apptype + " complete.");
             });
     }
 
     function showAvailability(returnedData) {
+        // Fix characters in XML notation to HTML notation
+        fixChars(returnedData);
+
+        // An XML DOM document is returned from AJAX
+        var resultset = returnedData.childNodes[0];
+        var output = "<table>";
+        // Iterate over all nodes in root node (i.e. resources)
+        for (i = 0; i < resultset.childNodes.length; i++) {
+            // Iterate over all child nodes of that node that are resource nodes
+            if (resultset.childNodes.item(i).nodeName == "availability") {
+                // Retrieve data from resource nodes
+                var avail = resultset.childNodes.item(i);
+                var searchDate = new Date(document.getElementById("datepicker").value);
+                var availableDate = new Date(avail.attributes['date'].value);
+                if (searchDate.getDate() === availableDate.getDate()) {
+
+                    output += "<tr class='actiontablerow' onclick='alert(\"" + avail.attributes['resourceID'].value + "\")'>";
+                    output += "<th> Class</th>";
+                    output += "<th> Location</th>";
+                    output += "<th> Cost</th>";
+                    output += "<th> Date</th>";
+                    output += "<th> Available seats</th>";
+                    output += "<th> ClickToBook</th>";
+                    output += "</tr>";
+                    output += "<td>" + avail.attributes['name'].value + "</td>";
+                    output += "<td>" + avail.attributes['location'].value + "</td>";
+                    output += "<td>" + avail.attributes['cost'].value + "</td>";
+                    output += "<td>" + avail.attributes['date'].value + "</td>";
+                    output += "<td>" + avail.attributes['remaining'].value + "</td>";
+                    output += `<td> <input type='button' onclick='passBookingParams(
+                    "` + avail.attributes['resourceID'].value + `","` +
+                        avail.attributes['date'].value + `","` +
+                        avail.attributes['dateto'].value + `");' value='Make Booking'> </td>`;
+                    output += "</tr>";
+                }
+            }
+        }
+
+        output += "</table>"
+        var div = document.getElementById("OutputDivSearchA");
+        div.innerHTML = output;
+
+    }
+
+    // search availability END
+    //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
+
+    // searchpage availability 
+    //------------------------------------------------------------------------
+    // Get the availability for a certain resource by searching name, location and company in addition to the type
+    // This is useful if we do not want to enter a date first, but rather to se a list of available time/date slots for resources
+    // Output: resourceID, name, location, company, size, cost, category, date, dateto, bookingcount, bookingcost, bookingclass, remaining
+    //         returns each availabile slot for that resource
+    //------------------------------------------------------------------------
+
+    function searchPageAvailability() {
+
+        var resID = document.getElementById("resLocationA").value;
+
+        var jqxhr = $.ajax("../WebbProgrammering/booking/getavailability_search_XML.php", {
+                type: 'POST',
+                data: {
+                    resid: encodeURIComponent(resID),
+
+                    type: apptype // Only show bookings for your webbapplication using the apptype
+                }
+            })
+            .done(showSearchAvailability)
+            .fail(errormsg)
+            .always(function() {
+                console.log("Request for resource availability for webbapplication " + apptype + " complete.");
+            });
+    }
+
+    function showSearchAvailability(returnedData) {
         // Fix characters in XML notation to HTML notation
         fixChars(returnedData);
 
@@ -572,12 +437,12 @@
         }
 
         output += "</table>"
-        var div = document.getElementById("OutputDivSearchA");
+        var div = document.getElementById("OutputDivSearchPageA");
         div.innerHTML = output;
 
     }
 
-    // search availability END
+    // searchpage availability END
     //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
 
     // search resources
@@ -599,9 +464,9 @@
                 }
             })
 
-                .done(showResources1)
+            .done(showResources1)
                 .fail(errormsg)
-                .always(function () {
+                .always(function() {
                     console.log("Request all resources for webbapplication " + apptype + " complete.");
                 });
         } else {
@@ -613,9 +478,9 @@
                 }
             })
 
-                .done(showResources2)
+            .done(showResources2)
                 .fail(errormsg)
-                .always(function () {
+                .always(function() {
                     console.log("Request all resources for webbapplication " + apptype + " complete.");
                 });
 
@@ -678,6 +543,109 @@
     // search resources END
     //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
 
+    // make booking
+    //------------------------------------------------------------------------
+    // Creates a new booking for a certain application
+    //   If status contains an other value than 1 it is a temporary booking
+    //   All temporary bookings are removed when a real booking is made
+    //   Not all booking systems have positions e.g. seats on aeroplane or in movie theater in that case use 0
+    //   Rebate is optional
+    //   Auxdata can be used to store additional information about the booking (any relevant information)
+    //------------------------------------------------------------------------
+
+    function makeBooking() {
+        var customerID = localStorage.getItem("userId");
+        var resourceID = localStorage.getItem("BookResourceId");
+        var date = localStorage.getItem("BookDate");
+        //var resourceID = document.getElementById("Select_drop").value;
+        //var date = document.getElementById("datepicker").value;
+        /* var dateto = document.getElementById("datepicker").value;
+        var rebate = document.getElementById("rebateB").value;
+        var statusb = document.getElementById("statusB").value;
+        var position = document.getElementById("positionB").value;
+        var auxdata = document.getElementById("auxDataB").value; */
+
+        alert(customerID + " " + resourceID + " " + date);
+
+        var jqxhr = $.ajax("../WebbProgrammering/booking/makebooking_XML.php", {
+                type: 'POST',
+                data: {
+                    resourceID: resourceID,
+                    date: date,
+                    dateto: date,
+                    customerID: customerID,
+                    //rebate: rebate,
+                    //status: statusb, // 2 = "Real" booking.
+                    //position: position,
+                    type: apptype // Only show bookings for your webbapplication using the apptype
+                }
+            })
+            .done(ResultBooking)
+            .fail(errormsg)
+            .always(function() {
+                console.log("Request bookings for resource " + resource + " for webbapplication " + apptype + " complete.");
+            });
+    }
+
+    function bookingmade(returnedData) {
+        alert('booked!');
+        console.log(returnedData);
+    }
+
+    // make booking END
+    //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
+
+    //------------------------------------------------------------------------
+    // Get Bookings
+    //------------------------------------------------------------------------
+
+    function getBookings() {
+        resource = document.getElementById("resNameGB").value;
+        bookingdate = document.getElementById("dateGB").value;
+
+        var jqxhr = $.ajax("../booking/getbookings_XML.php", {
+                type: 'POST',
+                data: {
+                    resourceID: resource,
+                    date: bookingdate,
+                    type: apptype // Only show bookings for your webbapplication using the apptype
+                }
+            })
+            .done(ResultBooking)
+            .fail(errormsg)
+            .always(function() {
+                console.log("Request bookings for resource " + resource + " for webbapplication " + apptype + " complete.");
+            });
+    }
+
+    function ResultBooking(returnedData) {
+        // Fix characters in XML notation to HTML notation
+        fixChars(returnedData);
+
+        // An XML DOM document is returned from AJAX
+        var resultset = returnedData.childNodes[0];
+
+        var output = "<table>";
+
+        // Iterate over all nodes in root node (i.e. customers)
+        for (i = 0; i < resultset.childNodes.length; i++) {
+            if (resultset.childNodes.item(i).nodeName == "booking") {
+                // Retrieve position from the returned booking
+                var booking = resultset.childNodes.item(i);
+                output += "<tr>";
+                output += "<td>" + booking.attributes['position'].value + "</td>";
+                output += "<td>" + booking.attributes['date'].value + "</td>";
+                output += "<td>" + booking.attributes['dateto'].value + "</td>";
+                output += "</tr>";
+            }
+        }
+        output += "</table>"
+        var div = document.getElementById('OutputDivBooked');
+        div.innerHTML = output;
+    }
+
+    // get Bookings END
+    //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
 
     //------------------------------------------------------------------------
     // get customer bookings
@@ -686,18 +654,18 @@
     // This function thus implements a traditional shopping cart
     //------------------------------------------------------------------------
 
-    function processinputbox() {
-        customer = document.getElementById("customerID").value;
+    function getCusomerBookings() {
+        customer = localStorage.getItem("userId");
         var jqxhr = $.ajax("../WebbProgrammering/booking/getcustomerbookings_XML.php", {
-            method: "POST",
-            data: {
-                customerID: encodeURIComponent(customer),
-                type: apptype // Only show bookings for your webbapplication using the apptype
-            }
-        })
+                method: "POST",
+                data: {
+                    customerID: encodeURIComponent(customer),
+                    type: apptype // Only show bookings for your webbapplication using the apptype
+                }
+            })
             .done(ResultBookingCustomer)
             .fail(errormsg)
-            .always(function () {
+            .always(function() {
                 console.log("Request bookings for customer " + customer + " has completed.");
             });
     }
@@ -710,6 +678,12 @@
         var resultset = returnedData.childNodes[0];
 
         var output = "<table>";
+        output += "<tr class='actiontablerow'>";
+        output += "<th> Location</th>";
+        output += "<th> Class</th>";
+        output += "<th> Cost</th>";
+        output += "<th> Date</th>";
+        output += "</tr>";
 
         // Iterate over all nodes in root node (i.e. bookings)
         for (i = 0; i < resultset.childNodes.length; i++) {
@@ -717,60 +691,28 @@
             if (resultset.childNodes.item(i).nodeName == "booking") {
                 // Retrieve first name and last name for node
                 var booking = resultset.childNodes.item(i);
-
-                output += "<tr class='actiontablerow'>";
-                output += "<td>" + booking.attributes['company'].value + "</td>";
-                output += "<td>" + booking.attributes['name'].value + "</td>";
+                output += "<tr>";
                 output += "<td>" + booking.attributes['location'].value + "</td>";
+                output += "<td>" + booking.attributes['name'].value + "</td>";
+                output += "<td>" + booking.attributes['cost'].value + "</td>";
                 output += "<td>" + booking.attributes['date'].value + "</td>";
                 output += "</tr>";
 
+            } else {
+                MyTravelC.innerHTML = "There are no Bookinghistory, please book your first travel";
             }
         }
 
         output += "</table>"
         var div = document.getElementById('OutputDiv');
+        var username = localStorage.getItem("username");
         div.innerHTML = output;
+        MyTravelC.innerHTML = "Theese are the planned and future travels for: " + username;
     }
 
     //------------------------------------------------------------------------
-    // error message callback
+    // get customer bookings END
     //------------------------------------------------------------------------
-    // The errror message callback displays the error message and error code
-    //------------------------------------------------------------------------
-
-    function errormsg(jqXHR, textStatus, errorThrown) {
-        console.log(jqXHR);
-        alert("AJAX Error:" + errorThrown);
-    }
-
-    $(function () {
-        $("#datepicker").datepicker({
-            minDate: -0,
-            maxDate: "+6M"
-        });
-    });
-
-
-    function confirmAgree() {
-        if ($('input[name="checkB"]').is(':checked')) {
-            console.log('Success');
-        } else {
-            console.log('No checkbox');
-            document.getElementById("confirmPop").className = "visible";
-        }
-    }
-
-    function closePop() {
-        document.getElementById("confirmPop").className = "hidden";
-    }
-
-    $(function () {
-        $("#tooltip-1").tooltip();
-        $("#tooltip-2").tooltip();
-        $("#tooltip-3").tooltip();
-    });
-
 
     //------------------------------------------------------------------------
     // make customer
@@ -780,31 +722,28 @@
     //------------------------------------------------------------------------
 
     function storeCustomer() {
-        document.getElementById("output").innerHTML += "<br>AJAX CALL Started.";
 
         var firstname = document.getElementById("customerfnameC").value;
         var lastname = document.getElementById("customerlnameC").value;
         var email = document.getElementById("customeremailC").value;
         var address = document.getElementById("customeraddressC").value;
 
-
         document.getElementById("output").innerHTML += "<br>Creating a new customer...";
         var jqxhr = $.ajax("../WebbProgrammering/booking/makecustomer_XML.php", {
-            type: 'POST',
-            data: {
-                ID: encodeURIComponent(email),
-                firstname: encodeURIComponent(firstname),
-                lastname: encodeURIComponent(lastname),
-                email: encodeURIComponent(email),
-                address: encodeURIComponent(address),
+                type: 'POST',
+                data: {
+                    ID: encodeURIComponent(email),
+                    firstname: encodeURIComponent(firstname),
+                    lastname: encodeURIComponent(lastname),
+                    email: encodeURIComponent(email),
+                    address: encodeURIComponent(address),
 
-            }
-        })
+                }
+            })
             .done(ResultCustomern)
-            .fail(errormsg)
-            .always(function () {
+            .fail(errormsgReg)
+            .always(function() {
                 console.log("Request for storing customer " + firstname + " " + lastname + " has completed.");
-                document.getElementById("output").innerHTML += "<br> AJAX CALL Finished."
             });
 
     }
@@ -815,25 +754,16 @@
             if (returnedData.childNodes.item(i).nodeName == "created") {
                 document.getElementById("output").innerHTML += "SUCCESSFUL!";
                 alert(returnedData.childNodes.item(i).attributes['status'].value);
+
+                var userId = document.getElementById("customeremailC").value;
+                var username = document.getElementById("customerfnameC").value;
+                localStorage.setItem("userId", userId);
+                localStorage.setItem("username", username);
+                show('page8');
+                checkLocalStorage();
             }
         }
     }
-
-    //------------------------------------------------------------------------
-    // error message callback
-    //------------------------------------------------------------------------
-    // The errror message callback displays the error message and error code
-    //------------------------------------------------------------------------
-
-    function errormsg(jqXHR, textStatus, errorThrown) {
-        console.log(jqXHR);
-        document.getElementById("output").innerHTML += "FAILED!";
-        alert("AJAX Error:" + errorThrown);
-    }
-
-
-    //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
-
     //------------------------------------------------------------------------
     // get customer
     //------------------------------------------------------------------------
@@ -845,14 +775,14 @@
         var customerID = document.getElementById("customerIDG").value;
 
         var jqxhr = $.ajax("../WebbProgrammering/booking/getcustomer_XML.php", {
-            type: 'POST',
-            data: {
-                customerID: encodeURIComponent(customerID)
-            }
-        })
+                type: 'POST',
+                data: {
+                    customerID: encodeURIComponent(customerID)
+                }
+            })
             .done(ResultCustomers)
             .fail(errormsg)
-            .always(function () {
+            .always(function() {
                 console.log("Request for showing customers complete.");
             });
     }
@@ -872,11 +802,6 @@
                 var div = document.getElementById('CustomerOutputDiv');
                 output = customer.attributes['id'].value;
                 output += ' ' + customer.attributes['firstname'].value;
-                /* output+=' '+customer.attributes['lastname'].value;
-                output+=' '+customer.attributes['address'].value;
-                output+=' '+customer.attributes['email'].value;
-                output+=' '+customer.attributes['lastvisit'].value;
-                output+=' '+customer.attributes['auxdata'].value; */
                 div.innerHTML = output;
                 var userId = customer.attributes['id'].value;
                 var username = customer.attributes['firstname'].value;
@@ -884,31 +809,244 @@
                 localStorage.setItem("username", username);
                 show('page8');
                 checkLocalStorage();
+                signinNavbarShow();
+
+            } else {
+
+                SiginDiv.innerHTML = "No account found, please register";
+
             }
         }
     }
     // get customer END
     //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
 
+    //------------------------------------------------------------------------
+    // error message Register callback
+    //------------------------------------------------------------------------
+    // The errror message callback displays the error message and error code
+    //------------------------------------------------------------------------
+
+    function errormsgReg(jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR);
+        alert('Registration failed please try again');
+        goShow();
+    }
+
+    // error message callback END
+    //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
+
+    function historyChange(event) {
+
+        console.log(event.state);
+
+        if (event.state != null) {
+            showpage(event.state);
+        }
+    }
+
+    function updateHistory(token) {
+        history.pushState(token, "Titel: " + token, "");
+    }
+
+    function setupHistory() {
+
+        window.onpopstate = function(event) {
+            historyChange(event);
+        };
+    }
+
+    function showpage(pageid) {
+        console.log('SHOW:' + pageid);
+        var pages = document.getElementsByClassName("page");
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].style.display = "none";
+        }
+        document.getElementById(pageid).style.display = "block";
+
+    }
+
+    function show(pageid) {
+        showpage(pageid);
+        updateHistory(pageid);
+    }
+
+    $(function() {
+        $("#datepicker").datepicker({
+            minDate: -0,
+            maxDate: "+6M"
+        });
+    });
+
+
+    function confirmAgree() {
+        if ($('input[name="checkB"]').is(':checked')) {
+            console.log('Success');
+            makeBooking();
+        } else {
+            console.log('No checkbox');
+            document.getElementById("confirmPop").className = "visible";
+        }
+    }
+
+    function closePop() {
+        document.getElementById("confirmPop").className = "hidden";
+    }
+
+    $(function() {
+        $("#tooltip-1").tooltip();
+        $("#tooltip-2").tooltip();
+        $("#tooltip-3").tooltip();
+    });
+
+    function signinNavbarShow() {
+        document.getElementById("nav1").className = "visible";
+        document.getElementById("nav2").className = "visible";
+        document.getElementById("nav3").className = "visible";
+        document.getElementById("nav4").className = "visible";
+        document.getElementById("nav5").className = "visible";
+    }
+
+    //------------------------------------------------------------------------
+    // Validations
+    //------------------------------------------------------------------------
+    function validateForm() {
+
+        var fname = document.getElementById('customerfnameC').value;
+        var lname = document.getElementById('customerlnameC').value;
+        var adress = document.getElementById('customeraddressC').value;
+        if (fname == "") {
+            document.getElementById('customerfnameC').style.border = "2px solid red";
+            document.getElementsByName('customerfnameC')[0].placeholder = 'First Name must be filled out';
+            return false;
+        } else if (lname == "") {
+            document.getElementById('customerfnameC').style.border = "2px solid rgb(17, 226, 104)";
+            document.getElementById('customerlnameC').style.border = "2px solid red";
+            document.getElementsByName('customerlnameC')[0].placeholder = 'Last Name must be filled out';
+            return false;
+        } else if (adress == "") {
+            document.getElementById('customerlnameC').style.border = "2px solid rgb(17, 226, 104)";
+            document.getElementById('customeraddressC').style.border = "2px solid red";
+            document.getElementsByName('customeraddressC')[0].placeholder = 'Adress must be filled out';
+            return false;
+        } else {
+            document.getElementById('customeraddressC').style.border = "2px solid rgb(17, 226, 104)";
+            return true;
+        }
+
+    }
+
+    function validateMail(email) {
+        var email = document.getElementById('customerIDG').value;
+        var regex = /^([a-zA-Z0-9_\.])+\@([a-zA-Z0-9_\.])/;
+        if (email == "") {
+            document.getElementsByName('customerIDG')[0].placeholder = 'email must be filled out';
+            document.getElementById('customerIDG').style.border = "2px solid red";
+        } else if (!regex.test(email)) {
+            document.getElementById('customerIDG').style.border = "2px solid red";
+            return false;
+        } else {
+            document.getElementById('customerIDG').style.border = "2px solid rgb(17, 226, 104)";
+            validateForm();
+            return true;
+        }
+    }
+
+    function validateRegMail(email) {
+        var email = document.getElementById('customeremailC').value;
+        var regex = /^([a-zA-Z0-9_\.])+\@([a-zA-Z0-9_\.])/;
+        if (email == "") {
+            document.getElementsByName('customeremailC')[0].placeholder = 'email must be filled out';
+            document.getElementById('customeremailC').style.border = "2px solid red";
+        } else if (!regex.test(email)) {
+            document.getElementById('customeremailC').style.border = "2px solid red";
+            return false;
+        } else {
+            document.getElementById('customeremailC').style.border = "2px solid rgb(17, 226, 104)";
+            validateForm();
+            return true;
+        }
+    }
+
+    function validateTravel() {
+        var city = document.getElementById('city').value;
+        var type = document.getElementsByClassName('class').value;
+        var tDate = document.getElementById('datepicker').value;
+        var tTime = document.getElementById('tTime').value;
+
+        if (city == "") {
+            document.getElementById('city').style.border = "2px solid red";
+        } else {
+            document.getElementById('city').style.border = "2px solid rgb(17, 226, 104)";
+        }
+
+        if ((!($('#class1radio').prop('checked'))) && (!($('#class2radio').prop('checked'))) && (!($('#class3radio').prop('checked')))) {
+            document.getElementById('classSelect').style.color = "red";
+        } else {
+            document.getElementById('classSelect').style.color = "black";
+        }
+
+        if (tDate == "") {
+            document.getElementById('dateLabel').style.color = "red";
+        } else {
+            document.getElementById('dateLabel').style.color = "black";
+        }
+
+        if (tTime == "") {
+            document.getElementById('timeLabel').style.color = "red";
+        } else {
+            document.getElementById('timeLabel').style.color = "black";
+            showpage('page4');
+        }
+    }
+    //------------------------------------------------------------------------
+    // END Validations
+    //------------------------------------------------------------------------
+
+    //------------------------------------------------------------------------
+    // Local storage
+    //------------------------------------------------------------------------
     function checkLocalStorage() {
         var username = localStorage.getItem("username");
 
         if (username != null && username != "") {
             console.log('Welcome again ' + username + '!');
-            welcomeC.innerHTML = "Hello" + username + 'Welcome back!';
-
-        } else {
-            username = prompt('Please enter your name:', "");
-            localStorage.setItem("username", username);
+            welcomeC.innerHTML = "Hello " + username + " Welcome back!";
         }
+    }
+
+    function passBookingParams(resourceID, date) {
+        localStorage.setItem("BookResourceId", resourceID);
+        localStorage.setItem("BookDate", date);
+        show('page4');
+    }
+    //------------------------------------------------------------------------
+    // END Local storage
+    //------------------------------------------------------------------------
+
+    function goShow() {
+        $("#RegForm").animate({
+            opacity: 1,
+            left: 350
+        }, 1500, "easeOutBounce");
+    }
+
+    function goHide() {
+        $("#RegForm").animate({
+            opacity: 0,
+            left: -2000
+        }, 1500, "easeInBack");
     }
 
     function SignOut() {
         localStorage.clear();
+        location.reload();
         show('page1');
     }
 
+    //------------------------------------------------------------------------
     //Canvas start
+    //------------------------------------------------------------------------
 
     var ctx;
 
@@ -948,61 +1086,59 @@
 
         // Function calls
         layer1();
-        ctx.translate(40,0);
-        for (var i=0; i<4; i++){
-            console.log('poddipod');
+        ctx.translate(40, 0);
+        for (var i = 0; i < 4; i++) {
             drawgraphics2();
-            ctx.translate(0,30);
+            ctx.translate(0, 30);
         }
     }
 
     function drawgraphics2() {
-       //--==## defs3454 defs ##==--
-ctx.globalAlpha=1.0;
-//defs
-//defsend
-      //--==## path3496 path ##==--
-   ctx.strokeStyle='#000000';
-   ctx.globalAlpha=1;
-   ctx.lineWidth='0';
-   ctx.beginPath();
-   ctx.moveTo(27,85);
-   ctx.bezierCurveTo(25,76,26,89,27,99);
-   ctx.bezierCurveTo(33,104,38,103,43,99);
-   ctx.bezierCurveTo(45,72,43,85,43,85);
-   ctx.lineTo(27,85);
-   ctx.stroke();
-      //--==## path4728 path ##==--
-   ctx.strokeStyle='#000000';
-   ctx.globalAlpha=1;
-   ctx.lineWidth='0';
-   ctx.beginPath();
-   ctx.moveTo(27,85);
-   ctx.lineTo(28,98);
-   ctx.lineTo(28,98);
-   ctx.bezierCurveTo(33,101,38,100,42,98);
-   ctx.lineTo(43,85);
-   ctx.lineTo(27,85);
-   ctx.stroke();
-}
+        //--==## defs3454 defs ##==--
+        ctx.globalAlpha = 1.0;
+        //defs
+        //defsend
+        //--==## path3496 path ##==--
+        ctx.strokeStyle = '#000000';
+        ctx.globalAlpha = 1;
+        ctx.lineWidth = '0';
+        ctx.beginPath();
+        ctx.moveTo(27, 85);
+        ctx.bezierCurveTo(25, 76, 26, 89, 27, 99);
+        ctx.bezierCurveTo(33, 104, 38, 103, 43, 99);
+        ctx.bezierCurveTo(45, 72, 43, 85, 43, 85);
+        ctx.lineTo(27, 85);
+        ctx.stroke();
+        //--==## path4728 path ##==--
+        ctx.strokeStyle = '#000000';
+        ctx.globalAlpha = 1;
+        ctx.lineWidth = '0';
+        ctx.beginPath();
+        ctx.moveTo(27, 85);
+        ctx.lineTo(28, 98);
+        ctx.lineTo(28, 98);
+        ctx.bezierCurveTo(33, 101, 38, 100, 42, 98);
+        ctx.lineTo(43, 85);
+        ctx.lineTo(27, 85);
+        ctx.stroke();
+    }
 
-ctx.globalAlpha=1.0;
+    ctx.globalAlpha = 1.0;
 
-// Function calls
-drawgraphics2();
-
-    
-
+    // Function calls
+    drawgraphics2();
 </script>
 
-<body onload="setupHistory();updateHistory('page1');searchAvailability();startupCanvas();">
+<!-- Start of SAP -->
+
+<body onload="initiateSap()">
     <!--Navbar-->
     <nav class="topNav">
-        <div onclick="show('page1')"> Home</div>
-        <div onclick="show('page3')"> Book</div>
-        <div onclick="show('page5')"> My page</div>
-        <div onclick="show('page6')"> Search</div>
-        <button id="SignOutButton" class="SignOutButton" onclick="SignOut()">Sign out</button>
+        <div id="nav1" class="hidden" onclick="show('page1')"> Home</div>
+        <div id="nav2" class="hidden" onclick="show('page3')"> Book</div>
+        <div id="nav3" class="hidden" onclick="show('page5')"> My page</div>
+        <div id="nav4" class="hidden" onclick="show('page6')"> Search</div>
+        <div id="nav5" class="hidden" onclick="SignOut()">Sign out</div>
     </nav>
 
     <!--Welcome-->
@@ -1016,15 +1152,11 @@ drawgraphics2();
             <div class="divForm">
 
                 <label for="">email: <i id="tooltip-3" title="email address example john.doe@hypertravel.com"
-                        class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
-                <!-- <input type="text" onkeyup="validateMail()" id="email" name="email" placeholder=""><br> -->
+                class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
                 <input type='text' onkeyup="validateMail()" name='customerIDG' id='customerIDG'><br>
                 <input type="Submit" onclick="showCustomer()" value="Sign in">
-                <button onclick="showpage('page2');goShow();">Register</button>
-
-                <div id="CustomerOutputDiv">
-
-                </div>
+                <button onclick="showpage('page2');goShow();">Register</button><br>
+                <div id="SiginDiv"></div>
 
             </div>
         </div>
@@ -1041,22 +1173,24 @@ drawgraphics2();
 
             <label for="">First Name: <i id="tooltip-1" title="Firstname" class="fa fa-question-circle"
                     style="color: rgb(14, 92, 238); font-size:16px"></i></label>
-            <input type="text" id="customerfnameC" name="customerfnameC" placeholder=""><br>
+            <input type="text" id="customerfnameC" name="customerfnameC" placeholder="" onchange="validateForm();" onkeyup="validateForm();"><br>
             <label for="">Last Name: <i id="tooltip-2" title="Lastname" class="fa fa-question-circle"
                     style="color: rgb(14, 92, 238); font-size:16px"></i></label>
-            <input type="text" id="customerlnameC" name="customerlnameC" placeholder=""><br>
+            <input type="text" id="customerlnameC" name="customerlnameC" placeholder="" onchange="validateForm();" onkeyup="validateForm();"><br>
             <label for="">email:<i id="tooltip-3" title="email address example john.doe@hypertravel.com"
                     class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
-            <input type="text" onkeyup="validateMail()" id="customeremailC" name="customeremailC" placeholder=""><br>
+            <input type="text" onkeyup="validateRegMail()" id="customeremailC" name="customeremailC" placeholder=""><br>
             <label for="">Adress: <i class="fa fa-question-circle"
                     style="color: rgb(14, 92, 238); font-size:16px"></i></label>
-            <input type="text" id="customeraddressC" name="customeraddressC" placeholder=""><br>
+            <input type="text" id="customeraddressC" name="customeraddressC" placeholder="" onchange="validateForm();" onkeyup="validateForm();"><br>
             <input type="button" onclick="storeCustomer();goHide();" value="Register">
         </div>
+        <div id="CustomerOutputDiv"></div>
         <div id="output"></div>
     </section>
     <!--Register end-->
 
+    <!--Make booking-->
     <section id="page3" class="page">
         <div class="pageHeader">
             <h1>Where do you want to travel</h1>
@@ -1067,15 +1201,16 @@ drawgraphics2();
                 <span class="actionheading"></span>
                 <label id="dateLabel" for="datepicker">Pick available date: <i class="fa fa-question-circle"
                         style="color: rgb(14, 92, 238); font-size:16px"></i></label>
-                <p>Date: <input type="text" autocomplete="off" name="tDate" id="datepicker"></p><br>
-                <p id="classSelect">Please select your prefered class: <i class="fa fa-question-circle"
-                        style="color: rgb(14, 92, 238); font-size:16px"></i></p>
+                <input type="text" autocomplete="off" name="tDate" id="datepicker"><br>
+                <span id="classSelect">Please select your prefered class: <i class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></span><br>
                 <input type="radio" id="class1radio" name="class" onchange="searchResources('1');" value="Class_1">
                 <label for="class1">class1</label><br>
                 <input type="radio" id="class2radio" name="class" onchange="searchResources('1');" value="Class_2">
                 <label for="class2">class2</label><br>
                 <input type="radio" id="class3radio" name="class" onchange="searchResources('1');" value="Class_3">
-                <label for="class3">class3</label><br><br>
+                <label for="class3">class3</label><br>
+                <label for="Select_drop">City: <i class="fa fa-question-circle"
+                        style="color: rgb(14, 92, 238); font-size:16px"></i></label><br>
                 <select id='Select_drop' onchange="searchResources"></select>
 
                 <input type="button" onclick="searchAvailability();" value="Search availabilable departures">
@@ -1084,7 +1219,6 @@ drawgraphics2();
         </div>
         <div id="OutputDivSearchA" />
     </section>
-
 
     <section id="page4" class="page">
         <div>
@@ -1095,28 +1229,33 @@ drawgraphics2();
 
                 <canvas id="myCanvas" width="400" height="400" style="border: 2px solid black;"></canvas>
 
-                <input id="selectButton" type="submit" onclick="showpage('page7')" value="confirm seat">
+                <input id="selectButton" type="submit" onclick="show('page7')" value="confirm seat">
             </div>
 
         </div>
     </section>
+    <!--END Make booking-->
 
+    <!-- My travels -->
     <section id="page5" class="page">
         <div class="divForm">
 
-            <h1 class="pageHeader">My travels</h1>
+            <h1 id="MyTravelC"></h1>
 
-            <div class="actionbox">
+
+            <!--   <div class="actionbox">
                 <span class="actionheading"></span>
-                <input type='text' style='width:300px' name='customerID' id='customerID' onchange="processinputbox()"
-                    onkeyup="processinputbox()">
+                <input type='text' style='width:300px' name='customerID' id='customerID' onchange="processinputbox()" onkeyup="processinputbox()">
                 <span class="actionheading">Result</span>
-                <div id="OutputDiv" />
-            </div>
+
+            </div> -->
+
         </div>
-
+        <div class="resultForm" id="OutputDiv" />
     </section>
+    <!-- END My travels -->
 
+    <!--Search available-->
     <section id="page6" class="page">
         <div class="pageHeader">
             <h3>Search available resources</h3>
@@ -1128,8 +1267,7 @@ drawgraphics2();
                 <input type='text' name='resIDS' id='resIDS'> Name:
                 <input type='text' name='resNameS' id='resNameS'><br /> Location:
                 <input type='text' name='resLocationS' id='resLocationS'> Company:
-                <input type='text' name='resCompanyS' id='resCompanyS'><br /> Full Text:<input type='text'
-                    name='resFulltextS' id='resFulltextS'><br />
+                <input type='text' name='resCompanyS' id='resCompanyS'><br /> Full Text:<input type='text' name='resFulltextS' id='resFulltextS'><br />
                 <input type="button" onclick="searchResources();" value="Search Resource">
                 <span class="actionheading">Result</span>
                 <div id="OutputDivSearchR" />
@@ -1137,26 +1275,21 @@ drawgraphics2();
         </div>
 
         <div class="actionbox">
-            <span class="actionheading">Search Availability (show the availability for a given Resource ID)</span>
-            ResourceID:
-            <input type='text' name='resIDA' id='resIDA' onchange="searchAvailability()" onkeyup="searchAvailability()">
-            Name:
-            <input type='text' name='resNameA' id='resNameA' onchange="searchAvailability()"
-                onkeyup="searchAvailability()"> Location:
-            <input type='text' name='resLocationA' id='resLocationA' onchange="searchAvailability()"
-                onkeyup="searchAvailability()"> Company:
-            <input type='text' name='resCompanyA' id='resCompanyA' onchange="searchAvailability()"
-                onkeyup="searchAvailability()"><br /> Full Text:<input type='text' name='resFulltextA' id='resFulltextA'
-                onchange="searchAvailability()" onkeyup="searchAvailability()"><br />
-            <input type="button" onclick="searchAvailability();" value="Search Availability">
+            <span class="actionheading">Search Availability</span> ResourceID:
+            <input type='text' name='resIDA' id='resIDA'> Name:
+            <input type='text' name='resNameA' id='resNameA'> Location:
+            <input type='text' name='resLocationA' id='resLocationA'> <br />
+            <input type="button" onclick="searchPageAvailability();" value="Search Availability">
             <span class="actionheading">Result</span>
-            <div id="OutputDivSearchA" />
+            <div id="OutputDivSearchPageA" />
         </div>
         </div>
         <input type="text" value="SEARCH">
         </div>
     </section>
+    <!--END Search available-->
 
+    <!--Confirm agreement-->
     <section id="page7" class="page">
         <div class="pageHeader">
             <h3>Confirm the agreements below</h3>
@@ -1164,20 +1297,13 @@ drawgraphics2();
         <div style="height:380px; " class="divForm">
 
             <p>
-                These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds,
-                to seek out new life and new civilizations, to boldly go where no one has gone before. We need to
-                neutralize the homing signal. Each unit has total
-                environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show
-                energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength
-                has increased by 3,000 percent.
+                These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no one has gone before. We need to neutralize the homing signal. Each unit has total
+                environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength has increased by 3,000 percent.
             </p>
 
             <p>
-                Exceeding reaction chamber thermal limit. We have begun power-supply calibration. Force fields have been
-                established on all turbo lifts and crawlways. Computer, run a level-two diagnostic on warp-drive
-                systems. Antimatter containment positive. Warp drive
-                within normal parameters. I read an ion trail characteristic of a freighter escape pod. The bomb had a
-                molecular-decay detonator. Detecting some unusual fluctuations in subspace frequencies.
+                Exceeding reaction chamber thermal limit. We have begun power-supply calibration. Force fields have been established on all turbo lifts and crawlways. Computer, run a level-two diagnostic on warp-drive systems. Antimatter containment positive. Warp drive
+                within normal parameters. I read an ion trail characteristic of a freighter escape pod. The bomb had a molecular-decay detonator. Detecting some unusual fluctuations in subspace frequencies.
             </p>
 
             <label for="checkB">I agree to the terms</label><input type="checkbox" id="checkB" name="checkB">
@@ -1190,19 +1316,21 @@ drawgraphics2();
                 </div>
             </div>
         </div>
-
-
     </section>
+    <!--END Confirm agreement-->
 
+    <!--Welcome User-->
     <section id="page8" class="page">
         <div class="pageHeader">
-            <h3>Welcome to Hypertravel</h3>
-        </div>
-        <div>
+            <h3>Welcome to Hypertravel</h3><br>
             <h1 id="welcomeC"></h1>
+            <span>Click on book to plan your next adventure or</span><br>
+            <span>on My travels to see your scheduled and past travels</span><br><br>
+            <button id="welcomeBookButton" onclick="show('page3')">Book</button>
+            <button id="welcomeMypageButton" onclick="show('page5')">My travels</button>
         </div>
     </section>
-
+    <!--END Welcome User-->
 </body>
 
 </html>
