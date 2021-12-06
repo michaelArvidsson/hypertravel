@@ -319,7 +319,6 @@
     function showAvailability(returnedData) {
         // Fix characters in XML notation to HTML notation
         fixChars(returnedData);
-
         // An XML DOM document is returned from AJAX
         var resultset = returnedData.childNodes[0];
         var output = "<table>";
@@ -332,7 +331,6 @@
                 var searchDate = new Date(document.getElementById("datepicker").value);
                 var availableDate = new Date(avail.attributes['date'].value);
                 if (searchDate.getDate() === availableDate.getDate()) {
-
                     output += "<tr class='actiontablerow' onclick='alert(\"" + avail.attributes['resourceID'].value + "\")'>";
                     output += "<th> Class</th>";
                     output += "<th> Location</th>";
@@ -831,6 +829,19 @@
         console.log(jqXHR);
         alert('Registration failed please try again');
         goShow();
+    }
+
+    // error message callback END
+    //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
+
+    // error message callback
+    //------------------------------------------------------------------------
+    // The errror message callback displays the error message and error code
+    //------------------------------------------------------------------------
+
+    function errormsg(jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR);
+        alert("AJAX Error:\n" + errorThrown);
     }
 
     // error message callback END
