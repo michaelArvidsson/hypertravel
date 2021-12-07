@@ -266,6 +266,7 @@
         searchAvailability();
         getCusomerBookings();
         startupCanvas();
+        startupCanvas3()
     }
 
     var apptype = "a18micar";
@@ -1138,6 +1139,55 @@
 
     // Function calls
     drawgraphics2();
+
+    var ctx2;
+    var img;
+
+
+    function drawgraphics3() {
+        ctx2.clearRect(0, 0, 400, 400);
+
+        // We can draw directly 
+        ctx2.drawImage(img, 100, 80);
+        // Or we can transform the bitmap
+        ctx2.save();
+        ctx2.translate(120, 80);
+        ctx2.rotate(0.7);
+        ctx2.drawImage(img, 0, 0);
+        ctx2.restore();
+    }
+
+    function startupCanvas3() {
+        var elem = document.getElementById("myCanvas3");
+        if (elem && elem.getContext) {
+            ctx2 = elem.getContext('2d');
+
+        }
+
+        img = new Image();
+        img.src = "sleigh-icon (1).png";
+        img.onload = function() {
+            drawgraphics3();
+        }
+
+    }
+
+
+
+    /* function myMove() {
+    var elem = document.getElementById("Anim1");
+    var pos = 0;
+    var id = setInterval(frame, 5);
+    function frame() {
+        if (pos == 350) {
+            clearInterval(id);
+            } else {
+            pos++;
+            elem.style.top = pos + 'px';
+            elem.style.left = pos + 'px';
+            }
+        }
+    } */
 </script>
 
 <!-- Start of SAP -->
@@ -1163,13 +1213,18 @@
             <div class="divForm">
 
                 <label for="">email: <i id="tooltip-3" title="email address example john.doe@hypertravel.com"
-                class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
+                        class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
                 <input type='text' onkeyup="validateMail()" name='customerIDG' id='customerIDG'><br>
                 <input type="Submit" onclick="showCustomer()" value="Sign in">
                 <button onclick="showpage('page2');goShow();">Register</button><br>
                 <div id="SiginDiv"></div>
 
             </div>
+
+            <canvas id="myCanvas3" width="400" height="400" style="background-color:white; border: 2px solid black; ">
+
+                </canvas>
+
         </div>
     </section>
     <!--Welcome end-->
@@ -1213,7 +1268,8 @@
                 <label id="dateLabel" for="datepicker">Pick available date: <i class="fa fa-question-circle"
                         style="color: rgb(14, 92, 238); font-size:16px"></i></label>
                 <input type="text" autocomplete="off" name="tDate" id="datepicker"><br>
-                <span id="classSelect">Please select your prefered class: <i class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></span><br>
+                <span id="classSelect">Please select your prefered class: <i class="fa fa-question-circle"
+                        style="color: rgb(14, 92, 238); font-size:16px"></i></span><br>
                 <input type="radio" id="class1radio" name="class" onchange="searchResources('1');" value="Class_1">
                 <label for="class1">class1</label><br>
                 <input type="radio" id="class2radio" name="class" onchange="searchResources('1');" value="Class_2">
