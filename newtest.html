@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: white;
+        }
+        
+        #canvascontainer {
+            width: 100%
+        }
+    </style>
+    <script>
+        function startupCanvas() {
+
+            // canvas variables
+            var canvas = document.getElementById("canvas");
+            var parent = document.getElementById("canvascontainer");
+            canvas.width = parent.offsetWidth;
+            canvas.height = parent.offsetHeight;
+            var ctx2 = canvas.getContext("2d");
+            var cw = canvas.width;
+            var ch = canvas.height;
+
+            // animation variables
+            var minX = -200;
+            var maxX = 2000; // between minX & maxX
+            var x = minX;
+            var speedX = 6;
+            var direction = 1; // The image direction
+            var y = 380;
+
+            // Load a new image
+            var img = new Image();
+            img.onload = startimg;
+            img.src = "sleigh.png";
+
+            function startimg() {
+
+                requestAnimationFrame(animate);
+            }
+
+            function animate(time) {
+
+                // clear canvas
+                ctx2.clearRect(0, 0, cw, ch);
+
+                // draw image
+                ctx2.drawImage(img, x, y);
+
+                // update
+                x += speedX * direction;
+
+                if (x > maxX) {
+                    x = maxX;
+                    direction *= -1;
+                    minX = -200;
+
+                    x = minX;
+
+                    direction = 1;
+
+                }
+
+                // loop again
+                requestAnimationFrame(animate);
+            }
+
+        };
+    </script>
+</head>
+
+<body onload="startupCanvas();">
+    <div id="canvascontainer">
+        <canvas id="canvas" height=512></canvas>
+    </div>
+
+</body>
+
+</html>

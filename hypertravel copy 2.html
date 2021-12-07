@@ -145,47 +145,74 @@
             color: red;
         }
         
-        #canvascontainer {
-            width: 100%
-        }
-        
-        .page {
-            margin-bottom: 15px;
-            height: 100%;
-            background: rgb(248, 255, 251);
-            background: linear-gradient(0deg, rgba(248, 255, 251, 1) 21%, rgba(57, 223, 73, 1) 35%, rgba(54, 193, 15, 1) 47%, rgba(3, 143, 21, 1) 69%);
-        }
-        
         #page1 {
             display: block;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            height: 100%;
+            background: rgb(255, 255, 255);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(120, 120, 120, 1) 35%, rgba(0, 0, 0, 1) 100%);
         }
         
         #page2 {
             display: none;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            height: 100%;
         }
         
         #page3 {
             display: none;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            height: 100%;
+            background: rgb(255, 255, 255);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(120, 120, 120, 1) 35%, rgba(0, 0, 0, 1) 100%);
         }
         
         #page4 {
             display: none;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            height: 100%;
+            background: rgb(255, 255, 255);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(120, 120, 120, 1) 35%, rgba(0, 0, 0, 1) 100%);
         }
         
         #page5 {
             display: none;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            height: 100%;
+            background: rgb(255, 255, 255);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(120, 120, 120, 1) 35%, rgba(0, 0, 0, 1) 100%);
         }
         
         #page6 {
             display: none;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            height: 100%;
+            background: rgb(255, 255, 255);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(120, 120, 120, 1) 35%, rgba(0, 0, 0, 1) 100%);
         }
         
         #page7 {
             display: none;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            height: 100%;
+            background: rgb(255, 255, 255);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(120, 120, 120, 1) 35%, rgba(0, 0, 0, 1) 100%);
         }
         
         #page8 {
             display: none;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            height: 100%;
+            background: rgb(255, 255, 255);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(120, 120, 120, 1) 35%, rgba(0, 0, 0, 1) 100%);
         }
         
         #errorMessage {
@@ -239,8 +266,7 @@
         searchAvailability();
         getCusomerBookings();
         startupCanvas();
-        startupCanvas2();
-
+        startupCanvas3()
     }
 
     var apptype = "a18micar";
@@ -1033,183 +1059,59 @@
     //------------------------------------------------------------------------
     //Canvas start
     //------------------------------------------------------------------------
-    function startupCanvas2() {
-
-        // canvas variables
-        var canvas = document.getElementById("canvas");
-        var parent = document.getElementById("canvascontainer");
-        canvas.width = parent.offsetWidth;
-        canvas.height = parent.offsetHeight;
-        var ctx2 = canvas.getContext("2d");
-        var cw = canvas.width;
-        var ch = canvas.height;
-
-        // animation variables
-        var minX = -200;
-        var maxX = 2000; // between minX & maxX
-        var x = minX;
-        var speedX = 6;
-        var direction = 1; // The image direction
-        var y = 380;
-
-        // Load a new image
-        var img = new Image();
-        img.onload = startimg;
-        img.src = "sleigh.png";
-
-        function startimg() {
-
-            requestAnimationFrame(animate);
-        }
-
-        function animate(time) {
-
-            // clear canvas
-            ctx2.clearRect(0, 0, cw, ch);
-
-            // draw image
-            ctx2.drawImage(img, x, y);
-
-            // update
-            x += speedX * direction;
-
-            if (x > maxX) {
-                x = maxX;
-                direction *= -1;
-                minX = -200;
-
-                x = minX;
-
-                direction = 1;
-
-            }
-
-            // loop again
-            requestAnimationFrame(animate);
-        }
-
-    };
-
-    ctx.globalAlpha = 1.0;
-    //defs
-    //defsend
-    function drawtree() {
-        //--==## path12802 path ##==--
-        ctx.fillStyle = '#008000';
-        ctx.strokeStyle = '#000000';
-        ctx.globalAlpha = 1;
-        ctx.lineWidth = '0';
-        ctx.beginPath();
-        ctx.moveTo(93, 56);
-        ctx.bezierCurveTo(93, 62, 90, 67, 82, 73);
-        ctx.bezierCurveTo(85, 72, 88, 70, 89, 73);
-        ctx.bezierCurveTo(90, 74, 83, 80, 75, 84);
-        ctx.bezierCurveTo(80, 84, 89, 80, 88, 84);
-        ctx.lineTo(66, 96);
-        ctx.bezierCurveTo(75, 96, 91, 90, 90, 96);
-        ctx.lineTo(90, 104);
-        ctx.lineTo(94, 104);
-        ctx.lineTo(93, 96);
-        ctx.bezierCurveTo(91, 89, 106, 96, 112, 96);
-        ctx.lineTo(95, 85);
-        ctx.bezierCurveTo(88, 78, 104, 84, 108, 84);
-        ctx.bezierCurveTo(102, 82, 95, 79, 94, 72);
-        ctx.bezierCurveTo(95, 71, 97, 72, 100, 73);
-        ctx.bezierCurveTo(94, 67, 93, 62, 93, 56);
-        ctx.lineTo(93, 56);
-        ctx.fill();
-        ctx.stroke();
-    }
-
-    ctx.globalAlpha = 1.0;
-
-    // Function calls
-    drawtree();
-
 
     var ctx;
+    var img;
+    var xa = 2;
+    var ya = 3;
+    var xk = 100;
+    var yk = 100;
+
+    function drawimage() {
+        ctx2.clearRect(0, 0, 400, 400);
+
+        // We can draw directly 
+        ctx2.save();
+        ctx2.drawImage(img, 20, 80);
+        ctx2.restore();
+        // Or we can transform the bitmap
+
+    }
+
+    function drawcircle() {
+        // Draw a filled circle
+        ctx.fillStyle = "#946";
+        ctx.beginPath();
+        ctx.arc(0, 0, 20, 0, 2 * Math.PI, false);
+        ctx.fill();
+    }
+
+    function drawgraphics() {
+        ctx.clearRect(0, 0, 400, 400);
+
+        xk += xa;
+        yk += ya;
+        if (xk > 380 || xk < 20) xa = -xa;
+        if (yk > 380 || yk < 20) ya = -ya;
+
+        ctx.save();
+        ctx.translate(xk, yk);
+        drawimage();
+        ctx.restore();
+
+        requestAnimationFrame(drawgraphics);
+    }
 
     function startupCanvas() {
+        alert('loadimg');
         var elem = document.getElementById('myCanvas');
         if (elem && elem.getContext) {
             ctx = elem.getContext('2d');
             drawgraphics();
-        }
-    }
 
-    function drawgraphics() {
-        //--==## defs1769 defs ##==--
-        ctx.globalAlpha = 1.0;
-        //defs
-        //defsend
-        function layer1() {
-            //--==## path1811 path ##==--
-            ctx.strokeStyle = '#000000';
-            ctx.globalAlpha = 1;
-            ctx.lineWidth = '1';
-            ctx.beginPath();
-            ctx.moveTo(37, 75);
-            ctx.lineTo(37, 204);
-            ctx.bezierCurveTo(36, 228, 35, 241, 45, 214);
-            ctx.bezierCurveTo(71, 235, 107, 233, 122, 215);
-            ctx.bezierCurveTo(126, 217, 134, 253, 133, 204);
-            ctx.lineTo(133, 74);
-            ctx.bezierCurveTo(132, 67, 134, 57, 124, 62);
-            ctx.bezierCurveTo(103, 52, 83, 38, 45, 62);
-            ctx.bezierCurveTo(35, 57, 37, 67, 37, 75);
-            ctx.lineTo(37, 75);
-            ctx.stroke();
         }
 
-        ctx.globalAlpha = 1.0;
-
-        // Function calls
-        layer1();
-        ctx.translate(40, 0);
-        for (var i = 0; i < 4; i++) {
-            drawgraphics2();
-            ctx.translate(0, 30);
-        }
     }
-
-    function drawgraphics2() {
-        //--==## defs3454 defs ##==--
-        ctx.globalAlpha = 1.0;
-        //defs
-        //defsend
-        //--==## path3496 path ##==--
-        ctx.strokeStyle = '#000000';
-        ctx.globalAlpha = 1;
-        ctx.lineWidth = '0';
-        ctx.beginPath();
-        ctx.moveTo(27, 85);
-        ctx.bezierCurveTo(25, 76, 26, 89, 27, 99);
-        ctx.bezierCurveTo(33, 104, 38, 103, 43, 99);
-        ctx.bezierCurveTo(45, 72, 43, 85, 43, 85);
-        ctx.lineTo(27, 85);
-        ctx.stroke();
-        //--==## path4728 path ##==--
-        ctx.strokeStyle = '#000000';
-        ctx.globalAlpha = 1;
-        ctx.lineWidth = '0';
-        ctx.beginPath();
-        ctx.moveTo(27, 85);
-        ctx.lineTo(28, 98);
-        ctx.lineTo(28, 98);
-        ctx.bezierCurveTo(33, 101, 38, 100, 42, 98);
-        ctx.lineTo(43, 85);
-        ctx.lineTo(27, 85);
-        ctx.stroke();
-    }
-
-    ctx.globalAlpha = 1.0;
-
-    // Function calls
-    drawgraphics2();
-
-
-
-
 
 
 
@@ -1259,9 +1161,10 @@
                 <div id="SiginDiv"></div>
 
             </div>
-            <div id="canvascontainer">
-                <canvas id="canvas" height=512></canvas>
-            </div>
+
+            <canvas id="myCanvas" width="400" height="400" style="border: 1px solid black; ">
+
+                </canvas>
 
         </div>
     </section>
@@ -1291,7 +1194,6 @@
         </div>
         <div id="CustomerOutputDiv"></div>
         <div id="output"></div>
-
     </section>
     <!--Register end-->
 
@@ -1324,7 +1226,6 @@
             </div>
         </div>
         <div id="OutputDivSearchA" />
-
     </section>
 
     <section id="page4" class="page">
@@ -1436,7 +1337,6 @@
             <button id="welcomeBookButton" onclick="show('page3')">Book</button>
             <button id="welcomeMypageButton" onclick="show('page5')">My travels</button>
         </div>
-
     </section>
     <!--END Welcome User-->
 </body>
