@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+          var ctx2;
+          var img;
+ 
+          var xa=1;
+          var xk=100;
+          var yk=100;
+          var bounce=0;
+ 
+          // Array to hold snowflakes
+          var snowflakes = new Array(); 
+          
+          // Number of flakes
+          var numflakes=400;
+          
+          // Constructor for snowflakes
+          function Snowflake(xk, yk, spd, siz) {
+            this.xk = xk;
+            this.yk = yk;
+            this.spd = spd;
+            this.siz = siz;
+          }                    
+
+          function drawDrift()
+          {
+          }
+          
+          function drawgraphics()
+          {
+                  
+              ctx2.clearRect(0,0,2000,400);
+ 
+              // Draw Snowdrifts
+              ctx2.save();
+              drawDrift();
+              ctx2.translate(255,4);
+              drawDrift();              
+              ctx2.restore();
+ 
+              // Draw Snow
+              for(var i=0;i<numflakes;i++){
+                  ctx2.save();
+                  ctx2.translate(snowflakes[i].xk+(Math.sin(snowflakes[i].xk+(snowflakes[i].yk*0.03))*snowflakes[i].siz*14.0),snowflakes[i].yk);  
+                  ctx2.scale(snowflakes[i].siz*0.5,snowflakes[i].siz*0.5);
+                  ctx2.drawImage(img,-5,-5);
+                  ctx2.restore();
+                  
+                  snowflakes[i].yk+=snowflakes[i].spd;
+                  if(snowflakes[i].yk>400) snowflakes[i].yk-=400;
+              }
+ 
+              setTimeout(function(){drawgraphics()}, 30);
+          }
+          
+          function startupCanvas()
+          {
+              img=document.getElementById("flake");
+              
+              for(var i=0;i<numflakes;i++){
+                  var typ=Math.round(Math.random()*4);
+                  snowflakes[i]=new Snowflake(Math.round(Math.random()*2000),Math.round(Math.random()*400),0.5+(typ/2),0.15+(typ/8));    
+              }
+ 
+              var elem = document.getElementById('myCanvas');
+              if (elem && elem.getContext) {
+                ctx2 = elem.getContext('2d');
+                drawgraphics();
+              }                  
+          }
+          
+      </script>
+  </head>
+<body onload="startupCanvas();">
+ 
+
+<br/>   
+<canvas id="myCanvas" width="2000" height="400" style="border: 2px solid red; background-color: BLACK;" />  
+ 
+<img style="border:1px solid red;" id="flake" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1NzJDNjlDNkY4MzM2ODExODA4M0QyMEE2QkQ5MUZEMiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoxMDdBMjA3QTg0RjExMUU1OTA2M0YyRTQ0NjcwNDQzQSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxMDdBMjA3OTg0RjExMUU1OTA2M0YyRTQ0NjcwNDQzQSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTcyQzY5QzZGODMzNjgxMTgwODNEMjBBNkJEOTFGRDIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTcyQzY5QzZGODMzNjgxMTgwODNEMjBBNkJEOTFGRDIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5xQz/FAAAAP1BMVEXx+//4/f/w+v/6/f/2/P/3/f/z+//6/v/p+P/q+f/u+v/7/v/8/v/y+//0/P/r+f/+///5/f/1/P/o+P////9typEwAAAAFXRSTlP//////////////////////////wAr2X3qAAAAVElEQVR42jSNSxKAIBTDiojKn0d7/7MK47jrIkkhydc2hwTJJpnOIoxJ5a6jGzJ51dgiAZslkTQX4L/pLCA/rAvoPLY2SheW9sfy7uqura2LV4ABADngBall6SEaAAAAAElFTkSuQmCC" alt="snowflakeS.png" />
+ 
+</body>
+</html>
