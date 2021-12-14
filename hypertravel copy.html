@@ -19,7 +19,7 @@
             height: 100%;
             margin: 0;
         }
-
+        
         .topNav {
             margin: auto;
             background: rgba(0, 0, 0, 1);
@@ -27,12 +27,12 @@
             padding: 8px;
             height: 40px;
         }
-
+        
         .topnav a {
             text-decoration: none;
             color: whitesmoke;
         }
-
+        
         .topNav div {
             font-family: Arial, Helvetica, sans-serif;
             float: left;
@@ -46,23 +46,23 @@
             border: 1px solid white;
             border-radius: 8px;
         }
-
+        
         .topNav div:hover {
             background-color: #ddd;
             color: black;
         }
-
+        
         .topNav div.active {
             background-color: #04AA6D;
             color: white;
         }
-
+        
         .welcomeHead {
             width: 200px;
             text-align: center;
             margin: auto;
         }
-
+        
         .divForm {
             margin: 0 auto;
             width: 400px;
@@ -71,7 +71,7 @@
             padding: 10px;
             box-shadow: 1px 1px 6px 2px lightslategray;
         }
-
+        
         .resultForm {
             margin: 0 auto;
             margin-top: 20px;
@@ -81,7 +81,7 @@
             padding: 10px;
             box-shadow: 1px 1px 6px 2px lightslategray;
         }
-
+        
         .RegForm {
             position: fixed;
             top: 200;
@@ -93,7 +93,7 @@
             padding: 10px;
             box-shadow: 1px 1px 6px 2px lightslategray;
         }
-
+        
         input[type=text],
         [type=date],
         [type=time],
@@ -107,18 +107,18 @@
             border-radius: 5px;
             outline: none;
         }
-
-        ::placeholder {
+        
+         ::placeholder {
             color: red;
         }
-
+        
         #selectButton {
             width: 100px;
             margin: 0 auto;
             margin-top: 15px;
             display: block;
         }
-
+        
         .pageHeader {
             width: 600px;
             margin: auto;
@@ -128,7 +128,7 @@
             margin-top: 0;
             color: whitesmoke;
         }
-
+        
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
@@ -138,79 +138,79 @@
             border-radius: 5px;
             padding: 10px;
         }
-
+        
         td,
         th {
             border: 1px solid rgb(0, 0, 0);
             text-align: left;
             padding: 8px;
         }
-
+        
         #SiginDiv {
             margin-top: 10px;
             font-weight: bold;
             color: red;
         }
-
+        
         #canvascontainer {
             width: 100%;
             height: 300px;
         }
-
+        
         .page {
             margin-bottom: 15px;
             height: 100%;
             background: rgb(248, 255, 251);
             background: linear-gradient(0deg, rgba(248, 255, 251, 1) 21%, rgba(57, 130, 223, 1) 35%, rgba(40, 34, 82, 1) 47%, rgba(0, 0, 0, 1) 69%);
         }
-
+        
         #page1 {
             display: block;
         }
-
+        
         #page2 {
             display: none;
         }
-
+        
         #page3 {
             display: none;
         }
-
+        
         #page4 {
             display: none;
         }
-
+        
         #page5 {
             display: none;
         }
-
+        
         #page6 {
             display: none;
         }
-
+        
         #page7 {
             display: none;
         }
-
+        
         #page8 {
             display: none;
         }
-
+        
         #errorMessage {
             display: none;
             width: 200px;
             color: firebrick;
             padding: 3px;
         }
-
+        
         .hidden {
             display: none;
         }
-
+        
         .visible {
             display: block;
         }
-
+        
         #confirmPop {
             width: 250px;
             height: 100px;
@@ -224,16 +224,15 @@
             animation-name: popup;
             animation-duration: 3s;
         }
-
+        
         #output {
             display: none;
         }
-
+        
         @keyframes popup {
             from {
                 opacity: 0;
             }
-
             to {
                 opacity: 1;
             }
@@ -287,16 +286,16 @@
         var resID = document.getElementById("Select_drop").value;
 
         var jqxhr = $.ajax("../WebbProgrammering/booking/getavailability_search_XML.php", {
-            type: 'POST',
-            data: {
-                resid: encodeURIComponent(resID),
+                type: 'POST',
+                data: {
+                    resid: encodeURIComponent(resID),
 
-                type: apptype // Only show bookings for your webbapplication using the apptype
-            }
-        })
+                    type: apptype // Only show bookings for your webbapplication using the apptype
+                }
+            })
             .done(showAvailability)
             .fail(errormsg)
-            .always(function () {
+            .always(function() {
                 console.log("Request for resource availability for webbapplication " + apptype + " complete.");
             });
     }
@@ -331,7 +330,7 @@
                     output += "<td>" + avail.attributes['remaining'].value + "</td>";
                     output += `<td> <input type='button' onclick='passBookingParams(
                     "` + avail.attributes['resourceID'].value + `","` +
-                        + avail.attributes['location'].value + `","` +
+                        +avail.attributes['location'].value + `","` +
                         avail.attributes['date'].value + `","` +
                         avail.attributes['dateto'].value + `");' value='Make Booking'> </td>`;
                     output += "</tr>";
@@ -361,16 +360,16 @@
         var resID = document.getElementById("resLocationA").value;
 
         var jqxhr = $.ajax("../WebbProgrammering/booking/getavailability_search_XML.php", {
-            type: 'POST',
-            data: {
-                resid: encodeURIComponent(resID),
+                type: 'POST',
+                data: {
+                    resid: encodeURIComponent(resID),
 
-                type: apptype // Only show bookings for your webbapplication using the apptype
-            }
-        })
+                    type: apptype // Only show bookings for your webbapplication using the apptype
+                }
+            })
             .done(showSearchAvailability)
             .fail(errormsg)
-            .always(function () {
+            .always(function() {
                 console.log("Request for resource availability for webbapplication " + apptype + " complete.");
             });
     }
@@ -461,9 +460,9 @@
                 }
             })
 
-                .done(showResources1)
+            .done(showResources1)
                 .fail(errormsg)
-                .always(function () {
+                .always(function() {
                     console.log("Request all resources for webbapplication " + apptype + " complete.");
                 });
         } else {
@@ -475,9 +474,9 @@
                 }
             })
 
-                .done(showResources2)
+            .done(showResources2)
                 .fail(errormsg)
-                .always(function () {
+                .always(function() {
                     console.log("Request all resources for webbapplication " + apptype + " complete.");
                 });
         }
@@ -559,19 +558,19 @@
         alert("Congratulations " + userName + " You have booked a trip with Santas travel to " + resourceLocation + " " + date + " Enjoy your ride");
 
         var jqxhr = $.ajax("../WebbProgrammering/booking/makebooking_XML.php", {
-            type: 'POST',
-            data: {
-                resourceID: resourceID,
-                date: date,
-                dateto: date,
-                customerID: customerID,
-                //position: position,
-                type: apptype
-            }
-        })
+                type: 'POST',
+                data: {
+                    resourceID: resourceID,
+                    date: date,
+                    dateto: date,
+                    customerID: customerID,
+                    //position: position,
+                    type: apptype
+                }
+            })
             .done(ResultBooking)
             .fail(errormsg)
-            .always(function () {
+            .always(function() {
                 console.log("Request bookings for resource " + resource + " for webbapplication " + apptype + " complete.");
             });
     }
@@ -593,16 +592,16 @@
         bookingdate = document.getElementById("dateGB").value;
 
         var jqxhr = $.ajax("../booking/getbookings_XML.php", {
-            type: 'POST',
-            data: {
-                resourceID: resource,
-                date: bookingdate,
-                type: apptype // Only show bookings for your webbapplication using the apptype
-            }
-        })
+                type: 'POST',
+                data: {
+                    resourceID: resource,
+                    date: bookingdate,
+                    type: apptype // Only show bookings for your webbapplication using the apptype
+                }
+            })
             .done(ResultBooking)
             .fail(errormsg)
-            .always(function () {
+            .always(function() {
                 console.log("Request bookings for resource " + resource + " for webbapplication " + apptype + " complete.");
             });
     }
@@ -646,15 +645,15 @@
     function getCusomerBookings() {
         customer = localStorage.getItem("userId");
         var jqxhr = $.ajax("../WebbProgrammering/booking/getcustomerbookings_XML.php", {
-            method: "POST",
-            data: {
-                customerID: encodeURIComponent(customer),
-                type: apptype // Only show bookings for your webbapplication using the apptype
-            }
-        })
+                method: "POST",
+                data: {
+                    customerID: encodeURIComponent(customer),
+                    type: apptype // Only show bookings for your webbapplication using the apptype
+                }
+            })
             .done(ResultBookingCustomer)
             .fail(errormsg)
-            .always(function () {
+            .always(function() {
                 console.log("Request bookings for customer " + customer + " has completed.");
             });
     }
@@ -719,19 +718,19 @@
 
         document.getElementById("output").innerHTML += "<br>Creating a new customer...";
         var jqxhr = $.ajax("../WebbProgrammering/booking/makecustomer_XML.php", {
-            type: 'POST',
-            data: {
-                ID: encodeURIComponent(email),
-                firstname: encodeURIComponent(firstname),
-                lastname: encodeURIComponent(lastname),
-                email: encodeURIComponent(email),
-                address: encodeURIComponent(address),
+                type: 'POST',
+                data: {
+                    ID: encodeURIComponent(email),
+                    firstname: encodeURIComponent(firstname),
+                    lastname: encodeURIComponent(lastname),
+                    email: encodeURIComponent(email),
+                    address: encodeURIComponent(address),
 
-            }
-        })
+                }
+            })
             .done(ResultCustomern)
             .fail(errormsgReg)
-            .always(function () {
+            .always(function() {
                 console.log("Request for storing customer " + firstname + " " + lastname + " has completed.");
             });
 
@@ -764,14 +763,14 @@
         var customerID = document.getElementById("customerIDG").value;
 
         var jqxhr = $.ajax("../WebbProgrammering/booking/getcustomer_XML.php", {
-            type: 'POST',
-            data: {
-                customerID: encodeURIComponent(customerID)
-            }
-        })
+                type: 'POST',
+                data: {
+                    customerID: encodeURIComponent(customerID)
+                }
+            })
             .done(ResultCustomers)
             .fail(errormsg)
-            .always(function () {
+            .always(function() {
                 console.log("Request for showing customers complete.");
             });
     }
@@ -854,7 +853,7 @@
 
     function setupHistory() {
 
-        window.onpopstate = function (event) {
+        window.onpopstate = function(event) {
             historyChange(event);
         };
     }
@@ -874,7 +873,7 @@
         updateHistory(pageid);
     }
 
-    $(function () {
+    $(function() {
         $("#datepicker").datepicker({
             minDate: -0,
             maxDate: "+6M"
@@ -896,7 +895,7 @@
         document.getElementById("confirmPop").className = "hidden";
     }
 
-    $(function () {
+    $(function() {
         $("#tooltip-1").tooltip();
         $("#tooltip-2").tooltip();
         $("#tooltip-3").tooltip();
@@ -1015,6 +1014,7 @@
         if (username != null && username != "") {
             console.log('Welcome again ' + username + '!');
             welcomeC.innerHTML = "Hello " + username + " Welcome back!";
+            signinNavbarShow();
             show('page8');
         }
     }
@@ -1065,7 +1065,7 @@
     var minX = -200;
     var maxX = 2000;
     var posx = minX;
-    var speedX = 6;    // speed of img
+    var speedX = 6; // speed of img
     var direction = 1; // direction
     var y = 100;
 
@@ -1099,7 +1099,7 @@
         this.siz = siz;
     }
 
-    function drawDrift() { }
+    function drawDrift() {}
 
     function animate(time) {
 
@@ -1150,7 +1150,7 @@
         rot += 0;
         var c = document.getElementById("canvasMoon");
         var ctx3 = c.getContext("2d");
-        ctx3.clearRect(0, 0, 300, 300);
+        ctx3.clearRect(0, 0, 200, 200);
 
         // Moon
         ctx3.globalAlpha = 1.0;
@@ -1203,7 +1203,7 @@
 
         var rect = event.target.getBoundingClientRect();
         mx = event.clientX - rect.left; //x position within the element.
-        my = event.clientY - rect.top;  //y position within the element. 
+        my = event.clientY - rect.top; //y position within the element. 
         grid = Math.floor((my - 110) / 50);
         if (mx > 190 && mx < 215) {
             // if(grid >= 0 && grid <=3){
@@ -1344,7 +1344,7 @@
     <!--Navbar END-->
     <!--Welcome-->
     <section id="page1" class="page">
-        <canvas id="canvasMoon" width="300" height="300" style="position: absolute;"></canvas>
+        <canvas id="canvasMoon" width="200" height="200" style="position: absolute; top:-20; left:-50;"></canvas>
 
         <div id="canvascontainer">
             <div class="pageHeader">
@@ -1376,19 +1376,16 @@
 
             <label for="">First Name: <i id="tooltip-1" title="Firstname" class="fa fa-question-circle"
                     style="color: rgb(14, 92, 238); font-size:16px"></i></label>
-            <input type="text" id="customerfnameC" name="customerfnameC" placeholder="" onchange="validateForm();"
-                onkeyup="validateForm();"><br>
+            <input type="text" id="customerfnameC" name="customerfnameC" placeholder="" onchange="validateForm();" onkeyup="validateForm();"><br>
             <label for="">Last Name: <i id="tooltip-2" title="Lastname" class="fa fa-question-circle"
                     style="color: rgb(14, 92, 238); font-size:16px"></i></label>
-            <input type="text" id="customerlnameC" name="customerlnameC" placeholder="" onchange="validateForm();"
-                onkeyup="validateForm();"><br>
+            <input type="text" id="customerlnameC" name="customerlnameC" placeholder="" onchange="validateForm();" onkeyup="validateForm();"><br>
             <label for="">email:<i id="tooltip-3" title="email address example john.doe@hypertravel.com"
                     class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
             <input type="text" onkeyup="validateRegMail()" id="customeremailC" name="customeremailC" placeholder=""><br>
             <label for="">Adress: <i class="fa fa-question-circle"
                     style="color: rgb(14, 92, 238); font-size:16px"></i></label>
-            <input type="text" id="customeraddressC" name="customeraddressC" placeholder="" onchange="validateForm();"
-                onkeyup="validateForm();"><br>
+            <input type="text" id="customeraddressC" name="customeraddressC" placeholder="" onchange="validateForm();" onkeyup="validateForm();"><br>
             <input type="button" onclick="storeCustomer();goHide();" value="Register">
         </div>
         <div id="CustomerOutputDiv"></div>
@@ -1436,8 +1433,7 @@
             </div>
             <div class="divForm">
 
-                <canvas id="myCanvas" width="400" height="400" onmousemove="onmouseSeat(event);"
-                    onclick="clickSeat();"></canvas>
+                <canvas id="myCanvas" width="400" height="400" onmousemove="onmouseSeat(event);" onclick="clickSeat();"></canvas>
 
                 <input id="selectButton" type="submit" onclick="show('page7')" value="confirm seat">
             </div>
@@ -1477,8 +1473,7 @@
                 <input type='text' name='resIDS' id='resIDS'> Name:
                 <input type='text' name='resNameS' id='resNameS'><br /> Location:
                 <input type='text' name='resLocationS' id='resLocationS'> Company:
-                <input type='text' name='resCompanyS' id='resCompanyS'><br /> Full Text:<input type='text'
-                    name='resFulltextS' id='resFulltextS'><br />
+                <input type='text' name='resCompanyS' id='resCompanyS'><br /> Full Text:<input type='text' name='resFulltextS' id='resFulltextS'><br />
                 <input type="button" onclick="searchResources();" value="Search Resource">
                 <span class="actionheading">Result</span>
                 <div id="OutputDivSearchR" />
@@ -1508,20 +1503,13 @@
         <div style="height:380px; " class="divForm">
 
             <p>
-                These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds,
-                to seek out new life and new civilizations, to boldly go where no one has gone before. We need to
-                neutralize the homing signal. Each unit has total
-                environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show
-                energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength
-                has increased by 3,000 percent.
+                These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no one has gone before. We need to neutralize the homing signal. Each unit has total
+                environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength has increased by 3,000 percent.
             </p>
 
             <p>
-                Exceeding reaction chamber thermal limit. We have begun power-supply calibration. Force fields have been
-                established on all turbo lifts and crawlways. Computer, run a level-two diagnostic on warp-drive
-                systems. Antimatter containment positive. Warp drive
-                within normal parameters. I read an ion trail characteristic of a freighter escape pod. The bomb had a
-                molecular-decay detonator. Detecting some unusual fluctuations in subspace frequencies.
+                Exceeding reaction chamber thermal limit. We have begun power-supply calibration. Force fields have been established on all turbo lifts and crawlways. Computer, run a level-two diagnostic on warp-drive systems. Antimatter containment positive. Warp drive
+                within normal parameters. I read an ion trail characteristic of a freighter escape pod. The bomb had a molecular-decay detonator. Detecting some unusual fluctuations in subspace frequencies.
             </p>
 
             <label for="checkB">I agree to the terms</label><input type="checkbox" id="checkB" name="checkB">
@@ -1551,8 +1539,7 @@
     </section>
     <!--END Welcome User-->
 
-    <img style="border:1px solid red; display:none;" id="flake"
-        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1NzJDNjlDNkY4MzM2ODExODA4M0QyMEE2QkQ5MUZEMiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoxMDdBMjA3QTg0RjExMUU1OTA2M0YyRTQ0NjcwNDQzQSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxMDdBMjA3OTg0RjExMUU1OTA2M0YyRTQ0NjcwNDQzQSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTcyQzY5QzZGODMzNjgxMTgwODNEMjBBNkJEOTFGRDIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTcyQzY5QzZGODMzNjgxMTgwODNEMjBBNkJEOTFGRDIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5xQz/FAAAAP1BMVEXx+//4/f/w+v/6/f/2/P/3/f/z+//6/v/p+P/q+f/u+v/7/v/8/v/y+//0/P/r+f/+///5/f/1/P/o+P////9typEwAAAAFXRSTlP//////////////////////////wAr2X3qAAAAVElEQVR42jSNSxKAIBTDiojKn0d7/7MK47jrIkkhydc2hwTJJpnOIoxJ5a6jGzJ51dgiAZslkTQX4L/pLCA/rAvoPLY2SheW9sfy7uqura2LV4ABADngBall6SEaAAAAAElFTkSuQmCC"
+    <img style="border:1px solid red; display:none;" id="flake" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1NzJDNjlDNkY4MzM2ODExODA4M0QyMEE2QkQ5MUZEMiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoxMDdBMjA3QTg0RjExMUU1OTA2M0YyRTQ0NjcwNDQzQSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxMDdBMjA3OTg0RjExMUU1OTA2M0YyRTQ0NjcwNDQzQSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTcyQzY5QzZGODMzNjgxMTgwODNEMjBBNkJEOTFGRDIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTcyQzY5QzZGODMzNjgxMTgwODNEMjBBNkJEOTFGRDIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5xQz/FAAAAP1BMVEXx+//4/f/w+v/6/f/2/P/3/f/z+//6/v/p+P/q+f/u+v/7/v/8/v/y+//0/P/r+f/+///5/f/1/P/o+P////9typEwAAAAFXRSTlP//////////////////////////wAr2X3qAAAAVElEQVR42jSNSxKAIBTDiojKn0d7/7MK47jrIkkhydc2hwTJJpnOIoxJ5a6jGzJ51dgiAZslkTQX4L/pLCA/rAvoPLY2SheW9sfy7uqura2LV4ABADngBall6SEaAAAAAElFTkSuQmCC"
         alt="snowflakeS.png" />
     <img style="border:1px solid red; display:none;" id="sleigh" src="sleigh.png" alt="sleigh.png" />
 </body>
