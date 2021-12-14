@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+      var ctx;
+      var img;
+      // Array to hold snowflakes
+      var snowflakes = new Array(); 
+      
+      // Number of flakes
+      var numflakes=10;
+      
+      var hovering=-1;
+      
+      function drawAmoeba(col)
+			{
+					// Face
+					if(col==0){
+							ctx.fillStyle = "#529687";					
+					}else{
+							ctx.fillStyle = "#875296";										
+					}
+					
+					ctx.beginPath();
+					ctx.moveTo(39,-69);
+					ctx.bezierCurveTo(28,-75,15,-78,2,-78);
+					ctx.bezierCurveTo(-42,-78,-77,-43,-77,0);
+					ctx.bezierCurveTo(-77,34,-56,62,-27,73);
+					ctx.bezierCurveTo(-34,60,-38,44,-38,27);
+					ctx.bezierCurveTo(-38,-21,-5,-61,39,-69);
+					ctx.lineTo(39,-69);
+					ctx.globalAlpha = 1.0;
+					ctx.fill();
+					
+					// Face
+					if(col==0){
+							ctx.fillStyle = "#8BFFEE";					
+					}else{
+							ctx.fillStyle = "#FF8BEE";
+					}
+
+					ctx.beginPath();
+					ctx.moveTo(81,0);
+					ctx.bezierCurveTo(81,-30,64,-56,39,-69);
+					ctx.bezierCurveTo(-5,-61,-38,-21,-38,27);
+					ctx.bezierCurveTo(-38,44,-34,60,-27,73);
+					ctx.bezierCurveTo(-18,77,-8,79,2,79);
+					ctx.bezierCurveTo(45,79,81,44,81,0);
+					ctx.lineTo(81,0);
+					ctx.globalAlpha = 1.0;
+					ctx.fill();
+					
+					//---------===### path: EyeBorder ###===---------
+					ctx.beginPath();
+					ctx.moveTo(65,-23);
+					ctx.bezierCurveTo(57,-51,25,-69,7,-59);
+					ctx.bezierCurveTo(-3,-54,-8,-45,-9,-32);
+					ctx.bezierCurveTo(-9,-32,-9,-31,-9,-31);
+					ctx.bezierCurveTo(-13,-41,-20,-48,-28,-49);
+					ctx.bezierCurveTo(-42,-51,-55,-40,-62,-18);
+					ctx.bezierCurveTo(-69,5,-60,28,-44,31);
+					ctx.bezierCurveTo(-30,34,-16,22,-8,3);
+					ctx.bezierCurveTo(-7,-0,-6,-4,-5,-8);
+					ctx.bezierCurveTo(-5,-7,-4,-5,-4,-3);
+					ctx.bezierCurveTo(6,24,32,39,51,30);
+					ctx.bezierCurveTo(66,23,72,1,65,-23);
+					ctx.lineTo(65,-23);
+					ctx.globalAlpha = 1.0;
+					ctx.fillStyle = "#000";
+					ctx.fill();
+					
+					ctx.fillStyle = "#FFFFFF";
+					ctx.beginPath();
+					ctx.moveTo(-61,49);
+					ctx.bezierCurveTo(-69,46,-52,68,-42,66);
+					ctx.bezierCurveTo(27,50,27,50,49,60);
+					ctx.bezierCurveTo(54,63,91,40,70,38);
+					ctx.bezierCurveTo(49,36,16,35,10,37);
+					ctx.bezierCurveTo(4,38,-57,51,-61,49);
+					ctx.lineTo(-61,49);
+					ctx.globalAlpha = 1.0;
+					ctx.fill();
+					
+					ctx.fillStyle = "#02190D";
+					ctx.beginPath();
+					ctx.moveTo(90,6);
+					ctx.bezierCurveTo(90,6,90,6,90,6);
+					ctx.bezierCurveTo(90,6,90,3,90,6);
+					ctx.lineTo(90,6);
+					ctx.globalAlpha = 1.0;
+					ctx.fill();
+					
+					ctx.fillStyle = "#02190D";
+					ctx.beginPath();
+					ctx.moveTo(90,6);
+					ctx.bezierCurveTo(93,-7,86,-24,81,-35);
+					ctx.bezierCurveTo(73,-53,62,-67,46,-78);
+					ctx.bezierCurveTo(46,-84,35,-87,27,-86);
+					ctx.bezierCurveTo(19,-78,-1,-86,-11,-85);
+					ctx.bezierCurveTo(-24,-85,-39,-75,-49,-67);
+					ctx.bezierCurveTo(-66,-55,-78,-40,-84,-20);
+					ctx.bezierCurveTo(-89,-19,-93,-8,-88,-2);
+					ctx.bezierCurveTo(-87,11,-88,25,-81,38);
+					ctx.bezierCurveTo(-74,51,-58,57,-52,70);
+					ctx.bezierCurveTo(-49,76,-36,79,-29,81);
+					ctx.bezierCurveTo(-0,93,30,82,57,73);
+					ctx.bezierCurveTo(69,66,81,48,82,34);
+					ctx.bezierCurveTo(79,31,87,19,90,16);
+					ctx.bezierCurveTo(90,15,89,9,90,6);
+					ctx.bezierCurveTo(90,6,90,6,90,6);
+					ctx.lineTo(90,6);
+					ctx.moveTo(-72,-3);
+					ctx.bezierCurveTo(-75,-14,-72,-24,-66,-34);
+					ctx.bezierCurveTo(-56,-52,-28,-75,-9,-74);
+					ctx.bezierCurveTo(-8,-74,0,-72,3,-72);
+					ctx.bezierCurveTo(6,-72,13,-76,14,-75);
+					ctx.bezierCurveTo(15,-77,32,-70,35,-69);
+					ctx.bezierCurveTo(54,-62,71,-37,76,-17);
+					ctx.bezierCurveTo(76,-16,76,-16,76,-16);
+					ctx.bezierCurveTo(77,-10,79,-3,79,4);
+					ctx.bezierCurveTo(79,5,77,22,75,19);
+					ctx.bezierCurveTo(74,18,73,19,72,20);
+					ctx.bezierCurveTo(71,18,71,19,71,20);
+					ctx.bezierCurveTo(69,23,66,28,65,30);
+					ctx.bezierCurveTo(64,32,64,33,63,34);
+					ctx.bezierCurveTo(51,34,21,32,11,34);
+					ctx.bezierCurveTo(1,36,-43,48,-51,46);
+					ctx.bezierCurveTo(-55,46,-58,47,-61,45);
+					ctx.bezierCurveTo(-64,42,-66,39,-68,35);
+					ctx.bezierCurveTo(-68,33,-67,32,-66,31);
+					ctx.bezierCurveTo(-65,29,-65,28,-66,22);
+					ctx.bezierCurveTo(-66,17,-70,13,-70,8);
+					ctx.bezierCurveTo(-74,5,-70,2,-72,-3);
+					ctx.lineTo(-72,-3);
+					ctx.moveTo(22,51);
+					ctx.bezierCurveTo(19,51,15,51,12,51);
+					ctx.bezierCurveTo(13,47,14,42,15,40);
+					ctx.bezierCurveTo(15,40,15,40,15,39);
+					ctx.bezierCurveTo(17,39,18,39,20,39);
+					ctx.bezierCurveTo(27,39,32,39,37,40);
+					ctx.bezierCurveTo(37,44,35,50,34,53);
+					ctx.bezierCurveTo(29,52,25,51,22,51);
+					ctx.lineTo(22,51);
+					ctx.moveTo(-22,57);
+					ctx.bezierCurveTo(-23,53,-23,50,-23,47);
+					ctx.bezierCurveTo(-23,47,-18,45,-18,45);
+					ctx.bezierCurveTo(-8,43,0,41,9,40);
+					ctx.bezierCurveTo(9,40,9,40,9,40);
+					ctx.bezierCurveTo(9,41,10,46,10,51);
+					ctx.bezierCurveTo(0,52,-15,55,-22,57);
+					ctx.lineTo(-22,57);
+					ctx.moveTo(-40,65);
+					ctx.bezierCurveTo(-45,62,-49,59,-53,54);
+					ctx.bezierCurveTo(-53,54,-53,54,-52,54);
+					ctx.bezierCurveTo(-42,52,-37,50,-28,48);
+					ctx.bezierCurveTo(-26,51,-25,55,-24,58);
+					ctx.bezierCurveTo(-29,59,-28,59,-30,59);
+					ctx.bezierCurveTo(-35,61,-52,69,-27,64);
+					ctx.bezierCurveTo(-1,60,28,60,35,60);
+					ctx.bezierCurveTo(39,61,42,61,44,61);
+					ctx.bezierCurveTo(39,64,34,66,28,70);
+					ctx.bezierCurveTo(12,81,-25,75,-40,65);
+					ctx.lineTo(-40,65);
+					ctx.moveTo(56,52);
+					ctx.bezierCurveTo(54,54,51,56,49,58);
+					ctx.bezierCurveTo(47,56,43,55,39,54);
+					ctx.bezierCurveTo(39,50,40,43,42,40);
+					ctx.bezierCurveTo(48,41,54,42,62,41);
+					ctx.bezierCurveTo(62,41,62,42,62,42);
+					ctx.bezierCurveTo(61,43,53,50,56,52);
+					ctx.lineTo(56,52);
+					ctx.globalAlpha = 1.0;
+					ctx.fill();
+					
+					//---------===### eg:  ###===---------
+					//-------------------------------
+					// GroupEnd: 
+					//-------------------------------
+					
+					
+					
+					ctx.fillStyle = "#FFFFFF";
+					ctx.beginPath();
+					ctx.moveTo(61,-21);
+					ctx.bezierCurveTo(53,-43,24,-62,9,-53);
+					ctx.bezierCurveTo(0,-48,-5,-40,-5,-29);
+					ctx.bezierCurveTo(-6,-23,-4,-15,-2,-7);
+					ctx.bezierCurveTo(-2,-7,-1,-6,-1,-6);
+					ctx.bezierCurveTo(7,17,29,31,46,25);
+					ctx.bezierCurveTo(62,19,66,-7,61,-21);
+					ctx.lineTo(61,-21);
+					ctx.moveTo(40,1);
+					ctx.bezierCurveTo(30,7,16,1,10,-12);
+					ctx.bezierCurveTo(8,-14,8,-16,7,-18);
+					ctx.bezierCurveTo(9,-18,11,-18,13,-18);
+					ctx.bezierCurveTo(20,-20,24,-27,23,-34);
+					ctx.bezierCurveTo(22,-39,19,-42,15,-44);
+					ctx.bezierCurveTo(16,-44,16,-44,16,-45);
+					ctx.bezierCurveTo(24,-49,41,-44,47,-31);
+					ctx.bezierCurveTo(54,-19,51,-4,40,1);
+					ctx.lineTo(40,1);
+					ctx.globalAlpha = 1.0;
+					ctx.fill();
+					
+					ctx.fillStyle = "#FFFFFF";
+					ctx.beginPath();
+					ctx.moveTo(-28,-44);
+					ctx.bezierCurveTo(-40,-46,-51,-37,-57,-18);
+					ctx.bezierCurveTo(-63,1,-57,21,-43,25);
+					ctx.bezierCurveTo(-29,29,-14,15,-10,3);
+					ctx.bezierCurveTo(-4,-16,-13,-42,-28,-44);
+					ctx.lineTo(-28,-44);
+					ctx.moveTo(-19,-11);
+					ctx.bezierCurveTo(-21,1,-30,9,-39,8);
+					ctx.bezierCurveTo(-48,6,-54,-5,-52,-17);
+					ctx.bezierCurveTo(-52,-18,-52,-19,-51,-20);
+					ctx.bezierCurveTo(-50,-17,-46,-15,-42,-16);
+					ctx.bezierCurveTo(-38,-17,-35,-21,-36,-25);
+					ctx.bezierCurveTo(-37,-29,-40,-31,-44,-31);
+					ctx.bezierCurveTo(-40,-34,-36,-36,-32,-36);
+					ctx.bezierCurveTo(-25,-35,-17,-23,-19,-11);
+					ctx.lineTo(-19,-11);
+					ctx.globalAlpha = 1.0;
+					ctx.fill();
+					
+			}
+      
+      function clickElement(el)
+      {
+          snowflakes[el].xk=500;
+      }
+ 
+      function hoverElement(el)
+      {
+          hovering=el;    
+      }
+ 
+      // Constructor for snowflakes
+      function Snowflake(xk, yk, spd) {
+         this.xk = xk;
+         this.yk = yk;
+         this.spd = spd;
+      }                         
+      
+      function drawgraphics()
+      {
+          ctx.clearRect(0,0,450,450);  
+          
+          var str="";   
+          
+          for(var i=0;i<numflakes;i++){
+            ctx.save();
+            ctx.translate(snowflakes[i].xk,snowflakes[i].yk);
+            ctx.scale(0.25,0.25);     
+            
+            if(hovering==i){
+                drawAmoeba(0);
+            }else{
+                drawAmoeba(1);            
+            }
+ 
+            ctx.restore();
+            
+            str+="<area shape='circle'   coords='"+snowflakes[i].xk+","+snowflakes[i].yk+",25' ";
+            str+=" onmousedown='clickElement("+i+");' ";
+            str+=" onmouseover='hoverElement("+i+");' ";
+            str+=" />";
+            
+            snowflakes[i].yk+=snowflakes[i].spd;
+            if(snowflakes[i].yk>420) snowflakes[i].yk-=440;
+ 
+          }
+                    
+          document.getElementById("canvasmap").innerHTML=str;
+          
+          setTimeout(function(){drawgraphics()}, 30);
+      }
+      
+      function startupCanvas()
+      {
+          for(var i=0;i<numflakes;i++){
+             var typ=Math.round(Math.random()*4);
+             snowflakes[i]=new Snowflake(Math.round(Math.random()*400),Math.round(Math.random()*400),1.0);          
+          }
+ 
+          var elem = document.getElementById("myCanvas");
+            ctx = elem.getContext('2d');
+            drawgraphics();
+      }
+      
+    </script>
+</head>
+<body onload="startupCanvas();">
+   
+<img width="400" height="400" style='border: 2px red dotted;position:absolute;top:0px;left:0px;z-index:100'  alt="Canvas" usemap="#canvasmap" style="border:1px red solid" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQAQMAAAC6caSPAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAACpJREFUeNrtwYEAAAAAw6D7Ux9gCtUAAAAAAAAAAAAAAAAAAAAAAAAAgDhPsAABa0Zz3QAAAABJRU5ErkJggg==" />
+ 
+<map name="canvasmap" id="canvasmap">
+</map>
+ 
+<body onload="startupCanvas();">
+        <canvas id="myCanvas" width="450" height="450" style="border:1px solid #000;float:left;margin:5px;" onmousedown="mouseDown(event);" onmousemove="mouseMove(event, this);"></canvas>
+        <br>
+</body> 
+<br>
+</body>
+</html>

@@ -17,6 +17,7 @@
         body {
             width: 100%;
             height: 100%;
+            margin: 0;
         }
         
         .topNav {
@@ -1007,6 +1008,7 @@
         if (username != null && username != "") {
             console.log('Welcome again ' + username + '!');
             welcomeC.innerHTML = "Hello " + username + " Welcome back!";
+            show('page8');
         }
     }
 
@@ -1042,6 +1044,11 @@
     //------------------------------------------------------------------------
     //Canvas start
     //------------------------------------------------------------------------
+    var mx;
+    var my; 
+    var grid; 
+    var clickcolor = -1;
+    
     // Array to hold snowflakes
     var snowflakes = new Array();
 
@@ -1057,7 +1064,7 @@
     var posx = minX;
     var speedX = 6;
     var direction = 1; // The image direction
-    var y = 250;
+    var y = 100;
 
     // Load a new image
     var img;
@@ -1082,8 +1089,6 @@
 
         requestAnimationFrame(animate);
     }
-
-
 
     // Constructor for snowflakes
     function Snowflake(xk, yk, spd, siz) {
@@ -1138,27 +1143,43 @@
     }
 
     var ctx3;
-
-    function drawMoon() {
-
+    var r=0;
+    
+    ctx3.translate(150,150); 
+    function drawMoon() {  
+           
+        ctx3.clearRect(0,0,300,150);
+        r+=0.01;
+        
         var my_gradient = ctx3.createRadialGradient(120, 90, 30, 120, 100, 70);
         my_gradient.addColorStop(0, 'white');
         my_gradient.addColorStop(0.3, 'lightyellow');
         my_gradient.addColorStop(0.6, '#fff787');
         my_gradient.addColorStop(1, '#ffee00');
+        ctx3.save();
 
         ctx3.beginPath();
-        ctx3.arc(100, 75, 50, 0, 2 * Math.PI);
+        ctx3.rotate(r);
+        ctx3.beginPath();
+        ctx3.moveTo(0,-37);
+        ctx3.bezierCurveTo(-20,-37,-37,-20,-37,0);
+        ctx3.bezierCurveTo(-37,20,-20,37,0,37);
+        ctx3.bezierCurveTo(20,37,37,20,37,0);
+        ctx3.bezierCurveTo(37,-20,20,-37,0,-37);
         ctx3.clip();
         ctx3.fillStyle = my_gradient;
         ctx3.strokeStyle = "black";
         ctx3.fill();
-        ctx3.stroke();
+        
 
         ctx3.beginPath();
-        ctx3.arc(140, 110, 55, 0, 2 * Math.PI);
-        ctx3.fillStyle = "black";
+        
+        ctx3.arc(40, 40, 55, 0, 2 * Math.PI);
+        ctx3.fillStyle = "navy";
         ctx3.fill();
+        ctx3.restore();
+        //setTimeout(function(){drawMoon()},1000);
+        window.requestAnimationFrame(drawMoon);
     }
 
     function startupCanvas3() {
@@ -1199,11 +1220,8 @@
         ctx2.stroke();
     }
 
-
-
     // Function tree
     //drawtree();
-
 
     var ctx;
 
@@ -1215,12 +1233,41 @@
         }
     }
 
-    function drawgraphics() {
-        //--==## defs1769 defs ##==--
-        ctx.globalAlpha = 1.0;
-        //defs
-        //defsend
-        function layer1() {
+    function moveSeat(event){
+        
+        var rect = event.target.getBoundingClientRect();
+            mx = event.clientX - rect.left; //x position within the element.
+            my = event.clientY - rect.top;  //y position within the element. 
+            grid = Math.floor((my-110)/50); 
+            if (mx>190 && mx<215){
+                // if(grid >= 0 && grid <=3){
+                //     ctx.save();
+                //     ctx.translate(0, 30*grid);
+                //     drawgraphics2();
+                //     ctx.restore();
+                //     //alert('position: 0');
+                //     // ctx.translate(0, -120);
+                //     // ctx.fillStyle = 'green';
+                //     // drawgraphics4();
+                // } 
+
+                // if(grid == 1){
+                //     //alert('position: 1');
+                //     ctx.translate(0, -90);
+                //     ctx.fillStyle = 'green';
+                //     drawgraphics4();
+                // } 
+             
+            }
+    }
+
+    function clickSeat(){
+        
+        //alert('Click:',grid);
+       clickcolor=grid;
+    }
+
+    function layer1() {
             //--==## path1811 path ##==--
             ctx.translate(75, -20);
             ctx.scale(1.5, 1.5);
@@ -1243,15 +1290,44 @@
             ctx.stroke();
         }
 
+    function drawgraphics() {
+        ctx.clearRect(0,0,400,400);
+        ctx.save();
+        //--==## defs1769 defs ##==--
+        ctx.globalAlpha = 1.0;
+        //defs
+        //defsend
 
         // Function calls
         layer1();
         ctx.scale(1.1, 1.1);
         ctx.translate(43, -5);
+        
+        //Click seat
         for (var i = 0; i < 4; i++) {
+            if(i==clickcolor) {
+                console.log(grid);
+                ctx.fillStyle = 'green';
+            }else if(i==grid){
+                ctx.fillStyle='lightblue';
+            }else{
+                ctx.fillStyle = 'white';
+
+            }
+            ctx.save();
+
+            if(i==clickcolor){
+                ctx.translate(-5+(Math.random()*10), 30*i);            
+            }else{
+                ctx.translate(0, 30*i);            
+            }            
+
             drawgraphics2();
-            ctx.translate(0, 30);
+            ctx.restore();
         }
+
+        ctx.restore();
+        window.requestAnimationFrame(drawgraphics);
     }
 
     function drawgraphics2() {
@@ -1261,7 +1337,7 @@
         //defsend
         //--==## path3496 path ##==--
         ctx.strokeStyle = '#000000';
-        ctx.fillStyle = 'white';
+        //ctx.fillStyle = 'white';
         ctx.globalAlpha = 1;
         ctx.lineWidth = '0';
         ctx.beginPath();
@@ -1301,13 +1377,10 @@
         <div id="nav4" class="hidden" onclick="show('page6')"> Search</div>
         <div id="nav5" class="hidden" onclick="SignOut()">Sign out</div>
     </nav>
-
+    <!--Navbar END-->
     <!--Welcome-->
     <section id="page1" class="page">
-        <canvas id="MoonCanvas" width="300" height="150"></canvas>
-
-
-
+        <canvas id="MoonCanvas" width="300" height="150" style="position: absolute;"></canvas>
 
         <div id="canvascontainer">
             <div class="pageHeader">
@@ -1324,10 +1397,8 @@
                 <div id="SiginDiv"></div>
 
             </div>
-            <canvas width="2000" height="400" id="canvas"></canvas>
+            <canvas width="1260" height="250" id="canvas"></canvas>
         </div>
-
-
     </section>
     <!--Welcome end-->
 
@@ -1398,7 +1469,7 @@
             </div>
             <div class="divForm">
 
-                <canvas id="myCanvas" width="400" height="400" style="border: 2px solid black;"></canvas>
+                <canvas id="myCanvas" width="400" height="400" onmousemove="moveSeat(event);" onclick="clickSeat();"></canvas>
 
                 <input id="selectButton" type="submit" onclick="show('page7')" value="confirm seat">
             </div>
@@ -1493,7 +1564,7 @@
     <!--Welcome User-->
     <section id="page8" class="page">
         <div class="pageHeader">
-            <h3>Welcome to Hypertravel</h3><br>
+            <h3>Welcome to Santas travel inc</h3><br>
             <h1 id="welcomeC"></h1>
             <span>Click on book to plan your next adventure or</span><br>
             <span>on My travels to see your scheduled and past travels</span><br><br>
