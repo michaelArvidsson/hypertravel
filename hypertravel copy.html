@@ -119,6 +119,13 @@
             display: block;
         }
 
+        .buttonW {
+            width: 150;
+            padding: 5px;
+            border-radius: 10px;
+            background-color: white;
+        }
+
         .pageHeader {
             width: 600px;
             margin: auto;
@@ -570,7 +577,7 @@
             }
         })
             .done(ResultBooking)
-            .fail(errormsg)
+            .fail(errormsgBook)
             .always(function () {
                 console.log("Request bookings for resource " + resource + " for webbapplication " + apptype + " complete.");
             });
@@ -821,6 +828,20 @@
         console.log(jqXHR);
         alert('Registration failed please try again');
         goShow();
+    }
+
+    // error message callback END
+    //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
+
+    //------------------------------------------------------------------------
+    // error message Register callback
+    //------------------------------------------------------------------------
+    // The errror message callback displays the error message and error code
+    //------------------------------------------------------------------------
+
+    function errormsgBook(jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR);
+        alert('Sorry, no available travels');
     }
 
     // error message callback END
@@ -1087,11 +1108,6 @@
         requestAnimationFrame(animate);
     };
 
-    // function startimg() {
-
-    //     requestAnimationFrame(animate);
-    // }
-
     // Constructor for snowflakes
     function Snowflake(xk, yk, spd, siz) {
         this.xk = xk;
@@ -1335,6 +1351,9 @@
 
 <body onload="initiateSpa()">
     <!--Navbar-->
+    <canvas id="canvasMoon" width="200" height="200" style="position: absolute; top:40;"></canvas>
+    <canvas width="1260" height="250" id="canvas" style="position: absolute; bottom: 0;"></canvas>
+
     <nav class="topNav">
         <div id="nav1" class="" onclick="show('page1')"> Home</div>
         <div id="nav2" class="hidden" onclick="show('page3')"> Book</div>
@@ -1345,7 +1364,7 @@
     <!--Navbar END-->
     <!--Welcome-->
     <section id="page1" class="page">
-        <canvas id="canvasMoon" width="200" height="200" style="position: absolute;"></canvas>
+
 
         <div id="canvascontainer">
             <div class="pageHeader">
@@ -1357,12 +1376,12 @@
                 <label for="">email: <i id="tooltip-3" title="email address example john.doe@hypertravel.com"
                         class="fa fa-question-circle" style="color: rgb(14, 92, 238); font-size:16px"></i></label>
                 <input type='text' onkeyup="validateMail()" name='customerIDG' id='customerIDG'><br>
-                <input type="Submit" onclick="showCustomer()" value="Sign in">
-                <button onclick="showpage('page2');goShow();">Register</button><br>
+                <input type="Submit" class="buttonW" onclick="showCustomer()" value="Sign in">
+                <button class="buttonW" onclick="showpage('page2');goShow();">Register</button><br>
                 <div id="SiginDiv"></div>
 
             </div>
-            <canvas width="1260" height="250" id="canvas"></canvas>
+
         </div>
     </section>
     <!--Welcome end-->
@@ -1537,8 +1556,8 @@
             <h1 id="welcomeC"></h1>
             <span>Click on book to plan your next adventure or</span><br>
             <span>on My travels to see your scheduled and past travels</span><br><br>
-            <button id="welcomeBookButton" onclick="show('page3')">Book</button>
-            <button id="welcomeMypageButton" onclick="show('page5')">My travels</button>
+            <button id="welcomeBookButton" class="buttonW" onclick="show('page3')">Book</button>
+            <button id="welcomeMypageButton" class="buttonW" onclick="show('page5')">My travels</button>
         </div>
         <canvas width="2000" height="250" id="canvas"></canvas>
     </section>
