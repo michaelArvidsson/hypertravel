@@ -5,22 +5,23 @@
     <script type="application/javascript">
         var rot = 0;
         var ctx3;
+
         function draw() {
             rot += 0.001;
             var c = document.getElementById("canvasMoon");
             var ctx3 = c.getContext("2d");
             ctx3.clearRect(0, 0, 400, 400);
-           
+
             // Moon
             ctx3.globalAlpha = 1.0;
             //--==## svg_1 path ##==--
             ctx3.strokeStyle = '#000';
             ctx3.beginPath();
             ctx3.moveTo(0, -37);
-            ctx3.bezierCurveTo(-20,-37,-37,-20,-37,0);
-            ctx3.bezierCurveTo(-37,20,-20,37,0,37);
-            ctx3.bezierCurveTo(20,37,37,20,37,0);
-            ctx3.bezierCurveTo(37,-20,20,-37,0,-37);
+            ctx3.bezierCurveTo(-20, -37, -37, -20, -37, 0);
+            ctx3.bezierCurveTo(-37, 20, -20, 37, 0, 37);
+            ctx3.bezierCurveTo(20, 37, 37, 20, 37, 0);
+            ctx3.bezierCurveTo(37, -20, 20, -37, 0, -37);
             ctx3.stroke();
             ctx3.clip();
             ctx3.fillStyle = "#ffee00";
@@ -32,9 +33,9 @@
             ctx3.fillStyle = "black";
             ctx3.stroke();
             ctx3.fill();
-            
 
-           
+
+
         }
 
         function rotateMoon() {
@@ -42,18 +43,18 @@
             var c = document.getElementById("canvasMoon");
             var ctx3 = c.getContext("2d");
             ctx3.beginPath();
-         
+
             ctx3.restore();
-        
+
             // Or we can transform the bitmap
-            
+
             ctx3.save();
             ctx3.translate(120, 130);
             ctx3.rotate(Math.PI * rot);
             draw();
             ctx3.restore();
             window.requestAnimationFrame(rotateMoon);
-        
+
         }
     </script>
 </head>

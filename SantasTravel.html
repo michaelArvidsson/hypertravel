@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hypertravel</title>
+    <title>Santas Travel inc</title>
     <style>
         body {
             width: 100%;
@@ -73,18 +73,6 @@
             position: relative;
         }
         
-        #OutputDivSearchC {
-            margin: 0 auto;
-            margin-top: 10px;
-            width: 800px;
-            background-color: white;
-            border-radius: 5px;
-            padding: 10px;
-            box-shadow: 1px 1px 6px 2px lightslategray;
-            position: relative;
-            display: none;
-        }
-        
         .resultForm {
             margin: 0 auto;
             margin-top: 20px;
@@ -94,6 +82,11 @@
             padding: 10px;
             box-shadow: 1px 1px 6px 2px lightslategray;
             position: relative;
+            display: none;
+        }
+        
+        #OutputDivSearchA {
+            display: none;
         }
         
         .RegForm {
@@ -177,7 +170,7 @@
         table {
             border: 1px solid #A40808;
             background-color: #EEE7DB;
-            width: 750px;
+            width: 700px;
             text-align: center;
             border-collapse: collapse;
         }
@@ -293,7 +286,7 @@
             padding: 20px;
             position: absolute;
             bottom: 10;
-            left: 340;
+            left: 40;
             animation-name: popup;
             animation-duration: 3s;
         }
@@ -318,7 +311,7 @@
         setupHistory();
         updateHistory('page1');
         checkLocalStorage();
-        searchAvailability();
+        //searchAvailability();
         getCusomerBookings();
         startupCanvas();
         startupCanvas2();
@@ -358,7 +351,7 @@
         var resID = document.getElementById("resIDA").value;
         var resname = document.getElementById("resNameA").value;
         var reslocation = document.getElementById("resLocationA").value;
-        var rescompany = document.getElementById("resCompanyA").value;
+        // var rescompany = document.getElementById("resCompanyA").value;
         var resfulltext = document.getElementById("resFulltextA").value;
 
         var jqxhr = $.ajax("../WebbProgrammering/booking/getavailability_search_XML.php", {
@@ -367,7 +360,7 @@
                     resid: encodeURIComponent(resID),
                     name: encodeURIComponent(resname),
                     location: encodeURIComponent(reslocation),
-                    company: encodeURIComponent(rescompany),
+                    // company: encodeURIComponent(rescompany),
                     fulltext: encodeURIComponent(resfulltext),
                     type: apptype // Only show bookings for your webbapplication using the apptype
                 }
@@ -386,39 +379,45 @@
         // An XML DOM document is returned from AJAX
         var resultset = returnedData.childNodes[0];
         var output = "<table>";
+        output += "<tr>";
+        output += "<th> Class</th>";
+        output += "<th> Location</th>";
+        output += "<th> Cost</th>";
+        output += "<th> Date</th>";
+        output += "<th> Available seats</th>";
+        output += "<th> ClickToBook</th>";
+        output += "</tr>";
         // Iterate over all nodes in root node (i.e. resources)
         for (i = 0; i < resultset.childNodes.length; i++) {
             // Iterate over all child nodes of that node that are resource nodes
             if (resultset.childNodes.item(i).nodeName == "availability") {
                 // Retrieve data from resource nodes
                 var avail = resultset.childNodes.item(i);
-                output += "<tr class='actiontablerow' onclick='alert(\"" + avail.attributes['resourceID'].value + "\")'>";
-                output += "<th> Class</th>";
-                output += "<th> Location</th>";
-                output += "<th> Cost</th>";
-                output += "<th> Date</th>";
-                output += "<th> Available seats</th>";
-                // output += "<th> ClickToBook</th>";
-                output += "</tr>";
-                // output += "<td>" + avail.attributes['resourceID'].value + "</td>";
-                // output += "<td>" + avail.attributes['company'].value + "</td>";
                 output += "<td>" + avail.attributes['name'].value + "</td>";
                 output += "<td>" + avail.attributes['location'].value + "</td>";
-                // output += "<td>" + avail.attributes['size'].value + "</td>";
                 output += "<td>" + avail.attributes['cost'].value + "</td>";
-                // output += "<td>" + avail.attributes['category'].value + "</td>";
                 output += "<td>" + avail.attributes['date'].value + "</td>";
-                // output += "<td>" + avail.attributes['dateto'].value + "</td>";
-                // output += "<td>" + avail.attributes['bookingcount'].value + "</td>";
                 output += "<td>" + avail.attributes['remaining'].value + "</td>";
+                output += `<td> <input type='button' onclick='passBookingParams(
+                    "${avail.attributes['resourceID'].value}",
+                    "${avail.attributes['location'].value}",
+                    "${avail.attributes['date'].value}",
+                    "${avail.attributes['dateto'].value}");' value='Make Booking'> </td>`;
                 output += "</tr>";
+
             }
         }
-
-        output += "</table>"
-        document.getElementById("OutputDivSearchC").style.display = "block";
         var div = document.getElementById("OutputDivSearchC");
-        div.innerHTML = output;
+        if (avail == "" || avail == null) {
+            div.style.display = "block", div.style.color = "Red", div.style.width = "400px";
+            div.innerHTML = "There are no available departures, please search again";
+        } else {
+            output += "</table>"
+            div.style.display = "block";
+            div.style.width = "700px";
+
+            div.innerHTML = output;
+        }
     }
 
     // search availability END
@@ -490,8 +489,8 @@
 
         output += "</table>"
         var div = document.getElementById("OutputDivSearchA");
+        div.style.display = "block";
         div.innerHTML = output;
-
     }
 
     // search availability END
@@ -505,79 +504,7 @@
     //         returns each availabile slot for that resource
     //------------------------------------------------------------------------
 
-    function searchPageAvailability() {
 
-        var resID = document.getElementById("resLocationA").value;
-
-        var jqxhr = $.ajax("../WebbProgrammering/booking/getavailability_search_XML.php", {
-                type: 'POST',
-                data: {
-                    resid: encodeURIComponent(resID),
-
-                    type: apptype // Only show bookings for your webbapplication using the apptype
-                }
-            })
-            .done(showSearchAvailability)
-            .fail(errormsg)
-            .always(function() {
-                console.log("Request for resource availability for webbapplication " + apptype + " complete.");
-            });
-    }
-
-    function showSearchAvailability(returnedData) {
-        // Fix characters in XML notation to HTML notation
-        fixChars(returnedData);
-
-        // An XML DOM document is returned from AJAX
-        var resultset = returnedData.childNodes[0];
-        var output = "<table>";
-        // Iterate over all nodes in root node (i.e. resources)
-        for (i = 0; i < resultset.childNodes.length; i++) {
-            // Iterate over all child nodes of that node that are resource nodes
-            if (resultset.childNodes.item(i).nodeName == "availability") {
-                // Retrieve data from resource nodes
-                var avail = resultset.childNodes.item(i);
-                var searchDate = new Date(document.getElementById("datepicker").value);
-                var availableDate = new Date(avail.attributes['date'].value);
-                if (searchDate.getDate() === availableDate.getDate()) {
-
-                    output += "<tr class='actiontablerow' onclick='alert(\"" + avail.attributes['resourceID'].value + "\")'>";
-                    output += "<th> Class</th>";
-                    output += "<th> Location</th>";
-                    output += "<th> Cost</th>";
-                    output += "<th> Date</th>";
-                    output += "<th> Available seats</th>";
-                    output += "<th> ClickToBook</th>";
-                    output += "</tr>";
-                    /*   output += "<td>" + avail.attributes['resourceID'].value + "</td>"; */
-                    /* output += "<td>" + avail.attributes['company'].value + "</td>"; */
-                    output += "<td>" + avail.attributes['name'].value + "</td>";
-                    output += "<td>" + avail.attributes['location'].value + "</td>";
-                    /*  output += "<td>" + avail.attributes['size'].value + "</td>"; */
-                    output += "<td>" + avail.attributes['cost'].value + "</td>";
-                    /*  output += "<td>" + avail.attributes['category'].value + "</td>"; */
-                    output += "<td>" + avail.attributes['date'].value + "</td>";
-                    /* output += "<td>" + avail.attributes['dateto'].value + "</td>"; */
-                    /*  output += "<td>" + avail.attributes['bookingcount'].value + "</td>"; */
-                    output += "<td>" + avail.attributes['remaining'].value + "</td>";
-                    output += `<td> <input type='button' onclick='makeBooking(
-                    "` + avail.attributes['resourceID'].value + `","` +
-                        avail.attributes['location'].value + `","` +
-                        avail.attributes['date'].value + `","` +
-                        avail.attributes['dateto'].value + `");' value='Make Booking'> </td>`;
-                    output += "</tr>";
-                }
-            }
-        }
-
-        output += "</table>"
-        document.getElementsByClassName("divsearch")
-        var div = document.getElementById("OutputDivSearchPageA");
-        div.innerHTML = output;
-
-    }
-    // searchpage availability END
-    //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
 
     //------------------------------------------------------------------------
     // Pass parameters for booking
@@ -588,16 +515,12 @@
         localStorage.setItem("BookDate", date);
         show('page4');
     }
-    // Pass parameters for booking END
-
-
-
-    // search resources
     //------------------------------------------------------------------------
-    // Searches through the resources for a certain application. 
-    // If only type is given all resources for application are given
-    // If either company, location or name are given in any combination, these values are searched
-    // If fulltext is given all attributes are searched at once 
+    // Pass parameters for booking END
+    //------------------------------------------------------------------------
+
+    //------------------------------------------------------------------------
+    // search resources
     //------------------------------------------------------------------------
 
     function searchResources(number) {
@@ -642,71 +565,8 @@
     }
 
     //------------------------------------------------------------------------
-    // search resources
-    //------------------------------------------------------------------------
-    // Searches through the resources for a certain application. 
-    // If only type is given all resources for application are given
-    // If either company, location or name are given in any combination, these values are searched
-    // If fulltext is given all attributes are searched at once 
-    //------------------------------------------------------------------------
-
-    function NewsearchResources() {
-        var resname = document.getElementById("resNameS").value;
-        var reslocation = document.getElementById("resLocationS").value;
-        // var rescompany = document.getElementById("resCompanyS").value;
-        var resfulltext = document.getElementById("resFulltextS").value;
-        // var resID = document.getElementById("resIDS").value;
-
-        var jqxhr = $.ajax("../WebbProgrammering/booking/getresources_XML.php", {
-                type: 'POST',
-                data: {
-                    // resid: encodeURIComponent(resID),
-                    name: encodeURIComponent(resname),
-                    location: encodeURIComponent(reslocation),
-                    // company: encodeURIComponent(rescompany),
-                    fulltext: encodeURIComponent(resfulltext),
-                    type: apptype // Only show bookings for your webbapplication using the apptype
-                }
-            })
-            .done(NewshowResources)
-            .fail(errormsg)
-            .always(function() {
-                console.log("Request all resources for webbapplication " + apptype + " complete.");
-            });
-    }
-
-    function NewshowResources(returnedData) {
-        // Fix characters in XML notation to HTML notation
-        fixChars(returnedData);
-
-        // An XML DOM document is returned from AJAX
-        var resultset = returnedData.childNodes[0];
-        var output = "<table>";
-        // Iterate over all nodes in root node (i.e. resources)
-        for (i = 0; i < resultset.childNodes.length; i++) {
-            // Iterate over all child nodes of that node that are resource nodes
-            if (resultset.childNodes.item(i).nodeName == "resource") {
-                // Retrieve data from resource nodes
-                var resource = resultset.childNodes.item(i);
-                output += "<tr class='actiontablerow' onclick='alert(\"" + resource.attributes['id'].value + "\")'>";
-                output += "<td>" + resource.attributes['id'].value + "</td>";
-                output += "<td>" + resource.attributes['company'].value + "</td>";
-                output += "<td>" + resource.attributes['name'].value + "</td>";
-                output += "<td>" + resource.attributes['location'].value + "</td>";
-                output += "<td>" + resource.attributes['category'].value + "</td>";
-                output += "</tr>";
-
-            }
-        }
-
-        output += "</table>"
-        var div = document.getElementById("OutputDivSearchR");
-        div.innerHTML = output;
-    }
-
     // search resources END
     //--=--=--=--=--=--=--=--=--=--====######====--=--=--=--=--=--=--=--=--=--
-
 
 
     // make booking
@@ -866,6 +726,7 @@
         output += "</table>"
         var div = document.getElementById('OutputDiv');
         var username = localStorage.getItem("username");
+        document.getElementById("OutputDiv").style.display = "block";
         div.innerHTML = output;
         MyTravelC.innerHTML = "Theese are the planned and future travels for: " + username;
     }
@@ -1253,7 +1114,7 @@
     var posx = minX;
     var speedX = 6; // speed of img
     var direction = 1; // direction
-    var y = 530;
+    var y = 250;
 
     // Load a new image
     var img;
@@ -1280,8 +1141,6 @@
         this.siz = siz;
     }
 
-    function drawDrift() {}
-
     function animate(time) {
 
         // clear canvas
@@ -1299,15 +1158,7 @@
             minX = -200;
             posx = minX;
             direction = 1;
-
         }
-        // Draw Snowdrifts
-        ctx2.save();
-        drawDrift();
-        ctx2.translate(255, 4);
-        drawDrift();
-        ctx2.restore();
-
 
         // Draw Snow
         for (var i = 0; i < numflakes; i++) {
@@ -1324,12 +1175,11 @@
         requestAnimationFrame(animate);
     }
 
-    var rot = 0;
+    var r = 0;
     var ctx3;
     //ctx3.translate(-50, 50);
 
-    function draw() {
-        rot += 0;
+    function drawMoon() {
         var c = document.getElementById("canvasMoon");
         var ctx3 = c.getContext("2d");
         ctx3.clearRect(0, 0, 200, 200);
@@ -1349,28 +1199,30 @@
         ctx3.bezierCurveTo(-37, 20, -20, 37, 0, 37);
         ctx3.bezierCurveTo(20, 37, 37, 20, 37, 0);
         ctx3.bezierCurveTo(37, -20, 20, -37, 0, -37);
-        ctx3.stroke();
         ctx3.clip();
         ctx3.fillStyle = grd;
+
         ctx3.fill();
+        ctx3.stroke();
 
         //Second "Moon"
         ctx3.beginPath();
         ctx3.arc(40, 40, 55, 0, 2 * Math.PI);
         ctx3.fillStyle = "black";
-        ctx3.stroke();
+
         ctx3.fill();
+        ctx3.stroke();
     }
 
     function rotateMoon() {
-        rot += 0.002;
+        r += 0.002;
         var c = document.getElementById("canvasMoon");
         var ctx3 = c.getContext("2d");
         ctx3.beginPath();
         ctx3.save();
         ctx3.translate(70, 80);
-        ctx3.rotate(Math.PI * rot);
-        draw();
+        ctx3.rotate(Math.PI * r);
+        drawMoon();
         ctx3.restore();
 
         window.requestAnimationFrame(rotateMoon);
@@ -1387,38 +1239,18 @@
     }
 
     function onmouseSeat(event) {
-
         var rect = event.target.getBoundingClientRect();
         mx = event.clientX - rect.left; //x position within the element.
         my = event.clientY - rect.top; //y position within the element. 
         grid = Math.floor((my - 110) / 50);
-        if (mx > 190 && mx < 215) {
-            // if(grid >= 0 && grid <=3){
-            //     ctx.save();
-            //     ctx.translate(0, 30*grid);
-            //     drawgraphics2();
-            //     ctx.restore();
-            //     //alert('position: 0');
-            //     // ctx.translate(0, -120);
-            //     // ctx.fillStyle = 'green';
-            //     // drawgraphics4();
-            // } 
-
-            // if(grid == 1){
-            //     //alert('position: 1');
-            //     ctx.translate(0, -90);
-            //     ctx.fillStyle = 'green';
-            //     drawgraphics4();
-            // } 
-
-        }
+        // console.log(mx, my);
     }
 
     function clickSeat() {
         clickcolor = grid;
     }
 
-    function layer1() {
+    function drawSleigh() {
         //--==## path1811 path ##==--
         ctx.translate(75, -20);
         ctx.scale(1.5, 1.5);
@@ -1447,23 +1279,20 @@
         //--==## defs1769 defs ##==--
         ctx.globalAlpha = 1.0;
         //defs
-        //defsend
 
-        // Function calls
-        layer1();
+        drawSleigh();
         ctx.scale(1.1, 1.1);
         ctx.translate(43, -5);
 
-        //Click seat
+        //click seat
         for (var i = 0; i < 4; i++) {
             if (i == clickcolor) {
-                console.log(grid);
+                // console.log(grid);
                 ctx.fillStyle = 'green';
             } else if (i == grid) {
                 ctx.fillStyle = 'lightblue';
             } else {
                 ctx.fillStyle = 'white';
-
             }
             ctx.save();
 
@@ -1472,20 +1301,18 @@
             } else {
                 ctx.translate(0, 30 * i);
             }
-
             drawgraphics2();
             ctx.restore();
         }
-
         ctx.restore();
         window.requestAnimationFrame(drawgraphics);
     }
 
+
     function drawgraphics2() {
+
         //--==## defs3454 defs ##==--
         ctx.globalAlpha = 1.0;
-        //defs
-        //defsend
         //--==## path3496 path ##==--
         ctx.strokeStyle = '#000000';
         //ctx.fillStyle = 'white';
@@ -1513,8 +1340,6 @@
         ctx.fill();
         ctx.stroke();
     }
-    // Function calls
-    drawgraphics2();
 </script>
 
 <!-- Start of SPA -->
@@ -1522,7 +1347,7 @@
 <body onload="initiateSpa()">
     <!--Navbar-->
     <canvas id="canvasMoon" width="200" height="200" style="position: absolute; top:40;"></canvas>
-    <canvas width="1260" height="700" id="canvas" style="position: absolute; bottom: 0;"></canvas>
+    <canvas width="1260" height="400" id="canvas" style="position: absolute; bottom: 0;"></canvas>
 
     <nav class="topNav">
         <div id="nav1" class="" onclick="show('page1')"> Home</div>
@@ -1576,7 +1401,7 @@
             <label for="">Adress: <i class="fa fa-question-circle"
                     style="color: rgb(14, 92, 238); font-size:16px"></i></label>
             <input type="text" id="customeraddressC" name="customeraddressC" placeholder="" onchange="validateForm();" onkeyup="validateForm();"><br>
-            <input type="button" onclick="storeCustomer();goHide();" value="Register">
+            <input class="buttonW" type="button" onclick="storeCustomer();goHide();" value="Register">
         </div>
         <div id="CustomerOutputDiv"></div>
         <div id="output"></div>
@@ -1608,11 +1433,12 @@
                         style="color: rgb(14, 92, 238); font-size:16px"></i></label><br>
                 <select id='Select_drop' onchange="searchResources('1')"></select>
 
-                <input type="button" onclick="searchAvailability();" value="Search availabilable departures">
+                <input class="buttonW" type="button" onclick="searchAvailability();" style="width: auto;" value="Search availabilable departures">
 
             </div>
         </div>
-        <div id="OutputDivSearchA" />
+
+        <div class="resultForm" id="OutputDivSearchA"></div>
 
     </section>
 
@@ -1625,7 +1451,7 @@
 
                 <canvas id="myCanvas" width="400" height="400" onmousemove="onmouseSeat(event);" onclick="clickSeat();"></canvas>
 
-                <input id="selectButton" type="submit" onclick="show('page7')" value="confirm seat">
+                <input class="buttonW" id="selectButton" type="submit" onclick="show('page7')" value="confirm seat">
             </div>
 
         </div>
@@ -1650,17 +1476,17 @@
         </div>
         <div class="divForm">
             <div class="actionbox">
-                <span class="actionheading">Search Availability (show the availability for a given Resource ID)</span> ResourceID:
-                <input type='text' name='resIDA' id='resIDA' onchange="newsearchAvailability()" onkeyup="newsearchAvailability()"> Name:
-                <input type='text' name='resNameA' id='resNameA' onchange="newsearchAvailability()" onkeyup="newsearchAvailability()"> Location:
-                <input type='text' name='resLocationA' id='resLocationA' onchange="newsearchAvailability()" onkeyup="newsearchAvailability()"> Company:
-                <input type='text' name='resCompanyA' id='resCompanyA' onchange="newsearchAvailability()" onkeyup="newsearchAvailability()"><br/> Full Text:<input type='text' name='resFulltextA' id='resFulltextA' onchange="searchAvailability()" onkeyup="searchAvailability()"><br/>
-                <input type="button" onclick="newsearchAvailability();" value="Search Availability">
-                <span class="actionheading">Result</span>
+                <input type='hidden' name='resIDA' id='resIDA' onchange="newsearchAvailability()" onkeyup="newsearchAvailability()">
+                <input type='hidden' name='resNameA' id='resNameA' onchange="newsearchAvailability()" onkeyup="newsearchAvailability()">
+                <label for="resLocationA">Search City</label><br>
+                <input type='text' name='resLocationA' id='resLocationA'><br>
+                <label for="resFulltextA">Free search</label>
+                <input type='text' name='resFulltextA' id='resFulltextA'><br/>
+                <input class="buttonW" type="button" onclick="newsearchAvailability();" value="Search Availability">
             </div>
         </div>
-        <div class="divsearch" id="OutputDivSearchC" /></div>
 
+        <div class="Resultform" id="OutputDivSearchC" /></div>
 
     </section>
     <!--END Search -->
